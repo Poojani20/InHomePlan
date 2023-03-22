@@ -20,17 +20,21 @@
 }
 
 .center-section {
-    flex: 1 1 0px;
+    flex: 200 1 300px;
     text-align: center;
 }
 
 .right-section {
     flex: 1 1 300px;
     text-align: right;
+    padding-top:20px;
+    margin-right:20px;
 }
 
 .bottom-section {
     width: 100%;
     text-align: center;
     margin-bottom:0px;
+    margin-top:0px;
 }
+
