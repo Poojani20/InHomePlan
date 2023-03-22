@@ -1,26 +1,23 @@
 ﻿.carousel {
-    margin-top: -49px;
-    margin-bottom:300px;
+    margin-top: -50px;
+    margin-bottom:400px;
 }
 .carousel-item {
-    height: 10%;
-    min-height: 200px;
+    height: 100%;
     background-color: #000;
     position: relative;
-    background-position: center center;
-    background-repeat:repeat;
-    background-size: cover;
-    transition: -webkit-transform .6s ease;
+    background-image: url('path/to/image.jpg');
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: contain;
     transition: transform .6s ease;
-    transition: transform .6s ease,-webkit-transform .6s ease;
 }
 
     .carousel-item img {
-        height: 50%;
-        width: 50%;
-        object-fit: cover;
-        margin: 0;
+        display: none;
     }
+
+
 
 .carousel-control-prev, .carousel-control-next {
     width: 5%;
@@ -48,7 +45,4 @@
 
 .carousel-control-next:before {
     background-image: url('path/to/right-arrow-icon.png');
-}
-.images{
-    margin-top:0px;
 }
