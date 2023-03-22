@@ -1,4 +1,8 @@
-﻿.carousel-item {
+﻿.carousel {
+    margin-top: -49px;
+    margin-bottom:300px;
+}
+.carousel-item {
     height: 10%;
     min-height: 200px;
     background-color: #000;
@@ -12,8 +16,8 @@
 }
 
     .carousel-item img {
-        height: 100%;
-        width: 100%;
+        height: 50%;
+        width: 50%;
         object-fit: cover;
         margin: 0;
     }
@@ -44,4 +48,7 @@
 
 .carousel-control-next:before {
     background-image: url('path/to/right-arrow-icon.png');
+}
+.images{
+    margin-top:0px;
 }
