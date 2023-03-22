@@ -15,3 +15,11 @@
 .navbar-nav {
     margin-left: auto;
 }
+    .navbar-nav > li:not(:last-child) {
+        margin-right: 50px;
+    }
+
+.nav-link {
+    font-size: 18px;
+}
+
