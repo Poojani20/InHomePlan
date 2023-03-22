@@ -1,23 +1,16 @@
-﻿.small-container {
-    max-width: 1080px;
-    margin: auto;
-    padding-left: 50px;
-    padding-right: 30px;
-    padding-top: 80px;
-}
+﻿
 .carousel {
     margin-top: -50px;
     margin-bottom:400px;
 }
-.carousel-item {
+/*.carousel-item {
     height: 100%;
     background-color:white;
     position: relative;
     background-repeat: no-repeat;
-    background-position: center left;
     background-size: contain;
     transition: transform .6s ease;
-}
+}*/
 
     /*.carousel-item img {
         display: none;
@@ -25,7 +18,7 @@
 */
 
 
-.carousel-control-prev, .carousel-control-next {
+/*.carousel-control-prev, .carousel-control-next {
     width: 5%;
     font-size: 1.5rem;
     text-shadow: none;
@@ -56,4 +49,4 @@
     color: red;
     font-size: 36px;
     margin-top:80px;
-}
+}*/
