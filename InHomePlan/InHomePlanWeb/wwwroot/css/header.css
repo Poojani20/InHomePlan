@@ -13,13 +13,29 @@
     text-decoration:double;
     
 }
-.navbar-nav {
+.navbar-nav{
     margin-left: auto;
+
 }
     .navbar-nav > li:not(:last-child) {
         margin-right: 50px;
     }
+    .nav-item::before {
+        top: 0;
+        transform-origin: left;
+    }
+    .nav-item::after {
+        bottom: 0;
+        transform-origin: right;
+    }
 
+    .nav-item:hover::before,
+    .nav-item:hover::after {
+        transform: scaleX(1);
+    }
+.nav-item:hover {
+    background-color: #7EC8E3;
+}
 .nav-link {
     font-size: 18px;
 }
