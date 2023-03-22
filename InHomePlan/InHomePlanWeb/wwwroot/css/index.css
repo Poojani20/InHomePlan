@@ -1,22 +1,28 @@
-﻿.carousel {
+﻿.small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 50px;
+    padding-right: 30px;
+    padding-top: 80px;
+}
+.carousel {
     margin-top: -50px;
     margin-bottom:400px;
 }
 .carousel-item {
     height: 100%;
-    background-color: #000;
+    background-color:white;
     position: relative;
-    background-image: url('path/to/image.jpg');
     background-repeat: no-repeat;
     background-position: center left;
     background-size: contain;
     transition: transform .6s ease;
 }
 
-    .carousel-item img {
+    /*.carousel-item img {
         display: none;
     }
-
+*/
 
 
 .carousel-control-prev, .carousel-control-next {
@@ -45,4 +51,9 @@
 
 .carousel-control-next:before {
     background-image: url('path/to/right-arrow-icon.png');
+}
+.my-heading {
+    color: red;
+    font-size: 36px;
+    margin-top:80px;
 }
