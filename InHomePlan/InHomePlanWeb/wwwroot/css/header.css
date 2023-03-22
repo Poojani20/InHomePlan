@@ -2,15 +2,16 @@
 }
 .container-fluid {
     background-color: #145DA0;
-    text-align:center;
+    
 }
 .navbar {
     background-color: #145DA0;
 }
 .nav-item{
-    text-align:center;
+    
     text-decoration:double;
+    
 }
-.nav-link {
-    text-align: center;
+.navbar-nav {
+    margin-left: auto;
 }
