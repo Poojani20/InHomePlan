@@ -6,3 +6,7 @@
 .navbar {
     background-color: #145DA0;
 }
+.nav-item{
+    text-align:end;
+    text-decoration:double;
+}
