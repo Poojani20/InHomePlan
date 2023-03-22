@@ -1,0 +1,26 @@
+﻿body {
+}
+/* Set the height of the carousel */
+#myCarousel {
+    height: 400px;
+}
+
+/* Change the color of the carousel controls */
+.carousel-control {
+    color: #fff;
+}
+
+/* Add a background color to the carousel indicators */
+.carousel-indicators li {
+    background-color: #777;
+}
+
+/* Customize the active carousel indicator */
+.carousel-indicators .active {
+    background-color: #337ab7;
+}
+
+/* Add a box shadow to the carousel */
+.carousel-inner {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
