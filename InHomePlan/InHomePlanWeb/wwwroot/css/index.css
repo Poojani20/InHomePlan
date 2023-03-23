@@ -1,12 +1,7 @@
 ﻿body {
-    width: 100%;
+    
     margin: 0;
     padding: 0;
-}
-#carousel-container {
-   max-width:100%;
-    margin: 0 auto;
-    background-color:aqua;
     
 }
 
@@ -14,19 +9,25 @@
     margin-top: -10px;
     margin-bottom: 60px;
     overflow: hidden;
-   
+    margin: 0;
+    padding: 0;
 }
 .carousel-item {
     height: 100%;
-    background-color:white;
+    background-color: white;
     position: relative;
     background-repeat: no-repeat;
     background-size: contain;
     transition: transform .2s ease;
+    margin: 0;
+    padding: 0;
 }
 
     .carousel-item img {
         display: none;
+        object-fit: cover;
+        margin: 0;
+        padding: 0;
     }
 
 
@@ -71,9 +72,12 @@
     margin-top: 10px;
     color: #003060;
 }
-.container{
-   /* margin-top:-350px;*/
-    margin-bottom:400px;
+.container {
+    /* margin-top:-350px;*/
+    margin-bottom: 100px;
+    
+    width: 5000px;
+   
 }
     .container h3 {
         text-align: center;
@@ -86,4 +90,8 @@
 }
 .img-fluid{
     align-content:center;
+}
+.container2 {
+    background-color:aqua;
+    margin-bottom:300px;
 }
