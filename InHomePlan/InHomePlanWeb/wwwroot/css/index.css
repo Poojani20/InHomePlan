@@ -3,9 +3,16 @@
     margin: 0;
     padding: 0;
 }
+#carousel-container {
+   max-width:100%;
+    margin: 0 auto;
+    background-color:aqua;
+    
+}
+
 .carousel {
-    margin-top: -50px;
-    margin-bottom: 400px;
+    margin-top: -10px;
+    margin-bottom: 60px;
     overflow: hidden;
    
 }
@@ -61,11 +68,11 @@
     font-size: 35px;
     text-decoration-style: solid;
     font-weight: 500;
-    margin-top: 50px;
+    margin-top: 10px;
     color: #003060;
 }
 .container{
-    margin-top:-350px;
+   /* margin-top:-350px;*/
     margin-bottom:400px;
 }
     .container h3 {
