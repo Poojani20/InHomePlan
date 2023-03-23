@@ -94,6 +94,8 @@
 .img-fluid{
     align-content:center;
 }
+
+/*----services----*/
 .container2 {
     background-color: #05445E;
     margin-bottom: 30px;
@@ -183,40 +185,52 @@ ul {
 .houses {
     background: #E2DED0;
     margin-top: 20px;
+    margin-left: 0;
     margin-bottom: 200px;
-    padding: 30px 0;
+    padding: 30px 0 30px 60px;
     align-items: center;
 }
 
     .houses.row {
-        margin-top: 120px;
-        margin-left:100px;
+        
         padding-left:100px;
     }
     .houses col-4 {
+        margin-left:100px;
         padding-left: 100px;
     }
 
-.col-4.houses-img{
-    padding-left:200px;
+.col-4.houses-img {
+    margin-left: 100px;
+    padding-left: 200px;
 }
 
 small {
     color: #555;
 }
-
+.houses h3 {
+    text-align: center;
+    font-size: 35px;
+    text-decoration-style: solid;
+    font-weight: 500;
+    color: #003060;
+    padding-top: -20px;
+}
 
 
 .btn {
     display: inline-block;
     background: #ff523b;
-    color: #fff;
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 30px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    width: 300px;
 }
 
     .btn:hover {
-        background: #563434;
+        background: #533440;
     }
 
