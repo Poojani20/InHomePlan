@@ -56,15 +56,27 @@
     font-size: 36px;
     margin-top:80px;
 }
-.offer {
+.offer{
     text-align: center;
-    font-size: 40px;
+    font-size: 35px;
     text-decoration-style: solid;
     font-weight: 500;
     margin-top: 50px;
-    color: #145DA0;
+    color: #003060;
 }
 .container{
     margin-top:-350px;
     margin-bottom:400px;
+}
+    .container h3 {
+        text-align: center;
+        color: #055C9D;
+        font-size:25px;
+    }
+.description {
+    font-size: 18px;
+    text-align: center;
+}
+.img-fluid{
+    align-content:center;
 }
