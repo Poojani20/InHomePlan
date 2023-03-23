@@ -1,24 +1,30 @@
-﻿
+﻿body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 .carousel {
     margin-top: -50px;
-    margin-bottom:400px;
+    margin-bottom: 400px;
+    overflow: hidden;
+   
 }
-/*.carousel-item {
+.carousel-item {
     height: 100%;
     background-color:white;
     position: relative;
     background-repeat: no-repeat;
     background-size: contain;
-    transition: transform .6s ease;
-}*/
+    transition: transform .2s ease;
+}
 
-    /*.carousel-item img {
+    .carousel-item img {
         display: none;
     }
-*/
 
 
-/*.carousel-control-prev, .carousel-control-next {
+
+.carousel-control-prev, .carousel-control-next {
     width: 5%;
     font-size: 1.5rem;
     text-shadow: none;
@@ -49,4 +55,12 @@
     color: red;
     font-size: 36px;
     margin-top:80px;
-}*/
+}
+.offer {
+    text-align: center;
+    font-size: 40px;
+    text-decoration-style: solid;
+    font-weight: 500;
+    margin-top: 50px;
+    color: #145DA0;
+}

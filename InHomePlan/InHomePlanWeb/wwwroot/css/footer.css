@@ -1,4 +1,7 @@
-﻿.footer-container {
+﻿body {
+    padding: 0;
+}
+.footer-container {
     display: flex;
     flex-wrap: wrap;
     background-color: #444444;
