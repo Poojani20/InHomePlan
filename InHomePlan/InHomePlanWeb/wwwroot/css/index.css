@@ -9,11 +9,13 @@
     margin-top: -10px;
     margin-bottom: 60px;
     overflow: hidden;
-    margin: 0;
     padding: 0;
+    width: 100%;
+    background-color:aqua;
 }
 .carousel-item {
     height: 100%;
+    width:100%;
     background-color: white;
     position: relative;
     background-repeat: no-repeat;
