@@ -2,25 +2,26 @@
     
     margin: 0;
     padding: 0;
-    
+   
 }
-
+/**---Image slide -----*/
 .carousel {
     margin-top: -10px;
     margin-bottom: 60px;
     overflow: hidden;
     padding: 0;
     width: 100%;
-    background-color:aqua;
+    background-color:antiquewhite;
 }
 .carousel-item {
     height: 100%;
-    width:100%;
+    width: 100%;
     background-color: white;
     position: relative;
     background-repeat: no-repeat;
     background-size: contain;
     transition: transform .2s ease;
+    background-color: antiquewhite;
     margin: 0;
     padding: 0;
 }
@@ -61,6 +62,8 @@
 .carousel-control-next:before {
     background-image: url('path/to/right-arrow-icon.png');
 }
+
+/*---offer---*/
 .my-heading {
     color: red;
     font-size: 36px;
