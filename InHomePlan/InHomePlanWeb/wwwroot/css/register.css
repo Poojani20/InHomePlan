@@ -26,3 +26,16 @@
     font-size:30px;
     text-align:center;
 }
+.btn {
+    background-color: #145DA0;
+    width: 200px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+.img-fluid {
+    border-bottom-left-radius: .25rem;
+    border-top-left-radius: .25rem;
+    height:1000px;
+
+}
