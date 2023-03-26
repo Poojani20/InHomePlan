@@ -1,3 +1,22 @@
 ﻿body {
-    background-color:aqua;
+    background-color:antiquewhite;
+}
+/*.vh-100 {
+    background-color: #145DA0;
+}
+.card text-black{
+    border-radius:25px;
+}*/
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+.card-registration .select-arrow {
+    top: 13px;
+}
+.h-100 {
+    background-color: #D4F1F4;
 }
