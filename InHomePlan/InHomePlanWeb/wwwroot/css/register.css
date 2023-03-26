@@ -1,5 +1,5 @@
 ﻿body {
-    background-color:antiquewhite;
+    background-color:white;
 }
 /*.vh-100 {
     background-color: #145DA0;
@@ -19,4 +19,10 @@
 }
 .h-100 {
     background-color: #D4F1F4;
+}
+.card-body h3 {
+    color: #145DA0;
+    font-weight:bold;
+    font-size:30px;
+    text-align:center;
 }
