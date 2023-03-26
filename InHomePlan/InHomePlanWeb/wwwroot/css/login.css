@@ -7,12 +7,16 @@
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))*/
 }
 .card {
-    background-color: #696969;
-    color: white;
+    background-color: #C5C5C5;
+    color: #145DA0;
+}
+.text-white-50{
+    color:black;
 }
 .form-label,
 .form-control {
     font-size: 20px;
+    color:black;
 }
 .form-outline.form-white.mb-4 {
     text-align: left;
@@ -21,4 +25,6 @@
     background-color: #145DA0;
     color: white;
 }
-
+.mb-0 {
+    color:black;
+}
