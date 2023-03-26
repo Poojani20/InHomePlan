@@ -32,10 +32,16 @@
     color:white;
     font-size:18px;
     font-weight:bold;
+    margin-top:-20px;
 }
 .img-fluid {
     border-bottom-left-radius: .25rem;
     border-top-left-radius: .25rem;
     height:1000px;
+    
 
 }
+.col-xl-6{
+   padding-left:20px;
+}
+    
