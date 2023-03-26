@@ -17,3 +17,8 @@
 .form-outline.form-white.mb-4 {
     text-align: left;
 }
+.btn-outline-light {
+    background-color: #000080;
+    color:white;
+}
+
