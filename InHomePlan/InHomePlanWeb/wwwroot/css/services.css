@@ -13,13 +13,32 @@ ul {
 ol {
     list-style-type: decimal;
 }
-.btn{
-    margin-top:70px;
-    margin-bottom:200px;
-    background-color:aquamarine;
-    width:600px;
-    padding-top:15px;
-    padding-bottom:15px;
+.btn {
+    margin-top: 70px;
+    margin-bottom: 200px;
+    background-color: #18A558;
+    width: 600px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color:white;
+    font-size:20px;
+    font-weight:600;
+}
+.animated-image {
+    position: absolute;
+    right: 0;
+    top: 0;
+    animation: slide-in 1s forwards;
+}
 
-    
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
