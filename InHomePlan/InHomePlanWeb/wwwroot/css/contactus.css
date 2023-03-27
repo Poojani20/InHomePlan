@@ -18,7 +18,8 @@
 .contact-box {
     background: #C5C5C5;
     display: flex;
-    padding-top: 10px;
+    align-items: stretch;
+   
 }
 
 .contact-left {
@@ -35,7 +36,7 @@
 
 h1 {
     margin-bottom: 10px;
-    color: #563434;
+    color: #145DA0;
 }
 
 .container p {
