@@ -1,2 +1,12 @@
 ﻿body {
 }
+.container{
+    margin-top:200px;
+    margin-bottom:200px;
+}
+.container ul {
+    list-style-type: decimal;
+    list-style-position: inside;
+    margin-left: 0;
+    padding-left: 0;
+}
