@@ -1,10 +1,10 @@
 ﻿body {
-    background-color:aqua;
+    background-color:white;
 }
 .container {
-    margin-top: 200px;
-    margin-bottom: 200px;
-    background-color: aqua;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    background-color: white;
 }
 ul {
     list-style-type: none;
@@ -14,7 +14,12 @@ ol {
     list-style-type: decimal;
 }
 .btn{
-    margin-top:200px;
+    margin-top:70px;
     margin-bottom:200px;
-    padding-bottom:200px;
+    background-color:aquamarine;
+    width:600px;
+    padding-top:15px;
+    padding-bottom:15px;
+
+    
 }
