@@ -4,7 +4,8 @@
 .container {
     margin-top: 20px;
     margin-bottom: 100px;
-    background-color: white;
+    background-color: #FFFDD0;
+    padding-left:100px;
 }
 ul {
     list-style-type: none;
@@ -14,7 +15,7 @@ ol {
     list-style-type: decimal;
 }
 .btn {
-    margin-top: 70px;
+    margin-top: 150px;
     margin-bottom: 200px;
     background-color: #18A558;
     width: 600px;
@@ -25,6 +26,7 @@ ol {
     font-weight:600;
 }
 .animated-image {
+    margin-top:100px;
     position: absolute;
     right: 0;
     top: 0;
