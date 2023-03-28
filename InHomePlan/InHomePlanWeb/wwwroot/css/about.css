@@ -30,12 +30,12 @@
     }*/
 
 body {
-    font-family: 'Roboto';
+    
     font-size: 16px;
 }
 
 .aboutus-section {
-    margin-top:100px;
+    margin-top:200px;
     margin-bottom:200px;
 }
 
@@ -63,7 +63,7 @@ body {
 
 .aboutus-text {
     color: #606060;
-    font-size: 13px;
+    font-size: 20px;
     line-height: 22px;
     margin: 0 0 35px;
 }
@@ -105,7 +105,7 @@ a:hover, a:active {
 
 .feature .feature-box .feature-content h4 {
     color: #17e362;
-    font-size: 18px;
+    font-size: 25px;
     letter-spacing: 0;
     line-height: 22px;
     margin: 0 0 5px;
@@ -120,7 +120,7 @@ a:hover, a:active {
 
     .feature .feature-box .feature-content h4 {
         color: #0f0f0f;
-        font-size: 18px;
+        font-size: 23px;
         letter-spacing: 0;
         line-height: 22px;
         margin: 0 0 5px;
@@ -128,7 +128,7 @@ a:hover, a:active {
 
     .feature .feature-box .feature-content p {
         color: #606060;
-        font-size: 13px;
+        font-size: 15px;
         line-height: 22px;
     }
 
