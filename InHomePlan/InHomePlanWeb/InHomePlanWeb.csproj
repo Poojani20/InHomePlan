@@ -14,7 +14,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\application.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Payment\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\application.js" />
   </ItemGroup>
 
 </Project>
