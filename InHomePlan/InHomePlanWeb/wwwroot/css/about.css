@@ -40,14 +40,15 @@ body {
 }
 
 .aboutus-title {
-    font-size: 30px;
+    font-size: 35px;
+    font-weight:500;
     letter-spacing: 0;
     line-height: 32px;
     margin: 0 0 39px;
     padding: 0 0 11px;
     position: relative;
     text-transform: uppercase;
-    color: #000;
+    color: #145DA0;
 }
 
     .aboutus-title::after {
@@ -93,7 +94,7 @@ a:hover, a:active {
 }
 
     .feature .feature-box .iconset::after {
-        background: #fdb801 none repeat scroll 0 0;
+        background: #17e362 none repeat scroll 0 0;
         content: "";
         height: 150%;
         left: 43%;
@@ -103,7 +104,7 @@ a:hover, a:active {
     }
 
 .feature .feature-box .feature-content h4 {
-    color: #0f0f0f;
+    color: #17e362;
     font-size: 18px;
     letter-spacing: 0;
     line-height: 22px;
@@ -132,12 +133,12 @@ a:hover, a:active {
     }
 
 .icon {
-    color: #f4b841;
+    color: #17e362;
     padding: 0px;
     font-size: 40px;
     border: 1px solid #fdb801;
     border-radius: 100px;
-    color: #fdb801;
+    color: #069e3e;
     font-size: 28px;
     height: 70px;
     line-height: 70px;
