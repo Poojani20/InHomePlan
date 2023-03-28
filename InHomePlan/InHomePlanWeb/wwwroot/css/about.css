@@ -1,41 +1,11 @@
-﻿/*.content{
-        margin-top:100px;
-        margin-bottom:100px;
-    }
-
-    .align {
-        text-align: justify;
-        font-size: 18px;
-    }
-
-    .row {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding-right: 50px;
-        margin-top: 200px;
-    }
-
-    .col-4 {
-        flex-basis: 25%;
-        padding: 5px;
-        min-width: 100px;
-        margin-bottom: 50px;
-        transition: transform 0.5s;
-    }
-
-    .img-fluid {
-        object-fit: cover;
-    }*/
-
+﻿
 body {
     
     font-size: 16px;
 }
 
 .aboutus-section {
-    margin-top:200px;
+    margin-top:150px;
     margin-bottom:200px;
 }
 
