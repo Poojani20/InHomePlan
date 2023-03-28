@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="jQuery" Version="3.6.4" />
+    <PackageReference Include="jQuery.Steps" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
