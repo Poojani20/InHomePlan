@@ -1,53 +1,41 @@
-﻿$(function () {
-    $("#wizard").steps({
-        headerTag: "h4",
-        bodyTag: "section",
-        transitionEffect: "fade",
-        enableAllSteps: true,
-        transitionEffectSpeed: 500,
-        onStepChanging: function (event, currentIndex, newIndex) {
-            if (newIndex === 1) {
-                $('.steps ul').addClass('step-2');
-            } else {
-                $('.steps ul').removeClass('step-2');
-            }
-            if (newIndex === 2) {
-                $('.steps ul').addClass('step-3');
-            } else {
-                $('.steps ul').removeClass('step-3');
-            }
+﻿const multiStepForm = document.querySelector("[data-multi-step]")
+const formSteps = [...multiStepForm.querySelectorAll("[data-step]")]
+let currentStep = formSteps.findIndex(step => {
+    return step.classList.contains("active")
+})
 
-            if (newIndex === 3) {
-                $('.steps ul').addClass('step-4');
-                $('.actions ul').addClass('step-last');
-            } else {
-                $('.steps ul').removeClass('step-4');
-                $('.actions ul').removeClass('step-last');
-            }
-            return true;
-        },
-        labels: {
-            finish: "Order again",
-            next: "Next",
-            previous: "Previous"
-        }
-    });
-    // Custom Steps Jquery Steps
-    $('.wizard > .steps li a').click(function () {
-        $(this).parent().addClass('checked');
-        $(this).parent().prevAll().addClass('checked');
-        $(this).parent().nextAll().removeClass('checked');
-    });
-    // Custom Button Jquery Steps
-    $('.forward').click(function () {
-        $("#wizard").steps('next');
-    })
-    $('.backward').click(function () {
-        $("#wizard").steps('previous');
-    })
-    // Checkbox
-    $('.checkbox-circle label').click(function () {
-        $('.checkbox-circle label').removeClass('active');
-        $(this).addClass('active');
+if (currentStep < 0) {
+    currentStep = 0
+    showCurrentStep()
+}
+
+multiStepForm.addEventListener("click", e => {
+    let incrementor
+    if (e.target.matches("[data-next]")) {
+        incrementor = 1
+    } else if (e.target.matches("[data-previous]")) {
+        incrementor = -1
+    }
+
+    if (incrementor == null) return
+
+    const inputs = [...formSteps[currentStep].querySelectorAll("input")]
+    const allValid = inputs.every(input => input.reportValidity())
+    if (allValid) {
+        currentStep += incrementor
+        showCurrentStep()
+    }
+})
+
+formSteps.forEach(step => {
+    step.addEventListener("animationend", e => {
+        formSteps[currentStep].classList.remove("hide")
+        e.target.classList.toggle("hide", !e.target.classList.contains("active"))
     })
 })
+
+function showCurrentStep() {
+    formSteps.forEach((step, index) => {
+        step.classList.toggle("active", index === currentStep)
+    })
+}
