@@ -8,13 +8,13 @@
     box-sizing: border-box;
 }
 
-/*body {
-    font-family: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+body {
+    
     margin: 0;
     display: grid;
     place-items: center;
     min-height: 100vh;
-*/}
+}
 /* Global Stylings */
 label {
     display: block;
@@ -103,6 +103,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 0.35rem;
     padding: 1.5rem;
+   
 }
 
 .form-step {
