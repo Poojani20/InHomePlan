@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
     ViewData["Title"] = "Services Page";
 }
 <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
@@ -25,10 +27,9 @@
     </ol>
 
     <div class="d-flex justify-content-center">
-
-        <button type="button" class="btn" asp-controller="Application" asp-action="Application">Go to the Application &#8594;</button>
-
-    </div>
+    <a href="@Url.Action("Application1", "Application")" class="btn">Go to the Application &#8594;</a>
+</div>
++
 
     <img src="~/images/houseanimate.png" alt="Animated Image" class="animated-image" />
    
