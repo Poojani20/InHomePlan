@@ -109,6 +109,7 @@ input {
     display: none;
     transform-origin: top;
     animation: animate 0.5s;
+    margin-bottom: 1rem;
 }
 
 .form-step-active {
@@ -116,7 +117,7 @@ input {
 }
 
 .input-group {
-    margin: 2rem 0;
+    margin-bottom:15px;
 }
 
 @keyframes animate {
