@@ -9,6 +9,9 @@ namespace InHomePlanWeb.Data
         {
 
         }
-        public DbSet<User> User { get; set; } //to create the table in the database
+        //to create the table in the database
+        public DbSet<User> User { get; set; } 
+
+        public DbSet<SystemAdmin> SystemAdmin { get; set; } 
     }
 }
