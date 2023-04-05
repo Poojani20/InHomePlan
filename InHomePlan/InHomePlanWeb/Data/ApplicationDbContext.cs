@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using InHomePlanWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InHomePlanWeb.Data
 {
@@ -8,5 +9,6 @@ namespace InHomePlanWeb.Data
         {
 
         }
+        public DbSet<User> User { get; set; } //to create the table in the database
     }
 }
