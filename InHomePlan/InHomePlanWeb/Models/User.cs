@@ -1,8 +1,11 @@
-﻿namespace InHomePlanWeb.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InHomePlanWeb.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }    
         public string Email { get; set; }
