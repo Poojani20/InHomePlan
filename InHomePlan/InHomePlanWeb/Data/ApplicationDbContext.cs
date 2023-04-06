@@ -10,8 +10,10 @@ namespace InHomePlanWeb.Data
 
         }
         //to create the table in the database
-        public DbSet<User> User { get; set; } 
+        public DbSet<User> User { get; set; }
+        public DbSet<SystemAdmin> SystemAdmin { get; set; }
+        public DbSet<Surveyor> Surveyor { get; set; }
 
-        public DbSet<SystemAdmin> SystemAdmin { get; set; } 
+
     }
 }
