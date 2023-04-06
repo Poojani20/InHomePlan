@@ -13,6 +13,9 @@ namespace InHomePlanWeb.Data
         public DbSet<User> User { get; set; }
         public DbSet<SystemAdmin> SystemAdmin { get; set; }
         public DbSet<Surveyor> Surveyor { get; set; }
+        public DbSet<Application> Application { get; set; }
+
+
 
 
     }
