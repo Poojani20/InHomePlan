@@ -97,7 +97,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Application", (string)null);
+                    b.ToTable("Application");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.RegionalStaff", b =>
@@ -139,7 +139,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("RegionalStaff", (string)null);
+                    b.ToTable("RegionalStaff");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Review", b =>
@@ -153,15 +153,15 @@ namespace InHomePlanWeb.Migrations
                     b.Property<int>("ApplicationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RegionalStaffID")
+                    b.Property<int?>("RegionalStaffID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Review_Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Review_Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Review_Status")
                         .IsRequired()
@@ -173,7 +173,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("RegionalStaffID");
 
-                    b.ToTable("Review", (string)null);
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Session", b =>
@@ -198,7 +198,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Session", (string)null);
+                    b.ToTable("Session");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Status", b =>
@@ -227,7 +227,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("Status", (string)null);
+                    b.ToTable("Status");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Surveyor", b =>
@@ -261,7 +261,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Surveyor", (string)null);
+                    b.ToTable("Surveyor");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.SystemAdmin", b =>
@@ -286,7 +286,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasKey("SystemAdminID");
 
-                    b.ToTable("SystemAdmin", (string)null);
+                    b.ToTable("SystemAdmin");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.User", b =>
@@ -331,7 +331,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Application", b =>
@@ -361,18 +361,14 @@ namespace InHomePlanWeb.Migrations
                     b.HasOne("InHomePlanWeb.Models.Application", "Application")
                         .WithMany("Review")
                         .HasForeignKey("ApplicationID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InHomePlanWeb.Models.RegionalStaff", "RegionalStaff")
+                    b.HasOne("InHomePlanWeb.Models.RegionalStaff", null)
                         .WithMany("Review")
-                        .HasForeignKey("RegionalStaffID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("RegionalStaffID");
 
                     b.Navigation("Application");
-
-                    b.Navigation("RegionalStaff");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Session", b =>

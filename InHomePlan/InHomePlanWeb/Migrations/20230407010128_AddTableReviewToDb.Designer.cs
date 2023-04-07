@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InHomePlanWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230407003250_AddReviewTableToDb2")]
-    partial class AddReviewTableToDb2
+    [Migration("20230407010128_AddTableReviewToDb")]
+    partial class AddTableReviewToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -156,15 +156,15 @@ namespace InHomePlanWeb.Migrations
                     b.Property<int>("ApplicationID")
                         .HasColumnType("int");
 
-                    b.Property<int>("RegionalStaffID")
+                    b.Property<int?>("RegionalStaffID")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Review_Comment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Review_Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Review_Status")
                         .IsRequired()
@@ -367,15 +367,11 @@ namespace InHomePlanWeb.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("InHomePlanWeb.Models.RegionalStaff", "RegionalStaff")
+                    b.HasOne("InHomePlanWeb.Models.RegionalStaff", null)
                         .WithMany("Review")
-                        .HasForeignKey("RegionalStaffID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RegionalStaffID");
 
                     b.Navigation("Application");
-
-                    b.Navigation("RegionalStaff");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Session", b =>
