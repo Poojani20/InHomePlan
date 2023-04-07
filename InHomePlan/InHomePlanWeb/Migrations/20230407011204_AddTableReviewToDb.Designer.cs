@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InHomePlanWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230407010128_AddTableReviewToDb")]
+    [Migration("20230407011204_AddTableReviewToDb")]
     partial class AddTableReviewToDb
     {
         /// <inheritdoc />
