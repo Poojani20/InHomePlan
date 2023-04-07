@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InHomePlanWeb.Models
 {
@@ -12,6 +13,13 @@ namespace InHomePlanWeb.Models
         public string Address { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
+
+        // Foreign key property
+        public int UserID { get; set; }
+
+        // Navigation property
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
 
     }
 }

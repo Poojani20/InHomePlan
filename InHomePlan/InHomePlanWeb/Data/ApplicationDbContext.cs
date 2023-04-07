@@ -23,6 +23,7 @@ namespace InHomePlanWeb.Data
         public DbSet<Approval> Approval { get; set; }
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Payment> Payment { get; set; }
+        public DbSet<Profile> Profile { get; set; }
 
 
 
