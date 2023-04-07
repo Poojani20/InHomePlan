@@ -24,6 +24,25 @@ namespace InHomePlanWeb.Data
         public DbSet<Inspection> Inspection { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Profile> Profile { get; set; }
+        public DbSet<Regional_Staff_Approval> Regional_Staff_Approval { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Regional_Staff_Approval>()
+                .HasKey(ra => new { ra.ApprovalID, ra.RegionalStaffID });
+
+            modelBuilder.Entity<Regional_Staff_Approval>()
+                .HasOne(ra => ra.Approval)
+                .WithMany(a => a.Regional_Staff_Approval)
+                .HasForeignKey(ra => ra.ApprovalID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Regional_Staff_Approval>()
+                .HasOne(ra => ra.RegionalStaff)
+                .WithMany(rs => rs.Regional_Staff_Approval)
+                .HasForeignKey(ra => ra.RegionalStaffID)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
 
 
