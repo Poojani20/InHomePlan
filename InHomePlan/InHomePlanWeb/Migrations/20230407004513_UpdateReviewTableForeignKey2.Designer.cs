@@ -4,6 +4,7 @@ using InHomePlanWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InHomePlanWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230407004513_UpdateReviewTableForeignKey2")]
+    partial class UpdateReviewTableForeignKey2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +100,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Application", (string)null);
+                    b.ToTable("Application");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.RegionalStaff", b =>
@@ -139,7 +142,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("RegionalStaff", (string)null);
+                    b.ToTable("RegionalStaff");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Review", b =>
@@ -173,7 +176,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("RegionalStaffID");
 
-                    b.ToTable("Review", (string)null);
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Session", b =>
@@ -198,7 +201,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Session", (string)null);
+                    b.ToTable("Session");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Status", b =>
@@ -227,7 +230,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("ApplicationID");
 
-                    b.ToTable("Status", (string)null);
+                    b.ToTable("Status");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Surveyor", b =>
@@ -261,7 +264,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Surveyor", (string)null);
+                    b.ToTable("Surveyor");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.SystemAdmin", b =>
@@ -286,7 +289,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasKey("SystemAdminID");
 
-                    b.ToTable("SystemAdmin", (string)null);
+                    b.ToTable("SystemAdmin");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.User", b =>
@@ -331,7 +334,7 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Application", b =>
