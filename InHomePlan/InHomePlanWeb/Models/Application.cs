@@ -31,5 +31,8 @@ namespace InHomePlanWeb.Models
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
 
+        // Navigation property for Reviews
+        public virtual ICollection<Review> Review { get; set; }
+
     }
 }
