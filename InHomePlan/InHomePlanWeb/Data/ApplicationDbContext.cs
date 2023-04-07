@@ -17,7 +17,8 @@ namespace InHomePlanWeb.Data
         public DbSet<Status> Status { get; set; }   
         public DbSet<Session> Session { get; set; }
         public DbSet<RegionalStaff> RegionalStaff { get; set; } 
-        public DbSet<Review> Review { get; set; }   
+        public DbSet<Review> Review { get; set; }  
+        public DbSet<Report> Report { get; set; }   
 
 
 
