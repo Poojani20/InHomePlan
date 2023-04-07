@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InHomePlanWeb.Models
 {
     public class Review
     {
+        [Key]
         public int ReviewID { get; set; }
         public string Review_Comment { get; set;}
         public string Review_Status { get; set; }
