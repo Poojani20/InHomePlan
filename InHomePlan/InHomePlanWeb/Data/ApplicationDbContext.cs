@@ -20,7 +20,8 @@ namespace InHomePlanWeb.Data
         public DbSet<Review> Review { get; set; }  
         public DbSet<Report> Report { get; set; } 
         public DbSet<Architect> Architect { get; set; }
-        public DbSet<Approval> Approval { get; set; }   
+        public DbSet<Approval> Approval { get; set; }
+        public DbSet<Inspection> Inspection { get; set; }
 
 
 
