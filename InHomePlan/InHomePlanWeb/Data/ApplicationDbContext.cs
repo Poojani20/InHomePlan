@@ -1,12 +1,11 @@
 ﻿using InHomePlanWeb.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 namespace InHomePlanWeb.Data
 {
     public class ApplicationDbContext : IdentityDbContext 
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext>options) : base(options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
@@ -27,15 +26,15 @@ namespace InHomePlanWeb.Data
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Rejection_Detail> Rejection_Detail { get; set; }
 
-
-
-
-
-
-
-
-
-
-
     }
 }
+
+
+
+
+
+
+
+
+
+
