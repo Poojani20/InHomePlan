@@ -106,6 +106,7 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
             
             public string? Role { get; set; }
+
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -124,7 +125,7 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
 
             Input = new()
             {
-                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                RoleList = _roleManager.Roles.Select(x=>x.Name).Select(i=> new SelectListItem
                 {
                     Text = i,
                     Value = i
@@ -149,7 +150,7 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    //assigning roles
                     if(String.IsNullOrEmpty(Input.Role))
                     {
                         await _userManager.AddToRoleAsync(user, Input.Role);
