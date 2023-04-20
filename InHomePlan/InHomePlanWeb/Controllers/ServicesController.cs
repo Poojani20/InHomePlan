@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InHomePlanWeb.Controllers
 {
-    [Authorize(Roles =SD.Role_Admin)]
+    //[Authorize(Roles =SD.Role_Admin)]
     public class ServicesController : Controller
     {
         public IActionResult Services()
