@@ -19,6 +19,7 @@ namespace InHomePlanWeb.Controllers
         {
             return View();
         }
+        //public string ReturnUrl { get; set; }
 
         [HttpPost]
         public async Task<IActionResult> Application1(Application application)
