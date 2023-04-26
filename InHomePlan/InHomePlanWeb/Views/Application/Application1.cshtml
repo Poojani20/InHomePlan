@@ -43,11 +43,20 @@
             </div>
             <div class="col">
                 <div class="input-group">
+                    @Html.LabelFor(model => model.LastName)
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "label", id = "lastName" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            @*<div class="col">
+                <div class="input-group">
                     <label for="LastName">Last Name</label>
                     <input type="text" name="lastName" id="lastName" />
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="input-group">
             <label for="Address">Address</label>
