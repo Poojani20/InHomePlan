@@ -22,7 +22,7 @@ namespace InHomePlanWeb.Models
         public String BuildingArea { get; set; }
         public String PlanNo { get; set; }
         public String Payment_Method { get; set; }
-        public DateTime Payment_Date { get; set; }
+        public DateTime? Payment_Date { get; set; }
 
         // Foreign key property
         public int UserID { get; set; }
