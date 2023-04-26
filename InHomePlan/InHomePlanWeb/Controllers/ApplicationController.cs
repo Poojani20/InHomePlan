@@ -24,8 +24,10 @@ namespace InHomePlanWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Application1(Application application)
         {
+
             if (ModelState.IsValid)
             {
+
                 _context.Add(application);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
