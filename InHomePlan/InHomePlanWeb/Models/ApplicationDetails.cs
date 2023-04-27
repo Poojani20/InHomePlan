@@ -20,6 +20,10 @@ namespace InHomePlanWeb.Models
         [ValidateNever]
         public Application Application { get; set; }
 
+        //public int Count { get; set; }
+        //public double Price { get; set; }
+
+
 
     }
 }
