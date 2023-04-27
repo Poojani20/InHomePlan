@@ -30,16 +30,17 @@ public class Repository<T> : IRepository<T> where T : class
 
     public IEnumerable<T> GetAll()
     {
-        throw new NotImplementedException();
+        IQueryable<T> query = dbSet;
+        return query.ToList();
     }
 
     public void Remove(T entity)
     {
-        throw new NotImplementedException();
+        dbSet.Remove(entity);
     }
 
     public void RemoveRange(IEnumerable<T> entity)
     {
-        throw new NotImplementedException();
+       dbSet.RemoveRange(entity);
     }
 }
