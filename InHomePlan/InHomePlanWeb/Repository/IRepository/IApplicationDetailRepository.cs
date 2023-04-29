@@ -2,9 +2,9 @@
 
 namespace InHomePlanWeb.Repository.IRepository
 {
-    public interface IApplicationRepository : IRepository<Application>
+    public interface IApplicationDetailRepository : IRepository<ApplicationDetails>
     {
-        void Update(Application obj);
+        void Update(ApplicationDetails obj);
         void Save();
     }
 }
