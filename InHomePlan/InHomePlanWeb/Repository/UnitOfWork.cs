@@ -10,6 +10,11 @@ namespace InHomePlanWeb.Repository
 
         
         public IApplicationRepository Application { get; private set; }
+
+        public IApplicationDetailRepository ApplicationDetails => throw new NotImplementedException();
+
+        public IApplicationHeaderRepository ApplicationHeader => throw new NotImplementedException();
+
         public UnitOfWork(ApplicationDbContext db) 
         {
             _db = db;
