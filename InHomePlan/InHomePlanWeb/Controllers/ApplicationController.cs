@@ -2,18 +2,23 @@
 using InHomePlanWeb.Models;
 using System.Threading.Tasks;
 using InHomePlanWeb.Data;
+using InHomePlanWeb.Repository.IRepository;
 
 namespace InHomePlanWeb.Controllers
 {
     public class ApplicationController : Controller
     {
 
-        private readonly ApplicationDbContext _context;
-
-        public ApplicationController(ApplicationDbContext context)
+        private readonly IUnitOfWork _unitOfWork;
+        public ApplicationController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
+
+        //public ApplicationController(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
 
         public IActionResult Application1()
         {
@@ -21,20 +26,20 @@ namespace InHomePlanWeb.Controllers
         }
         //public string ReturnUrl { get; set; }
 
-        [HttpPost]
-        public async Task<IActionResult> Application1(Application application)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> Application1(Application application)
+        //{
 
-            if (ModelState.IsValid)
-            {
+        //    if (ModelState.IsValid)
+        //    {
 
-                _context.Add(application);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
-            }
+        //        _context.Add(application);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Index", "Home");
+        //    }
 
-            return View(application);
-        }
+        //    return View(application);
+        //}
 
     }
 }
