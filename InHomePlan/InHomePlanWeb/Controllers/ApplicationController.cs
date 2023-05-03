@@ -3,6 +3,8 @@ using InHomePlanWeb.Models;
 using System.Threading.Tasks;
 using InHomePlanWeb.Data;
 using InHomePlanWeb.Repository.IRepository;
+using Stripe.Checkout;
+using Stripe;
 
 namespace InHomePlanWeb.Controllers
 {
@@ -40,6 +42,28 @@ namespace InHomePlanWeb.Controllers
 
         //    return View(application);
         //}
+
+        
+     //   var DOMAIN = "https://localhost:7169/";
+//        var options = new SessionCreateOptions
+//{
+   // SuccessUrl = domain$"/ApplicationConfirmation?id={ApplicationHeader.Id}",
+   // CancelUrl = domain + "index",
+//    LineItems = new List<SessionLineItemOptions>
+
+//  {
+//    new SessionLineItemOptions
+//    {
+//      Price = "price_H5ggYwtDq4fbrJ",
+//      Quantity = 2,
+//    },
+//  },
+//    Mode = "payment",
+//};
+
+
+//        var service = new SessionService();
+//        service.Create(options);
 
         public IActionResult ApplicationConfirmation(int id) 
         {
