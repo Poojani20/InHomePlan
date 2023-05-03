@@ -18,7 +18,12 @@ namespace InHomePlanWeb.Models
         public string? ApplicationStatus { get; set; }
         public string? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
+
+        public DateTime PayementDate { get; set; }
+        //public DateOnly PaymentDueDate { get; set; }
+        public string? SessionId { get; set; }
         public string? PaymentIntendId { get; set; }
+
         [Required]
         public String FirstName { get; set; }
         [Required]
