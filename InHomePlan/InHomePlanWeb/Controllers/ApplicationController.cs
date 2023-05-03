@@ -41,5 +41,10 @@ namespace InHomePlanWeb.Controllers
         //    return View(application);
         //}
 
+        public IActionResult ApplicationConfirmation(int id) 
+        {
+            return View(id);
+        }
+
     }
 }
