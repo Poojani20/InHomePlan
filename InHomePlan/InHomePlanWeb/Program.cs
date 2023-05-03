@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using InHomePlanWeb.Utility;
 using InHomePlanWeb.Repository.IRepository;
 using InHomePlanWeb.Repository;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+//setting stripe API key 
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 app.UseRouting();
 app.UseAuthentication();;
