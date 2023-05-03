@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<WorkingDirecotory>F:\Inhomeplan\InHomePlan\InHomePlan\InHomePlanWeb</WorkingDirecotory>
+	<WorkingDirectory>F:\Inhomeplan\InHomePlan\InHomePlan\InHomePlanWeb</WorkingDirectory>
   </PropertyGroup>
 
 	<Target Name="Build">
