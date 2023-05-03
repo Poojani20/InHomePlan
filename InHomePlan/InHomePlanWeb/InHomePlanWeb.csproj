@@ -4,8 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<WorkingDirecotory>F:\Inhomeplan\InHomePlan\InHomePlan\InHomePlanWeb</WorkingDirecotory>
   </PropertyGroup>
 
+	<Target Name="Build">
+		<MSBuild Projects="InHomePlanWeb.csproj"/>
+	</Target>
   <ItemGroup>
     <Compile Remove="wwwroot\NewFolder\**" />
     <Content Remove="wwwroot\NewFolder\**" />
