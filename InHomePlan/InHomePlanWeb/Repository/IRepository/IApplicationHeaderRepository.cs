@@ -5,6 +5,6 @@ namespace InHomePlanWeb.Repository.IRepository
     public interface IApplicationHeaderRepository : IRepository<ApplicationHeader>
     {
         void Update(ApplicationHeader obj);
-        void Save();
+        void UpdateStatus(int id, string ApplicationStatus, string? paymentStatus = null);
     }
 }

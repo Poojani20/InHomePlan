@@ -22,5 +22,31 @@ namespace InHomePlanWeb.Repository
         {
             _db.ApplicationHeader.Update(obj);
         }
+        //updating status
+        public void UpdateStatus(int id, string ApplicationStatus, string? paymentStatus = null)
+        {
+            var ApplicationFromDb = _db.ApplicationHeader.FirstOrDefault(u => u.Id == id);
+            if (ApplicationFromDb != null) {
+                ApplicationFromDb.ApplicationStatus = ApplicationStatus;
+                if(!string.IsNullOrEmpty(paymentStatus))
+                {
+                    ApplicationFromDb.PaymentStatus = paymentStatus;
+                }
+            }
+
+        }
+        //updating payment intent
+        public void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId)
+        {
+            var ApplicationFromDb = _db.ApplicationHeader.FirstOrDefault(u => u.Id == id);
+            if(!string.IsNullOrEmpty(sessionId)) {
+                ApplicationFromDb.SessionId = sessionId;
+            }
+            if (!string.IsNullOrEmpty(paymentIntentId))
+            {
+                ApplicationFromDb.PaymentIntendId = paymentIntentId;
+                ApplicationFromDb.PayementDate = DateTime.Now;
+            }
+        }
     }
 }
