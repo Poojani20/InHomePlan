@@ -46,3 +46,33 @@ function updateProgressbar() {
         ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
 }
 
+var dataTable;
+
+$(document).ready(function () {
+    loadDataTable();
+});
+
+function loadDataTable() {
+    dataTable = $('#tblData').DataTable({
+        "ajax": { url: '/Application/getall' },
+        "columns": [
+            { data: 'id', "width": "25%" },
+            { data: 'firstname', "width": "15%" },
+            { data: 'lastname', "width": "15%" },
+            { data: 'address', "width": "15%" },
+            { data: 'phonenumber', "width": "10%" },
+            { data: 'nic', "width": "10%" },
+            { data: 'email', "width": "10%" },
+            { data: 'dateofbirth', "width": "10%" },
+            { data: 'status', "width": "10%" },
+
+            {
+                data: 'id',
+                "render": function (data) {
+                    return '<div class="w-75 btn-group">'
+                },
+                "width":"25%"
+            }
+        ]
+    })
+}
