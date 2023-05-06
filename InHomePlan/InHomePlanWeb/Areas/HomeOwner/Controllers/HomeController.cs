@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace InHomePlanWeb.Controllers
 {
+    [Area("HomeOwner")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -36,6 +37,16 @@ namespace InHomePlanWeb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contactus()
+        {
+            return View();
         }
     }
 }

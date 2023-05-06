@@ -1,0 +1,203 @@
+﻿@model Application
+
+@{
+    ViewData["Title"] = "Application";
+}
+<link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
+
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<form id="Application" class="form" method="post">
+    <h1 class="text-center">Application</h1>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <!-- Progress bar -->
+    <div class="progressbar">
+        <div class="progress" id="progress"></div>
+
+        <div class="progress-step progress-step-active" data-title="Personal"></div>
+        <div class="progress-step" data-title="House Info"></div>
+        <div class="progress-step" data-title="Plan Upload"></div>
+        <div class="progress-step" data-title="Payment"></div>
+    </div>
+
+    <!-- Steps -->
+    <!--first part-->
+    <div class="form-step form-step-active">
+        <div class="row">
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="FirstName"></label>
+			        <input asp-for="FirstName"/>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="LastName"></label>
+			        <input asp-for="LastName"/>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="Address"></label>
+            <input asp-for="Address"/>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="Phone"></label>
+			        <input asp-for="Phone"/>
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="NIC "></label>
+			        <input asp-for="NIC"/>
+                    <span asp-validation-for="NIC" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+       <div class="input-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="DateOfBirth"></label>
+            <input asp-for="DateOfBirth"/>
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+
+        <div class="">
+            <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
+        </div>
+    </div>
+
+    <!--second part -->
+   
+    <div class="form-step">
+
+        <div class="row">
+            <div class="col">
+                <div class="input-group">           
+                    <label asp-for="AssessmentNo"></label>
+                    <input asp-for="AssessmentNo"/>
+                    <span asp-validation-for="AssessmentNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="PostalCode"></label>
+                    <input asp-for="PostalCode"/>
+                    <span asp-validation-for="PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="StreetName"></label>
+            <input asp-for="StreetName"/>
+            <span asp-validation-for="StreetName" class="text-danger"></span>
+        </div>
+
+         <div class="row">
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="No_Of_Rooms"></label>
+                    <input asp-for="No_Of_Rooms"/>
+                    <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <label asp-for="No_of_perches"></label>
+                    <input asp-for="No_of_perches"/>
+                    <span asp-validation-for="No_of_perches" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="BuildingArea"></label>
+            <input asp-for="BuildingArea"/>
+            <span asp-validation-for="BuildingArea" class="text-danger"></span>
+        </div>
+
+        <div class="btns-group">
+            <a href="#" class="btn btn-prev">Previous</a>
+            <a href="#" class="btn btn-next">Next</a>
+        </div>
+
+        </div>
+
+       
+
+    <!--third part-->
+    <div class="form-step">
+        <div class="input-group">
+            <label asp-for="PlanNo"></label>
+            <input asp-for="PlanNo"/>
+            <span asp-validation-for="PlanNo" class="text-danger"></span>
+        </div>
+
+        <div class="input-group">
+            <label for="file1">Upload House Plan</label>
+            <input type="file" name="file1" id="file1" accept="image/*, .pdf" />
+       </div>
+        <div class="input-group">
+            <label for="file2">Upload Land Plan</label>
+            <input type="file" name="file2" id="file2" accept="image/*, .pdf" />
+        </div>
+
+       
+        <div class="btns-group">
+            <a href="#" class="btn btn-prev">Previous</a>
+            <a href="#" class="btn btn-next">Next</a>
+        </div>
+    </div>
+
+    <!--fourth part-->
+    <div class="form-step">
+        <div class="input-group">
+            <label for="Payment_Method">Payment Method</label>
+            <input type="text" name="Payment_Method" id="Payment_Method"/>
+             <span asp-validation-for="Payment_Method" class="text-danger"></span>
+        </div>
+        
+        <div class="btns-group">
+            <a href="#" class="btn btn-prev">Previous</a>
+            <button type="submit" class="btn" >Submit</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/application.js" asp-append-version="true"></script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+

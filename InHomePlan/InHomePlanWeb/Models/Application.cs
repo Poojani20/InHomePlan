@@ -21,7 +21,7 @@ namespace InHomePlanWeb.Models
         public String NIC { get; set; }
         
         [Required]
-        [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Please enter a valid 10-digit phone number.")]
+        //[RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Please enter a valid 10-digit phone number.")]
         public String Phone { get; set; }
        
         [Required]
@@ -44,7 +44,7 @@ namespace InHomePlanWeb.Models
         public String BuildingArea { get; set; }
         public String PlanNo { get; set; }
 
-        [Required(ErrorMessage = "Payment method is required")]
+        //[Required(ErrorMessage = "Payment method is required")]
         public String? Payment_Method { get; set; }
         public DateTime? Payment_Date { get; set; }
 

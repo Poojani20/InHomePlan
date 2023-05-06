@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InHomePlanWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230505084209_UpdateApplicationTableToDb")]
+    [Migration("20230506145924_UpdateApplicationTableToDb")]
     partial class UpdateApplicationTableToDb
     {
         /// <inheritdoc />
@@ -74,6 +74,7 @@ namespace InHomePlanWeb.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Payment_Method")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")

@@ -71,6 +71,7 @@ namespace InHomePlanWeb.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Payment_Method")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")

@@ -7,6 +7,7 @@ namespace InHomePlanWeb.Controllers
     //[Authorize(Roles =SD.Role_Admin)]
     public class ServicesController : Controller
     {
+        [Area("HomeOwner")]
         public IActionResult Services()
         {
             return View();

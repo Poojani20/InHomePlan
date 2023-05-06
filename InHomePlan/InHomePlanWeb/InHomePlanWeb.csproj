@@ -11,9 +11,13 @@
 		<MSBuild Projects="InHomePlanWeb.csproj" />
 	</Target>
   <ItemGroup>
+    <Compile Remove="Views\Payment\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="Views\Payment\**" />
     <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="Views\Payment\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="Views\Payment\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
@@ -22,7 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Payment\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\HomeOwner\Data\" />
+    <Folder Include="Areas\HomeOwner\Models\" />
+    <Folder Include="Areas\Staff\Data\" />
+    <Folder Include="Areas\Staff\Models\" />
   </ItemGroup>
 
   <ItemGroup>

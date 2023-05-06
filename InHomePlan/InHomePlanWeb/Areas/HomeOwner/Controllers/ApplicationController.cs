@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InHomePlanWeb.Data;
 using InHomePlanWeb.Models;
-using System.Threading.Tasks;
-using InHomePlanWeb.Data;
-using InHomePlanWeb.Repository.IRepository;
-using Stripe.Checkout;
-using Stripe;
-using Application = InHomePlanWeb.Models.Application;
+using Microsoft.AspNetCore.Mvc;
 
-namespace InHomePlanWeb.Controllers
+namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 {
+    [Area("HomeOwner")]
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;
