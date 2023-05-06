@@ -7,12 +7,48 @@ const progressSteps = document.querySelectorAll(".progress-step");
 let formStepsNum = 0;
 
 nextBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        formStepsNum++;
-        updateFormSteps();
-        updateProgressbar();
+    btn.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent the default form submission
+
+        if (validateForm()) { // Validate the form before proceeding
+            formStepsNum++;
+            updateFormSteps();
+            updateProgressbar();
+        }
     });
 });
+
+//nextBtns.forEach((btn) => {
+//    btn.addEventListener("click", (e) => {
+//        e.preventDefault(); // Prevent the default form submission
+
+//        const currentFormStep = formSteps[formStepsNum];
+//        const formInputs = currentFormStep.querySelectorAll("input, select, textarea");
+
+//        let isValid = true;
+//        formInputs.forEach((input) => {
+//            if (!input.checkValidity()) {
+//                isValid = false;
+//                input.classList.add("is-invalid"); // Add "is-invalid" class to inputs with invalid values
+
+//                const errorContainer = input.closest(".form-group").querySelector(".text-danger");
+//                errorContainer.textContent = input.validationMessage; // Display validation message
+//            } else {
+//                input.classList.remove("is-invalid"); // Remove "is-invalid" class from valid inputs
+
+//                const errorContainer = input.closest(".form-group").querySelector(".text-danger");
+//                errorContainer.textContent = ""; // Clear any previous validation message
+//            }
+//        });
+
+//        if (isValid) {
+//            formStepsNum++;
+//            updateFormSteps();
+//            updateProgressbar();
+//        }
+//    });
+//});
+
 
 prevBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -45,34 +81,54 @@ function updateProgressbar() {
     progress.style.width =
         ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
 }
-//video
-var dataTable;
 
-$(document).ready(function () {
-    loadDataTable();
-});
+function validateForm() {
+    // Get the current form step
+    const currentFormStep = formSteps[formStepsNum];
 
-function loadDataTable() {
-    dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/Application/getall' },
-        "columns": [
-            { data: 'id', "width": "25%" },
-            { data: 'firstname', "width": "15%" },
-            { data: 'lastname', "width": "15%" },
-            { data: 'address', "width": "15%" },
-            { data: 'phonenumber', "width": "10%" },
-            { data: 'nic', "width": "10%" },
-            { data: 'email', "width": "10%" },
-            { data: 'dateofbirth', "width": "10%" },
-            { data: 'status', "width": "10%" },
+    // Get the form inputs within the current form step
+    const formInputs = currentFormStep.querySelectorAll("input, select, textarea");
 
-            {
-                data: 'id',
-                "render": function (data) {
-                    return '<div class="w-75 btn-group">'
-                },
-                "width":"25%"
-            }
-        ]
-    })
+    // Check if any of the inputs is invalid
+    let isValid = true;
+    formInputs.forEach((input) => {
+        if (!input.checkValidity()) {
+            input.reportValidity();
+            isValid = false;
+        }
+    });
+
+    return isValid;
 }
+
+//video
+//var dataTable;
+
+//$(document).ready(function () {
+//    loadDataTable();
+//});
+
+//function loadDataTable() {
+//    dataTable = $('#tblData').DataTable({
+//        "ajax": { url: '/Application/getall' },
+//        "columns": [
+//            { data: 'id', "width": "25%" },
+//            { data: 'firstname', "width": "15%" },
+//            { data: 'lastname', "width": "15%" },
+//            { data: 'address', "width": "15%" },
+//            { data: 'phonenumber', "width": "10%" },
+//            { data: 'nic', "width": "10%" },
+//            { data: 'email', "width": "10%" },
+//            { data: 'dateofbirth', "width": "10%" },
+//            { data: 'status', "width": "10%" },
+
+//            {
+//                data: 'id',
+//                "render": function (data) {
+//                    return '<div class="w-75 btn-group">'
+//                },
+//                "width":"25%"
+//            }
+//        ]
+//    })
+//}

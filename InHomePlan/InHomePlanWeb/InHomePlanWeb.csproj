@@ -8,7 +8,7 @@
   </PropertyGroup>
 
 	<Target Name="Build">
-		<MSBuild Projects="InHomePlanWeb.csproj"/>
+		<MSBuild Projects="InHomePlanWeb.csproj" />
 	</Target>
   <ItemGroup>
     <Compile Remove="wwwroot\NewFolder\**" />
@@ -46,6 +46,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
     <PackageReference Include="Stripe.net" Version="41.14.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
 </Project>

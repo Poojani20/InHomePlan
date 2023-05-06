@@ -17,6 +17,7 @@ namespace InHomePlanWeb.Controllers
             _db = db;
         }
 
+        // GET: Application
         public IActionResult ApplicationDisplay()
         {
             List<Application> objApplicationList = _db.Application.ToList();
@@ -28,12 +29,20 @@ namespace InHomePlanWeb.Controllers
             return View();
         }
 
+        // POST: Application/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Application(Application obj)
         {
-            _db.Application.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("ApplicationDisplay");
+            if(ModelState.IsValid)
+            {
+                _db.Application.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("ApplicationDisplay");
+            }
+
+            // If the model state is not valid, return the view with validation errors
+            return RedirectToAction("Application");
         }
 
 
