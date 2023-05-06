@@ -8,22 +8,21 @@ namespace InHomePlanWeb.Repository
     {
         private ApplicationDbContext _db;
 
-        
+        public UnitOfWork(ApplicationDbContext db) 
+        {
+            _db = db;
+            Application = new ApplicationRepository(_db);
+            //ApplicationHeader = new ApplicationHeaderRepository(_db);
+            //ApplicationDetails = new ApplicationDetailRepository(_db);
+        }
+       
         public IApplicationRepository Application { get; private set; }
 
         public IApplicationDetailRepository ApplicationDetails { get; private set; }
 
         public IApplicationHeaderRepository ApplicationHeader { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext db) 
-        {
-            _db = db;
-            Application = new ApplicationRepository(_db);
-            ApplicationHeader = new ApplicationHeaderRepository(_db);
-            ApplicationDetails = new ApplicationDetailRepository(_db);
-        }
-       
-        public void save()
+        public void Save()
         {
             _db.SaveChanges();
         }

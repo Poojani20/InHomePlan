@@ -6,6 +6,6 @@
         IApplicationDetailRepository ApplicationDetails { get; }
         IApplicationHeaderRepository ApplicationHeader{ get; }
 
-        void save();
+        void Save();
     }
 }

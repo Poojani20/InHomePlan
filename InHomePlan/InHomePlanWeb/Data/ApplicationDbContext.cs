@@ -29,7 +29,6 @@ namespace InHomePlanWeb.Data
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Rejection_Detail> Rejection_Detail { get; set; }
-        public DbSet<Test>Test { get; set; }
 
     }
 }

@@ -5,27 +5,38 @@ using InHomePlanWeb.Data;
 using InHomePlanWeb.Repository.IRepository;
 using Stripe.Checkout;
 using Stripe;
+using Application = InHomePlanWeb.Models.Application;
 
 namespace InHomePlanWeb.Controllers
 {
     public class ApplicationController : Controller
     {
-
-        private readonly IUnitOfWork _unitOfWork;
-        public ApplicationController(IUnitOfWork unitOfWork)
+        private readonly ApplicationDbContext _db;
+        public ApplicationController(ApplicationDbContext db)
         {
-            _unitOfWork = unitOfWork;
+            _db = db;
         }
 
-        //public ApplicationController(ApplicationDbContext context)
-        //{
-        //    _context = context;
-        //}
+        public IActionResult ApplicationDisplay()
+        {
+            List<Application> objApplicationList = _db.Application.ToList();
+            return View(objApplicationList);
+        }
 
-        public IActionResult Application1()
+        public IActionResult Application()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Application(Application obj)
+        {
+            _db.Application.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("ApplicationDisplay");
+        }
+
+
         //public string ReturnUrl { get; set; }
 
         //[HttpPost]
@@ -43,32 +54,29 @@ namespace InHomePlanWeb.Controllers
         //    return View(application);
         //}
 
-        
-     //   var DOMAIN = "https://localhost:7169/";
-//        var options = new SessionCreateOptions
-//{
-   // SuccessUrl = domain$"/ApplicationConfirmation?id={ApplicationHeader.Id}",
-   // CancelUrl = domain + "index",
-//    LineItems = new List<SessionLineItemOptions>
 
-//  {
-//    new SessionLineItemOptions
-//    {
-//      Price = "price_H5ggYwtDq4fbrJ",
-//      Quantity = 2,
-//    },
-//  },
-//    Mode = "payment",
-//};
+        //   var DOMAIN = "https://localhost:7169/";
+        //        var options = new SessionCreateOptions
+        //{
+        // SuccessUrl = domain$"/ApplicationConfirmation?id={ApplicationHeader.Id}",
+        // CancelUrl = domain + "index",
+        //    LineItems = new List<SessionLineItemOptions>
+
+        //  {
+        //    new SessionLineItemOptions
+        //    {
+        //      Price = "price_H5ggYwtDq4fbrJ",
+        //      Quantity = 2,
+        //    },
+        //  },
+        //    Mode = "payment",
+        //};
 
 
-//        var service = new SessionService();
-//        service.Create(options);
+        //        var service = new SessionService();
+        //        service.Create(options);
 
-        public IActionResult ApplicationConfirmation(int id) 
-        {
-            return View(id);
-        }
+
 
     }
 }

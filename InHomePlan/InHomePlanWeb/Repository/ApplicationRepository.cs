@@ -13,8 +13,6 @@ namespace InHomePlanWeb.Repository
             _db = db;
         }
 
-       
-
         public void Update(Application obj)
         {
             _db.Application.Update(obj);
