@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static InHomePlanWeb.Utility.Enums;
 
 namespace InHomePlanWeb.Models
 {
@@ -47,6 +48,20 @@ namespace InHomePlanWeb.Models
         //[Required(ErrorMessage = "Payment method is required")]
         public String? Payment_Method { get; set; }
         public DateTime? Payment_Date { get; set; }
+
+        //Add properties of the enum type to represent the bool value
+
+        [Display(Name = "Approval of Plan")]
+        public BoolOptions IsPlanApproved { get; set; }
+
+        [Display(Name = "Completion of Inspection")]
+        public BoolOptions IsInspectionCompleted { get; set; }
+
+        [Display(Name = "Grant of Final Approval")]
+        public BoolOptions IsFinalApproved { get; set; }
+
+
+
 
         // Foreign key property
         //public int UserID { get; set; }
