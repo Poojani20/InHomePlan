@@ -60,7 +60,9 @@ namespace InHomePlanWeb.Models
         [Display(Name = "Grant of Final Approval")]
         public BoolOptions IsFinalApproved { get; set; }
 
-
+        //For file upload
+        public byte[] FileHomePlan { get; set; }
+        public byte[] FileLandPlan { get; set; }
 
 
         // Foreign key property

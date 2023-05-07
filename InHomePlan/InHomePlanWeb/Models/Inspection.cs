@@ -11,10 +11,10 @@ namespace InHomePlanWeb.Models
         public string InspectionComment { get; set;}
         public DateTime InspectionDate { get; set; }
 
-        [ForeignKey("Application")]
+        
         public int ApplicationID { get; set; }
-
-        public virtual Application Application { get; set; }
+        [ForeignKey("ApplicationID")]
+        public Application Application { get; set; }
 
     }
 }
