@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using InHomePlanWeb.Data;
 using InHomePlanWeb.Repository.IRepository;
 using Stripe.Checkout;
+using InHomePlanWeb.Utility;
 
 namespace InHomePlanWeb.Areas.Staff.Controllers 
 {
@@ -44,6 +45,37 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
             return RedirectToAction("Application");
         }
 
+        // GET: Get single application
+        public IActionResult ApplicationDetails(int? applicationID)
+        {
+            if (applicationID == 0)
+            {
+                return NotFound();
+            }
+
+            // Find only works with a Primary Key
+            Application? applicationFromDb = _db.Application.Find(applicationID);
+
+            // FirstOrDefault works with any field
+            Application? applicationFromDb2 = _db.Application.FirstOrDefault(u => u.ApplicationID == applicationID);
+
+            // Where is to use if we have more filtering to do
+            Application? applicationFromDb3 = _db.Application.Where(u => u.ApplicationID == applicationID).FirstOrDefault();
+
+            if (applicationFromDb == null)
+            {
+                return NotFound();
+            }
+
+            // using option1:Find here
+            return View(applicationFromDb);
+        }
+
+        public enum BoolOptions
+        {
+            No,
+            Yes
+        }
 
         //public string ReturnUrl { get; set; }
 

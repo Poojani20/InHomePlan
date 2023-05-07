@@ -53,6 +53,15 @@ namespace InHomePlanWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsFinalApproved")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsInspectionCompleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsPlanApproved")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -71,7 +80,6 @@ namespace InHomePlanWeb.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Payment_Method")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
