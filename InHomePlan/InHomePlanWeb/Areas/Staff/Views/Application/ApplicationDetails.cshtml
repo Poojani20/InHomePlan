@@ -173,7 +173,7 @@
             </div>
             <div class="col">
                 <div class="input-group">
-                    <select asp-for="IsPlanApproved" class="form-control">
+                    <select asp-for="IsPlanApproved" class="form-select">
                         <option value="@BoolOptions.Yes">Yes</option>
                         <option value="@BoolOptions.No">No</option>
                     </select>
@@ -193,7 +193,7 @@
             </div>
             <div class="col">
                 <div class="input-group">
-                    <select asp-for="IsInspectionCompleted" class="form-control">
+                    <select asp-for="IsInspectionCompleted" class="form-select">
                         <option value="@BoolOptions.Yes">Yes</option>
                         <option value="@BoolOptions.No">No</option>
                     </select>
@@ -213,7 +213,7 @@
             </div>
             <div class="col">
                 <div class="input-group">
-                    <select asp-for="IsFinalApproved" class="form-control">
+                    <select asp-for="IsFinalApproved" class="form-select">
                         <option value="@BoolOptions.Yes">Yes</option>
                         <option value="@BoolOptions.No">No</option>
                     </select>

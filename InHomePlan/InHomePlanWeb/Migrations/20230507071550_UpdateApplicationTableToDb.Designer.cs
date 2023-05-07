@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InHomePlanWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230507024521_UpdateApplicationTableToDb")]
+    [Migration("20230507071550_UpdateApplicationTableToDb")]
     partial class UpdateApplicationTableToDb
     {
         /// <inheritdoc />
@@ -51,6 +51,14 @@ namespace InHomePlanWeb.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("FileHomePlan")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("FileLandPlan")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()

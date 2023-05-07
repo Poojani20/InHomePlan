@@ -10,7 +10,7 @@
 <br>
 <br>
 <br>
-<form id="Application" class="form" method="post">
+<form id="Application" class="form" method="post" enctype="multipart/form-data">
     <h1 class="text-center">Application</h1>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <!-- Progress bar -->
@@ -152,12 +152,12 @@
         </div>
 
         <div class="input-group">
-            <label for="file1">Upload House Plan</label>
-            <input type="file" name="file1" id="file1" accept="image/*, .pdf" />
+            <label for="fileHomePlan">Upload House Plan</label>
+            <input type="file" name="fileHomePlan" id="file1" accept="image/*, .pdf" />
        </div>
         <div class="input-group">
-            <label for="file2">Upload Land Plan</label>
-            <input type="file" name="file2" id="file2" accept="image/*, .pdf" />
+            <label for="fileLandPlan">Upload Land Plan</label>
+            <input type="file" name="fileLandPlan" id="file2" accept="image/*, .pdf" />
         </div>
 
        

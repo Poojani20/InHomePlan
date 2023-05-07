@@ -28,14 +28,38 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         // POST: Application/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Application(Application obj)
+        public IActionResult Application(Application obj, IFormFile fileHomePlan, IFormFile fileLandPlan)
         {
-            if(ModelState.IsValid)
+            if (fileHomePlan != null && fileHomePlan.Length > 0)
             {
+                using (var memoryStream = new MemoryStream())
+                {
+                    fileHomePlan.CopyTo(memoryStream);
+                    byte[] fileData1 = memoryStream.ToArray();
+
+                    fileLandPlan.CopyTo(memoryStream);
+                    byte[] fileData2 = memoryStream.ToArray();
+
+                    // Save the file data to the database or perform any other operations
+                    // using the file data
+
+                    // Assign the file data to the appropriate property in the model
+                    obj.FileHomePlan = fileData1;
+                    obj.FileLandPlan = fileData2;
+                    //obj.FileHomePlanName = file.FileName;
+                }
+
                 _db.Application.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("ApplicationDisplay");
             }
+
+            //if (ModelState.IsValid)
+            //{
+            //    _db.Application.Add(obj);
+            //    _db.SaveChanges();
+            //    return RedirectToAction("ApplicationDisplay");
+            //}
 
             // If the model state is not valid, return the view with validation errors
             return RedirectToAction("Application");
