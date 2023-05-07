@@ -28,23 +28,7 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
         {
             return View();
         }
-
-        // POST: Application/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Application(Application obj)
-        {
-            if(ModelState.IsValid)
-            {
-                _db.Application.Add(obj);
-                _db.SaveChanges();
-                return RedirectToAction("ApplicationDisplay");
-            }
-
-            // If the model state is not valid, return the view with validation errors
-            return RedirectToAction("Application");
-        }
-
+        
         // GET: Get single application
         public IActionResult ApplicationDetails(int? applicationID)
         {
@@ -53,13 +37,13 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
                 return NotFound();
             }
 
-            // Find only works with a Primary Key
+            // Find - only works with a Primary Key
             Application? applicationFromDb = _db.Application.Find(applicationID);
 
-            // FirstOrDefault works with any field
+            // FirstOrDefault - works with any field
             Application? applicationFromDb2 = _db.Application.FirstOrDefault(u => u.ApplicationID == applicationID);
 
-            // Where is to use if we have more filtering to do
+            // Where - use if we have more filtering to do
             Application? applicationFromDb3 = _db.Application.Where(u => u.ApplicationID == applicationID).FirstOrDefault();
 
             if (applicationFromDb == null)
@@ -71,52 +55,21 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
             return View(applicationFromDb);
         }
 
-        public enum BoolOptions
+        // POST: Application/Update
+        [HttpPost]
+        public IActionResult ApplicationDetails(Application obj)
         {
-            No,
-            Yes
+            if (ModelState.IsValid)
+            {
+                _db.Application.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("ApplicationDetails", new { applicationID = obj.ApplicationID });
+            }
+
+            // If the model state is not valid, return the view with validation errors
+            return RedirectToAction("ApplicationDetails", obj);
         }
 
-        //public string ReturnUrl { get; set; }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Application1(Application application)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        _context.Add(application);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    return View(application);
-        //}
-
-
-        //   var DOMAIN = "https://localhost:7169/";
-        //        var options = new SessionCreateOptions
-        //{
-        // SuccessUrl = domain$"/ApplicationConfirmation?id={ApplicationHeader.Id}",
-        // CancelUrl = domain + "index",
-        //    LineItems = new List<SessionLineItemOptions>
-
-        //  {
-        //    new SessionLineItemOptions
-        //    {
-        //      Price = "price_H5ggYwtDq4fbrJ",
-        //      Quantity = 2,
-        //    },
-        //  },
-        //    Mode = "payment",
-        //};
-
-
-        //        var service = new SessionService();
-        //        service.Create(options);
-
-
-
+       
     }
 }

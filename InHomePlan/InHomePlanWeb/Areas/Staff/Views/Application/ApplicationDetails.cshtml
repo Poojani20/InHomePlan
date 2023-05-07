@@ -235,7 +235,9 @@
       
         <div class="btns-group">
             @*<a href="#" class="btn btn-prev">Previous</a>*@
-            <button type="submit" class="btn" >Update Application</button>
+            @*<button type="submit" class="btn" >Update Application</button>*@
+            <a asp-controller="Application" asp-action="ApplicationDisplay" class="btn">Back to List</a>
+            <button type="submit" class="btn btn-primary" style="width:150px">Update Application</button>
         </div>
     </div>
 </form>
