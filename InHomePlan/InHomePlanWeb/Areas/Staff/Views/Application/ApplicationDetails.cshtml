@@ -11,7 +11,7 @@
 <br>
 <br>
 <br>
-<form id="Application" class="form" method="post">
+<form id="Application" class="form" method="post" enctype="multipart/form-data">
     <h4 class="text-center">Application Details</h4>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <!-- Progress bar -->
@@ -146,15 +146,19 @@
             <input asp-for="PlanNo"/>
             <span asp-validation-for="PlanNo" class="text-danger"></span>
         </div>
+       
+       <div>
+       <div class="col"> 
+               <a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>
 
-        <div class="input-group">
-            <label for="file1">Upload House Plan</label>
-            <input type="file" name="file1" id="file1" accept="image/*, .pdf" />
+              @* <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>*@
+
+           </div>
+            <div class="col">
+                <a href="@Model.LandPlanFileUrl" class="btn" download>View Land Plan</a>
+           </div>
+           
        </div>
-        <div class="input-group">
-            <label for="file2">Upload Land Plan</label>
-            <input type="file" name="file2" id="file2" accept="image/*, .pdf" />
-        </div>
 
     </div>
 
@@ -226,7 +230,6 @@
         </div>
 
 
-    </div>
 
 
 

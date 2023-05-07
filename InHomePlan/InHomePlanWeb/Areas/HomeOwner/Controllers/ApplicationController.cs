@@ -53,8 +53,8 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                         fileLandPlan.CopyTo(fileStream2);
                     }
 
-                    obj.HomePlanFileUrl = @"Uploads\Plans\Home" + fileName1;
-                    obj.LandPlanFileUrl = @"Uploads\Plans\Land" + fileName2;
+                    obj.HomePlanFileUrl = @"Uploads\Plans\Home\" + fileName1;
+                    obj.LandPlanFileUrl = @"Uploads\Plans\Land\" + fileName2;
 
                 }
 

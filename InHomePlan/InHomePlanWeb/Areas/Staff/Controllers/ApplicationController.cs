@@ -12,9 +12,11 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public ApplicationController(ApplicationDbContext db)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Application
@@ -32,6 +34,8 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
         // GET: Get single application
         public IActionResult ApplicationDetails(int? applicationID)
         {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
             if (applicationID == 0)
             {
                 return NotFound();
@@ -50,6 +54,12 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
             {
                 return NotFound();
             }
+
+            string filePath1 = Path.Combine(wwwRootPath, applicationFromDb.HomePlanFileUrl);
+            string filePath2 = Path.Combine(wwwRootPath, applicationFromDb.LandPlanFileUrl);
+
+            applicationFromDb.HomePlanFileUrl = filePath1;  
+            applicationFromDb.LandPlanFileUrl = filePath2;
 
             // using option1:Find here
             return View(applicationFromDb);
@@ -70,6 +80,21 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
             return RedirectToAction("ApplicationDetails", obj);
         }
 
-       
+        public IActionResult DownloadFile(string filePath)
+        {
+            // Ensure that the file path is valid and exists
+            if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+            {
+                // Get the file name from the file path
+                string fileName = Path.GetFileName(filePath);
+
+                // Return the file for download
+                return File(filePath, "application/octet-stream", fileName);
+            }
+
+            // If the file path is invalid or the file doesn't exist, return an error or handle it accordingly
+            return NotFound();
+        }
+
     }
 }
