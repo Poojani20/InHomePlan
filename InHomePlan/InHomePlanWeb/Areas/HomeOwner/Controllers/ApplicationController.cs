@@ -8,9 +8,11 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public ApplicationController(ApplicationDbContext db)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;  
         }
 
         // GET: Application
@@ -28,38 +30,38 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         // POST: Application/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Application(Application obj, IFormFile fileHomePlan, IFormFile fileLandPlan)
+        public IActionResult Application(Application obj, IFormFile? fileHomePlan, IFormFile? fileLandPlan)
         {
-            if (fileHomePlan != null && fileHomePlan.Length > 0)
+            if (ModelState.IsValid)
             {
-                using (var memoryStream = new MemoryStream())
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+                if(fileHomePlan != null)
                 {
-                    fileHomePlan.CopyTo(memoryStream);
-                    byte[] fileData1 = memoryStream.ToArray();
+                    string fileName1 = Guid.NewGuid().ToString() + Path.GetExtension(fileHomePlan.FileName);
+                    string filePath1 = Path.Combine(wwwRootPath, @"Uploads\Plans\Home");
 
-                    fileLandPlan.CopyTo(memoryStream);
-                    byte[] fileData2 = memoryStream.ToArray();
+                    string fileName2 = Guid.NewGuid().ToString() + Path.GetExtension(fileLandPlan.FileName);
+                    string filePath2 = Path.Combine(wwwRootPath, @"Uploads\Plans\Land");
 
-                    // Save the file data to the database or perform any other operations
-                    // using the file data
+                    using (var fileStream1 = new FileStream(Path.Combine(filePath1, fileName1), FileMode.Create))
+                    {
+                        fileHomePlan.CopyTo(fileStream1);
+                    }
 
-                    // Assign the file data to the appropriate property in the model
-                    obj.FileHomePlan = fileData1;
-                    obj.FileLandPlan = fileData2;
-                    //obj.FileHomePlanName = file.FileName;
+                    using (var fileStream2 = new FileStream(Path.Combine(filePath2, fileName2), FileMode.Create))
+                    {
+                        fileLandPlan.CopyTo(fileStream2);
+                    }
+
+                    obj.HomePlanFileUrl = @"Uploads\Plans\Home" + fileName1;
+                    obj.LandPlanFileUrl = @"Uploads\Plans\Land" + fileName2;
+
                 }
 
                 _db.Application.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("ApplicationDisplay");
             }
-
-            //if (ModelState.IsValid)
-            //{
-            //    _db.Application.Add(obj);
-            //    _db.SaveChanges();
-            //    return RedirectToAction("ApplicationDisplay");
-            //}
 
             // If the model state is not valid, return the view with validation errors
             return RedirectToAction("Application");

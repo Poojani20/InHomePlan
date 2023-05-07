@@ -12,13 +12,9 @@
 	</Target>
   <ItemGroup>
     <Compile Remove="Views\Payment\**" />
-    <Compile Remove="wwwroot\NewFolder\**" />
     <Content Remove="Views\Payment\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
     <EmbeddedResource Remove="Views\Payment\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
     <None Remove="Views\Payment\**" />
-    <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +29,9 @@
     <Folder Include="Areas\HomeOwner\Models\" />
     <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Areas\Staff\Models\" />
+    <Folder Include="wwwroot\Uploads\Plans\Home\" />
+    <Folder Include="wwwroot\Uploads\Plans\Land\" />
+    <Folder Include="wwwroot\Uploads\Plans\" />
   </ItemGroup>
 
   <ItemGroup>

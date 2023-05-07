@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static InHomePlanWeb.Utility.Enums;
 
@@ -60,9 +61,15 @@ namespace InHomePlanWeb.Models
         [Display(Name = "Grant of Final Approval")]
         public BoolOptions IsFinalApproved { get; set; }
 
-        //For file upload
-        public byte[] FileHomePlan { get; set; }
-        public byte[] FileLandPlan { get; set; }
+        //Save files as byte array - This method is Not using
+        //public byte[] FileHomePlan { get; set; }
+        //public byte[] FileLandPlan { get; set; }
+
+        //Save file Url
+        [ValidateNever]
+        public string HomePlanFileUrl { get; set; }
+        [ValidateNever]
+        public string LandPlanFileUrl { get; set; }
 
 
         // Foreign key property
