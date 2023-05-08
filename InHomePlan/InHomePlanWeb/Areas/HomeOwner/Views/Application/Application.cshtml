@@ -170,14 +170,18 @@
     <!--fourth part-->
     <div class="form-step">
         <div class="input-group">
-            <label for="Payment_Method">Payment Method</label>
-            <input type="text" name="Payment_Method" id="Payment_Method"/>
-             <span asp-validation-for="Payment_Method" class="text-danger"></span>
+            <h5>Payments - </h5>
+            <br />
+            <label for="Payment_Method"> You will be charged a fix amount of Rs.7500/= </label>
+
+            @*<input type="text" name="Payment_Method" id="Payment_Method"/>
+             <span asp-validation-for="Payment_Method" class="text-danger"></span>*@
         </div>
         
         <div class="btns-group">
             <a href="#" class="btn btn-prev">Previous</a>
-            <button type="submit" class="btn" >Submit</button>
+            <button type="submit" class="btn" >submit</button>
+            <button type="submit" class="btn" asp-action="Payment">Proceed to Pay</button>
         </div>
     </div>
 </form>

@@ -149,9 +149,11 @@
        
        <div>
        <div class="col"> 
-               <a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>
+               @*<a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>*@
 
-              @* <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>*@
+               <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>
+
+              @*<img src="@Model.HomePlanFileUrl"/>*@
 
            </div>
             <div class="col">

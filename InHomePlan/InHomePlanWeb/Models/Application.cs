@@ -71,6 +71,10 @@ namespace InHomePlanWeb.Models
         [ValidateNever]
         public string LandPlanFileUrl { get; set; }
 
+        public string? SessionId { get; set; }
+        public string? PaymentIntentId { get; set; }
+
+
 
         // Foreign key property
         //public int UserID { get; set; }
