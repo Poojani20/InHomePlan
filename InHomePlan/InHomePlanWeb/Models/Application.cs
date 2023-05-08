@@ -72,8 +72,14 @@ namespace InHomePlanWeb.Models
         public string LandPlanFileUrl { get; set; }
 
         public string? SessionId { get; set; }
-        public string? PaymentIntentId { get; set; }
 
+        [Column(TypeName = "uniqueidentifier")]
+        public Guid PaymentId { get; set; }
+        public string? PaymentIntentId { get; set; }
+        public string? PaymentStatus { get; set; }
+        public DateTime PaymentDate { get; set; }
+
+        public string? ApplicationStatus { get; set; }
 
 
         // Foreign key property

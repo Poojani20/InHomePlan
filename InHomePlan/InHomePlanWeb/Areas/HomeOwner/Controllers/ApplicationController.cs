@@ -1,5 +1,7 @@
 ﻿using InHomePlanWeb.Data;
 using InHomePlanWeb.Models;
+using InHomePlanWeb.Repository.IRepository;
+using InHomePlanWeb.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.Checkout;
@@ -12,15 +14,49 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
+
+        [BindProperty]
+        public Models.Application applicationModel { get; set; }
+
         public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
-            _webHostEnvironment = webHostEnvironment;  
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Application
-        public IActionResult ApplicationDisplay()
+        //// GET: Application
+        //[HttpGet]
+        //public IActionResult PaymentConfirmation()
+        //{
+        //    List<Models.Application> objApplicationList = _db.Application.ToList();
+        //    return View(objApplicationList);
+        //}
+
+
+        // POST: Update payments details
+
+        public IActionResult PaymentConfirmation(Guid? id)
         {
+            if(id != null)
+            {
+                Models.Application? applicationFromDb = _db.Application.FirstOrDefault(u => u.PaymentId == id);
+
+                var service = new SessionService();
+                Stripe.Checkout.Session session = service.Get(applicationFromDb.SessionId);
+
+                if (session.PaymentStatus.ToLower() == "paid")
+                {
+                    applicationFromDb.PaymentIntentId = session.PaymentIntentId;
+                    applicationFromDb.ApplicationStatus = SD.StatusPending;
+                    applicationFromDb.PaymentStatus = SD.PaymentStatusApproved;
+                    applicationFromDb.PaymentDate = DateTime.Now;
+
+                    _db.Application.Update(applicationFromDb);
+                    _db.SaveChanges();
+
+                }
+            }
+
             List<Models.Application> objApplicationList = _db.Application.ToList();
             return View(objApplicationList);
         }
@@ -61,9 +97,50 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 
                 }
 
+                Guid paymentId = Guid.NewGuid();
+
+                var domain = "https://localhost:7169/";
+                var options = new SessionCreateOptions
+                {
+                    PaymentMethodTypes = new List<string>
+                {
+                    "card" // Allow card payments
+                },
+                    LineItems = new List<SessionLineItemOptions>
+                {
+                    new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = "lkr", // Set the currency code
+                            UnitAmount = 750000, // Set the amount in the smallest currency unit (e.g., cents)
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = "Product Name" // Set the name of the product or service
+                            }
+                        },
+                        Quantity = 1 // Set the quantity of the product or service
+                    }
+                },
+                    Mode = "payment",
+
+                    SuccessUrl = domain + $"homeowner/application/PaymentConfirmation?id={paymentId}", // Set the URL to redirect to after successful payment
+                    CancelUrl = domain + $"homeowner/application/PaymentConfirmation", // Set the URL to redirect to if the payment is canceled
+                };
+
+                var service = new SessionService();
+                Stripe.Checkout.Session session = service.Create(options); // currently using Stripe session
+
+                obj.PaymentId = paymentId;
+                obj.SessionId = session.Id;
+
                 _db.Application.Add(obj);
                 _db.SaveChanges();
-                return RedirectToAction("ApplicationDisplay");
+
+                Response.Headers.Add("Location", session.Url);
+                return new StatusCodeResult(303);
+                
+                //return RedirectToAction("ApplicationDisplay");
             }
 
             // If the model state is not valid, return the view with validation errors
@@ -72,10 +149,8 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 
         // POST: Stripe payment
         [HttpPost]
-        public IActionResult Payment()
+        public IActionResult Payment(Models.Application applicationModel)
         {
-            StripeConfiguration.ApiKey = "sk_test_51N3aLlSJhkQUz078VdybXfM0GTMYEAcaHdflkPHcMYhEQykWZD3gZ5wQxEvjsNFCzIqlXbMwUme8lEKUxXRCIMNP00z8pgJkML";
-
             var domain = "https://localhost:7169/";
             var options = new SessionCreateOptions
             {
@@ -101,76 +176,23 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                 },
                 Mode = "payment",
 
-                //SuccessUrl = "https://example.com/success", // Set the URL to redirect to after successful payment
-                //CancelUrl = "https://example.com/cancel" // Set the URL to redirect to if the payment is canceled
-
                 SuccessUrl = domain + $"homeowner/application/applicationdisplay", // Set the URL to redirect to after successful payment
                 CancelUrl = domain + $"homeowner/application/applicationdisplay", // Set the URL to redirect to if the payment is canceled
             };
 
             var service = new SessionService();
-            var session = service.Create(options);
+
+            //var session = service.Create(options); 
+            Stripe.Checkout.Session session = service.Create(options); // currently using Stripe session
+
+            //_unitOfWork.ApplicationHeader.UpdateStripePaymentID(applicationModel.ApplicationID, session.Id, session.PaymentIntentId);
+            //_unitOfWork.Save();
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
 
             //return View(session); // Pass the session object to the view
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public string ReturnUrl { get; set; }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Application1(Application application)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        _context.Add(application);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    return View(application);
-        //}
-
-
-        //   var DOMAIN = "https://localhost:7169/";
-        //        var options = new SessionCreateOptions
-        //{
-        // SuccessUrl = domain$"/ApplicationConfirmation?id={ApplicationHeader.Id}",
-        // CancelUrl = domain + "index",
-        //    LineItems = new List<SessionLineItemOptions>
-
-        //  {
-        //    new SessionLineItemOptions
-        //    {
-        //      Price = "price_H5ggYwtDq4fbrJ",
-        //      Quantity = 2,
-        //    },
-        //  },
-        //    Mode = "payment",
-        //};
-
-
-        //        var service = new SessionService();
-        //        service.Create(options);
-
-
 
     }
 }
