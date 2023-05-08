@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Application>
 
 @{
-    ViewData["Title"] = "Application1 Page";
+    ViewData["Title"] = "Applications Summary";
 }
 <link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
 
@@ -9,7 +9,7 @@
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Application List</h2>
+                <h2 class="text-white py-2">Applications Summary</h2>
             </div>
         </div>
     </div>
@@ -17,28 +17,28 @@
         <table class="table table-bordered table-striped" style="width:100%">
             <thead>
                     <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Application ID</th>
+                    <th>Full Name</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>NIC</th>
                     <th>Email</th>
-                    <th>DateOfBirth</th>
+                    <th>Submitted Time</th>
+                    <th>Payment Status</th>
+                    <th>Application Status</th>
                 </tr>
                 </thead>
             <tbody>
                 @foreach(var obj in Model)
                 {
                     <tr>
-                        <td width="30%">@obj.ApplicationID</td>
-                        <td width="30%">@obj.FirstName</td>
-                        <td width="30%">@obj.LastName</td>
+                        <td width="20%">@obj.ApplicationID</td>
+                        <td width="30%">@($"{obj.FirstName} {obj.LastName}")</td>
                         <td width="30%">@obj.Address</td>
                         <td width="30%">@obj.Phone</td>
-                        <td width="30%">@obj.NIC</td>
                         <td width="30%">@obj.Email</td>
-                        <td width="30%">@obj.DateOfBirth</td>
+                         <td width="30%">@obj.PaymentDate</td>
+                        <td width="30%">@obj.PaymentStatus</td>
+                        <td width="30%">@obj.ApplicationStatus</td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Application" asp-action="ApplicationDetails" asp-route-applicationID="@obj.ApplicationID"
