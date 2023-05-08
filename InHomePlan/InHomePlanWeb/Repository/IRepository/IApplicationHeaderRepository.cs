@@ -6,5 +6,6 @@ namespace InHomePlanWeb.Repository.IRepository
     {
         void Update(ApplicationHeader obj);
         void UpdateStatus(int id, string ApplicationStatus, string? paymentStatus = null);
+        void UpdateStripePaymentID(int id, string sessionId, string paymentIntentId);
     }
 }

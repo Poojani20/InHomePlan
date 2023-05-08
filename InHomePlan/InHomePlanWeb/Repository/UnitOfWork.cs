@@ -11,7 +11,7 @@ namespace InHomePlanWeb.Repository
         public UnitOfWork(ApplicationDbContext db) 
         {
             _db = db;
-            Application = new ApplicationRepository(_db);
+            ApplicationHeader = new ApplicationHeaderRepository(_db);
             //ApplicationHeader = new ApplicationHeaderRepository(_db);
             //ApplicationDetails = new ApplicationDetailRepository(_db);
         }
