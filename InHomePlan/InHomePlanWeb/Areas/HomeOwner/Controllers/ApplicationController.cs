@@ -2,10 +2,10 @@
 using InHomePlanWeb.Models;
 using InHomePlanWeb.Repository.IRepository;
 using InHomePlanWeb.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.Checkout;
-
 
 namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 {
@@ -14,14 +14,16 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IEmailSender _emailSender;
 
         [BindProperty]
         public Models.Application applicationModel { get; set; }
 
-        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
+        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
+            _emailSender = emailSender;
         }
 
         //// GET: Application
@@ -33,9 +35,9 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         //}
 
 
-        // POST: Update payments details
+        //Update payments details
 
-        public IActionResult PaymentConfirmation(Guid? id)
+        public async Task<IActionResult> PaymentConfirmationAsync(Guid? id)
         {
             if(id != null)
             {
@@ -50,6 +52,16 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                     applicationFromDb.ApplicationStatus = SD.StatusPending;
                     applicationFromDb.PaymentStatus = SD.PaymentStatusApproved;
                     applicationFromDb.PaymentDate = DateTime.Now;
+
+                    string recipientEmail = applicationFromDb.Email;
+                    string subject = "Home Plan Approval";
+                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
+                    string emailContent = templateProvider.GetHomePlanApprovalEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
+
+                    await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
+
+
+                    //_emailSender.SendEmailAsync(applicationFromDb.Email, "New Application - Home Plan Approval", "<p>New Order Created</p>");
 
                     _db.Application.Update(applicationFromDb);
                     _db.SaveChanges();
