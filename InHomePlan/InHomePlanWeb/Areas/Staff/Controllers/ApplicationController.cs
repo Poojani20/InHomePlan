@@ -5,6 +5,8 @@ using InHomePlanWeb.Data;
 using InHomePlanWeb.Repository.IRepository;
 using Stripe.Checkout;
 using InHomePlanWeb.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using static InHomePlanWeb.Utility.Enums;
 
 namespace InHomePlanWeb.Areas.Staff.Controllers 
 {
@@ -13,10 +15,15 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
+        private readonly IEmailSender _emailSender;
+
+        [BindProperty]
+        public Models.Application applicationModel { get; set; }
+        public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
             _db = db;
             _webHostEnvironment = webHostEnvironment;
+            _emailSender = emailSender;
         }
 
         // GET: Application
@@ -65,14 +72,51 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
             return View(applicationFromDb);
         }
 
-        // POST: Application/Update
+        //Update application status
         [HttpPost]
-        public IActionResult ApplicationDetails(Application obj)
+        public async Task<IActionResult> ApplicationDetailsAsync(Application obj)
         {
+            string statusText = ""; 
+
             if (ModelState.IsValid)
             {
-                _db.Application.Update(obj);
-                _db.SaveChanges();
+                Application? applicationCurrent = _db.Application.FirstOrDefault(u => u.ApplicationID == obj.ApplicationID);
+                
+
+                if (applicationCurrent != null)
+                {
+                    
+
+                    if (applicationCurrent.IsPlanApproved != obj.IsPlanApproved) {
+                        applicationCurrent.IsPlanApproved = obj.IsPlanApproved;
+                        statusText = (bool)(applicationCurrent.IsPlanApproved == BoolOptions.Yes) ? SD.StatusPlanApprove : SD.StatusPlanReject;
+                    }
+
+                    if (applicationCurrent.IsInspectionCompleted != obj.IsInspectionCompleted)
+                    {
+                        applicationCurrent.IsInspectionCompleted = obj.IsInspectionCompleted;
+                        statusText = (bool)(applicationCurrent.IsInspectionCompleted == BoolOptions.Yes) ? SD.StatusInspectionApprove : SD.StatusInspectionReject;
+                    }
+
+                    if (applicationCurrent.IsFinalApproved != obj.IsFinalApproved)
+                    {
+                        applicationCurrent.IsFinalApproved = obj.IsFinalApproved;
+                        statusText = (bool)(applicationCurrent.IsFinalApproved == BoolOptions.Yes) ? SD.StatusFinalApprove : SD.StatusFinalReject;
+                    }
+
+                    //sending status update email
+
+                    string recipientEmail = applicationCurrent.Email;
+                    string subject = "Home Application - Status Update";
+
+                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
+                    string emailContent = templateProvider.GetApplicationStatusUpdateEmailTemplate(applicationCurrent, statusText);
+
+                    await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
+
+                    _db.SaveChanges();
+                }  
+                
                 return RedirectToAction("ApplicationDetails", new { applicationID = obj.ApplicationID });
             }
 

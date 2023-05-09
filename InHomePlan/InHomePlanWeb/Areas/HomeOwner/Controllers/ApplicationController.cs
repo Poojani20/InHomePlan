@@ -37,41 +37,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 
         //Update payments details
 
-        public async Task<IActionResult> PaymentConfirmationAsync(Guid? id)
-        {
-            if(id != null)
-            {
-                Models.Application? applicationFromDb = _db.Application.FirstOrDefault(u => u.PaymentId == id);
-
-                var service = new SessionService();
-                Stripe.Checkout.Session session = service.Get(applicationFromDb.SessionId);
-
-                if (session.PaymentStatus.ToLower() == "paid")
-                {
-                    applicationFromDb.PaymentIntentId = session.PaymentIntentId;
-                    applicationFromDb.ApplicationStatus = SD.StatusPending;
-                    applicationFromDb.PaymentStatus = SD.PaymentStatusApproved;
-                    applicationFromDb.PaymentDate = DateTime.Now;
-
-                    string recipientEmail = applicationFromDb.Email;
-                    string subject = "Home Plan Approval";
-                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
-                    string emailContent = templateProvider.GetHomePlanApprovalEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
-
-                    await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
-
-
-                    //_emailSender.SendEmailAsync(applicationFromDb.Email, "New Application - Home Plan Approval", "<p>New Order Created</p>");
-
-                    _db.Application.Update(applicationFromDb);
-                    _db.SaveChanges();
-
-                }
-            }
-
-            List<Models.Application> objApplicationList = _db.Application.ToList();
-            return View(objApplicationList);
-        }
+        
 
         public IActionResult Application()
         {
@@ -109,6 +75,8 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 
                 }
 
+                // Stripe payment setup
+
                 Guid paymentId = Guid.NewGuid();
 
                 var domain = "https://localhost:7169/";
@@ -125,7 +93,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             Currency = "lkr", // Set the currency code
-                            UnitAmount = 750000, // Set the amount in the smallest currency unit (e.g., cents)
+                            UnitAmount = 50000, // Set the amount in the smallest currency unit (e.g., cents)
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = "Product Name" // Set the name of the product or service
@@ -159,51 +127,40 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
             return RedirectToAction("Application");
         }
 
-        // POST: Stripe payment
-        [HttpPost]
-        public IActionResult Payment(Models.Application applicationModel)
+        public async Task<IActionResult> PaymentConfirmationAsync(Guid? id)
         {
-            var domain = "https://localhost:7169/";
-            var options = new SessionCreateOptions
+            if (id != null)
             {
-                PaymentMethodTypes = new List<string>
+                Models.Application? applicationFromDb = _db.Application.FirstOrDefault(u => u.PaymentId == id);
+
+                var service = new SessionService();
+                Stripe.Checkout.Session session = service.Get(applicationFromDb.SessionId);
+
+                if (session.PaymentStatus.ToLower() == "paid")
                 {
-                    "card" // Allow card payments
-                },
-                LineItems = new List<SessionLineItemOptions>
-                {
-                    new SessionLineItemOptions
-                    {
-                        PriceData = new SessionLineItemPriceDataOptions
-                        {
-                            Currency = "lkr", // Set the currency code
-                            UnitAmount = 750000, // Set the amount in the smallest currency unit (e.g., cents)
-                            ProductData = new SessionLineItemPriceDataProductDataOptions
-                            {
-                                Name = "Product Name" // Set the name of the product or service
-                            }
-                        },
-                        Quantity = 1 // Set the quantity of the product or service
-                    }
-                },
-                Mode = "payment",
+                    applicationFromDb.PaymentIntentId = session.PaymentIntentId;
+                    applicationFromDb.ApplicationStatus = SD.StatusPending;
+                    applicationFromDb.PaymentStatus = SD.PaymentStatusApproved;
+                    applicationFromDb.PaymentDate = DateTime.Now;
 
-                SuccessUrl = domain + $"homeowner/application/applicationdisplay", // Set the URL to redirect to after successful payment
-                CancelUrl = domain + $"homeowner/application/applicationdisplay", // Set the URL to redirect to if the payment is canceled
-            };
+                    //sending confirmation email
 
-            var service = new SessionService();
+                    string recipientEmail = applicationFromDb.Email;
+                    string subject = "Home Plan Approval";
+                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
+                    string emailContent = templateProvider.GetHomePlanApprovalEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
 
-            //var session = service.Create(options); 
-            Stripe.Checkout.Session session = service.Create(options); // currently using Stripe session
+                    await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
 
-            //_unitOfWork.ApplicationHeader.UpdateStripePaymentID(applicationModel.ApplicationID, session.Id, session.PaymentIntentId);
-            //_unitOfWork.Save();
+                    //updating database
+                    _db.Application.Update(applicationFromDb);
+                    _db.SaveChanges();
 
-            Response.Headers.Add("Location", session.Url);
-            return new StatusCodeResult(303);
+                }
+            }
 
-            //return View(session); // Pass the session object to the view
+            List<Models.Application> objApplicationList = _db.Application.ToList();
+            return View(objApplicationList);
         }
 
     }

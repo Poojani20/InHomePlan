@@ -16,7 +16,7 @@ namespace InHomePlanWeb.Utility
         {
             //logic to send email
             var client = new SendGridClient(SendGridSecret);
-            var from = new EmailAddress("hasitha.ranasinghearachchige@flinders.edu.au", "InHomePlan");
+            var from = new EmailAddress("10749097@students.plymouth.ac.uk", "InHomePlan");
             var to = new EmailAddress(email);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);
             

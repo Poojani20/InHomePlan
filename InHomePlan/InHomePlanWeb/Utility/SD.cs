@@ -9,9 +9,12 @@
         public const string Role_Architect = "Architect";
 
         public const string StatusPending = "Pending";
-        public const string StatusApproved = "Approved";
-        public const string StatusInProcess = "Processing";
-        public const string StatusRejected = "Rejected";
+        public const string StatusPlanApprove = "Plan Approved";
+        public const string StatusPlanReject = "Plan Rejected";
+        public const string StatusInspectionApprove = "Inspection Completed";
+        public const string StatusInspectionReject = "Inspection Incompleted";
+        public const string StatusFinalApprove = "Final Approval Granted";
+        public const string StatusFinalReject = "Final Approval Denied";
 
         public const string PaymentStatusPending = "Pending";
         public const string PaymentStatusApproved = "Approved";
