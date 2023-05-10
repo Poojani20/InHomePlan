@@ -2,6 +2,7 @@
 using InHomePlanWeb.Models;
 using InHomePlanWeb.Repository.IRepository;
 using InHomePlanWeb.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
@@ -10,6 +11,7 @@ using Stripe.Checkout;
 namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 {
     [Area("HomeOwner")]
+    [Authorize(Roles = SD.Role_Houseowner)]
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;
