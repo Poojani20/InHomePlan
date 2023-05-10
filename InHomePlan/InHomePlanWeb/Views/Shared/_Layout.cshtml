@@ -1,120 +1,100 @@
-﻿@using InHomePlanWeb.Utility
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - InHomePlanWeb</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-   integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-     <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>@ViewData["Title"] - InHomePlanWeb</title>
+      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+      <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
       <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/InHomePlanWeb.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-5 fixed-top">
+      @*<link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />*@
+      @*<link rel="stylesheet" href="~/InHomePlanWeb.styles.css" asp-append-version="true" />*@
+   </head>
+   <body>
+      <header>
+         <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-5 fixed-top">
             <div class="container-fluid">
-                @*<img src="~/images/logo.png" alt="InHome Plan Logo" class="logo" width="50px" height="100px">*@
-                   
-               
-               @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
-                
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav ml-auto">
-                      
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+               <img src="~/images/logo.png" alt="InHome Plan Logo" class="logo">
+                @*<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                  aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>*@
+               <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                  <ul class="navbar-nav ml-auto">
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="Index">Home</a>
+                     </li>
+                     @if (User.IsInRole(SD.Role_Houseowner))
+                     {
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Services" asp-action="Services">Services</a>
+                     </li>
+                     }
+                     @if (User.IsInRole(SD.Role_Houseowner))
+                     {
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Application" asp-action="PaymentConfirmation">My Applications</a>
+                     </li>
+                     }
+                     @if (User.IsInRole(SD.Role_Staff))
+                     {
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="Staff" asp-controller="Application" asp-action="ApplicationDisplay">Applications</a>
+                     </li>
+                     }
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="Contactus">Contact Us</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="About">About</a>
+                     </li>
+   
+                     <partial name="_LoginPartial" />
 
-                        @if (User.IsInRole(SD.Role_Houseowner))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Services" asp-action="Services">Services</a>
-                            </li>
-                        }
-
-                        @if (User.IsInRole(SD.Role_Houseowner))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Application" asp-action="PaymentConfirmation">My Applications</a>
-                            </li>
-                        }
-
-                        @if (User.IsInRole(SD.Role_Staff))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="Staff" asp-controller="Application" asp-action="ApplicationDisplay">Applications</a>
-                            </li>
-                        }
-
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="Contactus">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="About">About</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>*@
-                        <li class="nav-item">
-                            <partial name="_LoginPartial"/>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Services" asp-action="Services">Profile</a>
-                        </li>
-                    </ul>
-                </div>
-                
+                     @*<li class="nav-item">
+                        <a class="nav-link text-white" asp-area="" asp-controller="Services" asp-action="Services">Profile</a>
+                     </li>*@
+                  </ul>
+               </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+         </nav>
+      </header>
+      <div class="container">
+         <main role="main" class="pb-3">
             @RenderBody()
-        </main>
-    </div>
-
-   <footer class="border-top footer text-muted">
-    <div class="footer-container">
-        <div class="first-section">
-            <div class="left-section">
-                <p class="main">InHome Plan</p>
-                <p>We can tailor our service offer to meet your specific project requirements</p>
+         </main>
+      </div>
+      <footer class="border-top footer text-muted">
+         <div class="footer-container">
+            <div class="first-section">
+               <div class="left-section">
+                  <p class="main"><b>InHome Plan</b></p>
+                  <p>We can tailor our service offer to meet your specific project requirements</p>
+               </div>
+               <div class="center-section">
+                  <img src="~/images/logo.png" alt="InHome Plan logo">
+               </div>
+               <div class="right-section">
+                  <ul class="social-media-links">
+                     <li><a href="">Facebook</a></li>
+                     <li><a href="">YouTube</a></li>
+                     <li><a href="">Twitter</a></li>
+                  </ul>
+               </div>
             </div>
-            <div class="center-section">
-                <img src="~/images/logo.png" alt="InHome Plan logo">
+            <div class="bottom-section">
+               <p>&copy; InHome Plan All rights reserved.</p>
             </div>
-            <div class="right-section">
-                <ul class="social-media-links">
-                    <li><a href="">Facebook</a></li>
-                    <li><a href="">YouTube</a></li>
-                    <li><a href="">Twitter</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="bottom-section">
-            <p>&copy; InHome Plan All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
-   integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+         </div>
+      </footer>
+      <script src="~/lib/jquery/dist/jquery.min.js"></script>
+      <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="~/js/site.js" asp-append-version="true"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
+         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+      @await RenderSectionAsync("Scripts", required: false)
+   </body>
 </html>
