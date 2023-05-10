@@ -5,6 +5,7 @@ namespace InHomePlanWeb.Utility
 {
     public class EmailTemplateProvider
     {
+        //Register account
         public string GetRegistrationEmailTemplate(string firstName, string email, string confirmationLink)
         {
             string emailContent = $@"
@@ -29,8 +30,7 @@ namespace InHomePlanWeb.Utility
             return emailContent;
         }
 
-
-
+        //Submit application
         public string GetApplicationSubmitEmailTemplate(string firstName, string planId, DateTime submittedDate)
         {
             string emailContent = $@"
@@ -58,6 +58,7 @@ namespace InHomePlanWeb.Utility
             return emailContent;
         }
 
+        //Application status update 
         public string GetApplicationStatusUpdateEmailTemplate(Application application, string applicationStatus)
         {
             string emailContent = $@"

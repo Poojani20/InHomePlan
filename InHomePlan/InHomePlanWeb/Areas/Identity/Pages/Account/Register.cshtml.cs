@@ -154,11 +154,13 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                
+                //Adding extra properties for the application user
                 user.StreetAddress = Input.StreetAddress;
                 user.City = Input.City;
                 user.Name = Input.Name;
                 user.Province=Input.Province;
-                user. PostalCode = Input.PostalCode;
+                user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -225,6 +227,7 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
         {
             try
             {
+                // Replaced the Identity user with the Application user to change the Discriminator to the ApplicationUser.
                 return Activator.CreateInstance<ApplicationUser>();
             }
             catch

@@ -7,10 +7,12 @@ using Stripe.Checkout;
 using InHomePlanWeb.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using static InHomePlanWeb.Utility.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InHomePlanWeb.Areas.Staff.Controllers 
 {
     [Area("Staff")]
+    [Authorize(Roles = SD.Role_Staff)]
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;

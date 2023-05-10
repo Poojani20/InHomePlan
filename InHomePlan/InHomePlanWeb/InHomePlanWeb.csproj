@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Staff\Views\Application\ApplicationConfirmation.cshtml" />
+    <Content Remove="Areas\Staff\Views\Application\ApplicationDetails2.cshtml" />
+    <Content Remove="Areas\Staff\Views\Application\ApplicationDetails3.cshtml" />
     <Content Remove="wwwroot\js\application.js" />
   </ItemGroup>
 
