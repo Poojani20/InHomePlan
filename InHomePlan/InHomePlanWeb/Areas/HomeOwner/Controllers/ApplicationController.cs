@@ -148,7 +148,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                     string recipientEmail = applicationFromDb.Email;
                     string subject = "Home Plan Approval";
                     EmailTemplateProvider templateProvider = new EmailTemplateProvider();
-                    string emailContent = templateProvider.GetHomePlanApprovalEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
+                    string emailContent = templateProvider.GetApplicationSubmitEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
 
                     await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
 

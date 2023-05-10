@@ -187,8 +187,18 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //Commenting the inbuild registration email
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+                    //Using a customised registration email
+
+                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
+                    string emailContent = templateProvider.GetRegistrationEmailTemplate(user.Name, user.Email, callbackUrl);
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailContent);
 
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
