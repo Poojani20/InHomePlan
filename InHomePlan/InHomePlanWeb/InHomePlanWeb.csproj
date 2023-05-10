@@ -16,6 +16,63 @@
     <EmbeddedResource Remove="Views\Payment\**" />
     <None Remove="Views\Payment\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20230405124215_AddUserTableToDb.cs" />
+    <Compile Remove="Migrations\20230405124215_AddUserTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230405141117_AddSystemAdminTableToDb.cs" />
+    <Compile Remove="Migrations\20230405141117_AddSystemAdminTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230406091624_AddSurveyorTableToDb.cs" />
+    <Compile Remove="Migrations\20230406091624_AddSurveyorTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230406143940_AddApplicationTableToDb.cs" />
+    <Compile Remove="Migrations\20230406143940_AddApplicationTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230406232958_AddStatusToDb.cs" />
+    <Compile Remove="Migrations\20230406232958_AddStatusToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230406233322_AddApplicationToStatus.cs" />
+    <Compile Remove="Migrations\20230406233322_AddApplicationToStatus.Designer.cs" />
+    <Compile Remove="Migrations\20230406234824_AddSessionTableToDb.cs" />
+    <Compile Remove="Migrations\20230406234824_AddSessionTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230406235652_AddRegionalStaffTableToDb.cs" />
+    <Compile Remove="Migrations\20230406235652_AddRegionalStaffTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407011204_AddTableReviewToDb.cs" />
+    <Compile Remove="Migrations\20230407011204_AddTableReviewToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407012159_AddTableReportToDb.cs" />
+    <Compile Remove="Migrations\20230407012159_AddTableReportToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407012848_AddArchitectTableToDb.cs" />
+    <Compile Remove="Migrations\20230407012848_AddArchitectTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407020040_AddApprovalTableToDb.cs" />
+    <Compile Remove="Migrations\20230407020040_AddApprovalTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407034134_AddInspectionTableToDb.cs" />
+    <Compile Remove="Migrations\20230407034134_AddInspectionTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407035016_AddPaymentTableToDb.cs" />
+    <Compile Remove="Migrations\20230407035016_AddPaymentTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230407040728_AddProfileTableToDb.cs" />
+    <Compile Remove="Migrations\20230407040728_AddProfileTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230411114720_addIdentityTables.cs" />
+    <Compile Remove="Migrations\20230411114720_addIdentityTables.Designer.cs" />
+    <Compile Remove="Migrations\20230411135858_ExtendAndChangeIdentityUser.cs" />
+    <Compile Remove="Migrations\20230411135858_ExtendAndChangeIdentityUser.Designer.cs" />
+    <Compile Remove="Migrations\20230422070409_UpdateColumnNamesToApplicationUser.cs" />
+    <Compile Remove="Migrations\20230422070409_UpdateColumnNamesToApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\20230427053933_addApplicationHeaderAndDetailsToDb.cs" />
+    <Compile Remove="Migrations\20230427053933_addApplicationHeaderAndDetailsToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230503082934_addSessionIdToApplicationHeaderthree.cs" />
+    <Compile Remove="Migrations\20230503082934_addSessionIdToApplicationHeaderthree.Designer.cs" />
+    <Compile Remove="Migrations\20230503132857_addTestTableToDb.cs" />
+    <Compile Remove="Migrations\20230503132857_addTestTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230507055324_AddForeignKeyForApplicationInspectionRelation.cs" />
+    <Compile Remove="Migrations\20230507055324_AddForeignKeyForApplicationInspectionRelation.Designer.cs" />
+    <Compile Remove="Migrations\20230507071550_UpdateApplicationTableToDb.cs" />
+    <Compile Remove="Migrations\20230507071550_UpdateApplicationTableToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230507090827_addFileUrlToApplication.cs" />
+    <Compile Remove="Migrations\20230507090827_addFileUrlToApplication.Designer.cs" />
+    <Compile Remove="Migrations\20230507142455_addSessionToApplication.cs" />
+    <Compile Remove="Migrations\20230507142455_addSessionToApplication.Designer.cs" />
+    <Compile Remove="Migrations\20230508133055_addStatustoApplicationToDb.cs" />
+    <Compile Remove="Migrations\20230508133055_addStatustoApplicationToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.cs" />
+    <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.Designer.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Areas\Staff\Views\Application\ApplicationConfirmation.cshtml" />
@@ -26,6 +83,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Uploads\Plans\Home\" />
     <Folder Include="wwwroot\Uploads\Plans\Land\" />
     <Folder Include="wwwroot\Uploads\Plans\" />
