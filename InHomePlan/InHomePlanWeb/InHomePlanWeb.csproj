@@ -71,10 +71,12 @@
     <Compile Remove="Migrations\20230508133055_addStatustoApplicationToDb.Designer.cs" />
     <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.cs" />
     <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.Designer.cs" />
-    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\HomeOwner\Views\Application\ApplicationConfirmation.cshtml" />
+    <Content Remove="Areas\HomeOwner\Views\Application\ApplicationTest.cshtml" />
+    <Content Remove="Areas\HomeOwner\Views\Application\Payment.cshtml" />
     <Content Remove="Areas\Staff\Views\Application\ApplicationConfirmation.cshtml" />
     <Content Remove="Areas\Staff\Views\Application\ApplicationDetails2.cshtml" />
     <Content Remove="Areas\Staff\Views\Application\ApplicationDetails3.cshtml" />
@@ -83,7 +85,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Migrations\ExcludedMigrations\" />
     <Folder Include="wwwroot\Uploads\Plans\Home\" />
     <Folder Include="wwwroot\Uploads\Plans\Land\" />
     <Folder Include="wwwroot\Uploads\Plans\" />

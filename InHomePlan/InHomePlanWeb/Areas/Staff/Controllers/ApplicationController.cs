@@ -8,6 +8,7 @@ using InHomePlanWeb.Utility;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using static InHomePlanWeb.Utility.Enums;
 using Microsoft.AspNetCore.Authorization;
+using InHomePlanWeb.Models.ViewModels;
 
 namespace InHomePlanWeb.Areas.Staff.Controllers 
 {
@@ -32,7 +33,22 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
         public IActionResult ApplicationDisplay()
         {
             List<Application> objApplicationList = _db.Application.ToList();
-            return View(objApplicationList);
+
+            var statusCounts = _db.Application
+                .GroupBy(a => a.ApplicationStatus)
+                .Select(g => new ApplicationStatusCount { StatusType = g.Key, Count = g.Count() })
+                .ToList();
+
+            var viewModel = new ApplicationVM
+            {
+                ApplicationList = objApplicationList,
+                StatusCounts = statusCounts
+            };
+
+            return View(viewModel);
+
+
+            //return View(objApplicationList);
         }
 
         public IActionResult Application()
@@ -115,6 +131,8 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
                     string emailContent = templateProvider.GetApplicationStatusUpdateEmailTemplate(applicationCurrent, statusText);
 
                     await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
+
+                    applicationCurrent.ApplicationStatus = statusText;  
 
                     _db.SaveChanges();
                 }  

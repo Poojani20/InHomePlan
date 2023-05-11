@@ -1,0 +1,93 @@
+﻿:root {
+    --primary-color: rgb(11, 78, 179);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    margin-top: 100px;
+}
+/* Global Stylings */
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.width-50 {
+    width: 30%;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+/* Form */
+.form {
+    width: clamp(700px, 120%, 900px);
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 0.35rem;
+    padding: 1.5rem;
+    margin-top: 220px;
+    margin-bottom: 300px;
+}
+
+.form-step {
+    display: none;
+    transform-origin: top;
+    animation: animate 0.5s;
+    margin-bottom: 1rem;
+}
+
+.form-step-active {
+    display: block;
+}
+
+.input-group {
+    margin-bottom:15px;
+}
+
+
+/* Button */
+.btns-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem;
+    display: block;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: #f3f3f3;
+    text-align: center;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn:hover {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+    }
+

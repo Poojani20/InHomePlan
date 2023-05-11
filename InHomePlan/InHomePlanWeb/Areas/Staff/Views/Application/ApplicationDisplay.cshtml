@@ -1,17 +1,55 @@
-﻿@model IEnumerable<Application>
-
+﻿@model ApplicationVM
 @{
-    ViewData["Title"] = "Applications Summary";
+ViewData["Title"] = "Applications Summary";
 }
-@*<link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />*@
-<div class="card shadow border-0 my-4">
-   <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
-      <div class="row">
-         <div class="col-12 text-center">
-            <h2 class="text-white py-2">Applications Summary</h2>
+<link rel="stylesheet" href="~/css/application_display.css" asp-append-version="true" />
+<div class="row">
+   <div class="col-md-3">
+      <div class="dashboard-summary">
+         <!-- Display status counts -->
+         <div class="summary-item">
+            <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Pending")?.Count ?? 0)</h4>
+            <p>Received</p>
          </div>
       </div>
    </div>
+   <div class="col-md-3">
+      <div class="dashboard-summary">
+         <!-- Display status counts -->
+         <div class="summary-item">
+            <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Plan Approved")?.Count ?? 0)</h4>
+            <p>Plan Approved</p>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-3">
+      <div class="dashboard-summary">
+         <!-- Display status counts -->
+         <div class="summary-item">
+            <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Inspection Completed")?.Count ?? 0)</h4>
+            <p>Inspection Completed</p>
+         </div>
+      </div>
+   </div>
+   <div class="col-md-3">
+      <div class="dashboard-summary">
+         <!-- Display status counts -->
+         <div class="summary-item">
+            <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Final Approval Granted")?.Count ?? 0)</h4>
+            <p>Approved</p>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="card shadow border-0 my-4">
+<div class="card-header bg-secondary bg-gradient m-lg-0 py-6">
+   <div class="row">
+      <div class="col-12">
+         <h2 class="text-white py-1">Applications</h2>
+      </div>
+   </div>
+</div>
+<div class="card-body p-4">
    <div class="card-body p-4">
       <table class="table table-bordered table-striped" style="width:100%">
          <thead>
@@ -27,7 +65,7 @@
             </tr>
          </thead>
          <tbody>
-            @foreach(var obj in Model)
+            @foreach (var obj in Model.ApplicationList)
             {
             <tr>
                <td width="20%">@obj.ApplicationID</td>
@@ -41,7 +79,7 @@
                <td>
                   <div class="w-75 btn-group" role="group">
                      <a asp-controller="Application" asp-action="ApplicationDetails" asp-route-applicationID="@obj.ApplicationID"
-                        class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> View Details</a>
+                        class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>View</a>
                   </div>
                </td>
             </tr>
@@ -50,13 +88,3 @@
       </table>
    </div>
 </div>
-
-
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
-    @section Script {
-        <script src="~/js/application.js"></script>
-    }*@

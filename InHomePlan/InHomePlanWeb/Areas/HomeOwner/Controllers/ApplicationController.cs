@@ -19,7 +19,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         private readonly IEmailSender _emailSender;
 
         [BindProperty]
-        public Models.Application applicationModel { get; set; }
+        public Models.Application ApplicationModel { get; set; }
 
         public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
         {
@@ -161,8 +161,47 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                 }
             }
 
-            List<Models.Application> objApplicationList = _db.Application.ToList();
+            //List<Models.Application> objApplicationList = _db.Application.ToList();
+            //return View(objApplicationList);
+
+            string? currentUserName = User.Identity.Name;
+
+            List<Models.Application> objApplicationList = _db.Application.Where(a => a.Email == currentUserName).ToList();
+
             return View(objApplicationList);
+
+        }
+
+
+        // GET: Get single application
+        public IActionResult ApplicationDetails(int? applicationID)
+        {
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+            if (applicationID == 0)
+            {
+                return NotFound();
+            }
+
+            Models.Application? applicationFromDb = _db.Application.Find(applicationID);
+
+            if (applicationFromDb == null)
+            {
+                return NotFound();
+            }
+
+            string filePath1 = Path.Combine(wwwRootPath, applicationFromDb.HomePlanFileUrl);
+            string filePath2 = Path.Combine(wwwRootPath, applicationFromDb.LandPlanFileUrl);
+
+            applicationFromDb.HomePlanFileUrl = filePath1;
+            applicationFromDb.LandPlanFileUrl = filePath2;
+
+            //if (!applicationCurrent.Equals(applicationFromDb))
+            //{
+            //    // Models are not equal
+            //}
+
+            return View(applicationFromDb);
         }
 
     }

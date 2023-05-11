@@ -103,7 +103,8 @@ input {
     border: 1px solid #ccc;
     border-radius: 0.35rem;
     padding: 1.5rem;
-   
+    margin-top: 120px;
+    margin-bottom: 300px;
 }
 
 .form-step {

@@ -1,23 +1,27 @@
-﻿<link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
+﻿@using static InHomePlanWeb.Utility.Enums
 @model Application
 @{
-ViewData["Title"] = "Application";
+ViewData["Title"] = "Application Details";
 }
+<link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
 
 <form id="Application" class="form" method="post" enctype="multipart/form-data">
-   <h1 class="text-center">Application</h1>
+   <h4 class="text-center">Application Details</h4>
    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
    <!-- Progress bar -->
+   @*
    <div class="progressbar">
       <div class="progress" id="progress"></div>
-      <div class="progress-step progress-step-active" data-title="Personal"></div>
-      <div class="progress-step" data-title="House Info"></div>
-      <div class="progress-step" data-title="Plan Upload"></div>
-      <div class="progress-step" data-title="Payment"></div>
+      <div class="progress-step progress-step-active" data-title="Personal Details"></div>
+      <div class="progress-step" data-title="Plan Details"></div>
+      <div class="progress-step" data-title="Approval Details"></div>
    </div>
+   *@
    <!-- Steps -->
    <!--first part-->
-   <div class="form-step form-step-active">
+   <div>
+      <h5>Personal Details</h5>
+      <hr>
       <div class="row">
          <div class="col">
             <div class="input-group">
@@ -62,15 +66,15 @@ ViewData["Title"] = "Application";
       </div>
       <div class="input-group">
          <label asp-for="DateOfBirth"></label>
-         <input asp-for="DateOfBirth" asp-format="{yyyy-MM-dd}"/>
+         <input asp-for="DateOfBirth"/>
          <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-      </div>
-      <div class="">
-         <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
       </div>
    </div>
    <!--second part -->
-   <div class="form-step">
+   <div>
+      <br>
+      <h5>Plan Details</h5>
+      <hr>
       <div class="row">
          <div class="col">
             <div class="input-group">           
@@ -113,59 +117,98 @@ ViewData["Title"] = "Application";
          <input asp-for="BuildingArea"/>
          <span asp-validation-for="BuildingArea" class="text-danger"></span>
       </div>
-      <div class="btns-group">
-         <a href="#" class="btn btn-prev">Previous</a>
-         <a href="#" class="btn btn-next">Next</a>
-      </div>
    </div>
    <!--third part-->
-   <div class="form-step">
+   <div >
       <div class="input-group">
          <label asp-for="PlanNo"></label>
          <input asp-for="PlanNo"/>
          <span asp-validation-for="PlanNo" class="text-danger"></span>
       </div>
-      <div class="input-group">
-         <label for="fileHomePlan">Upload House Plan</label>
-         <input type="file" name="fileHomePlan" id="file1" accept="image/*, .pdf" />
-      </div>
-      <div class="input-group">
-         <label for="fileLandPlan">Upload Land Plan</label>
-         <input type="file" name="fileLandPlan" id="file2" accept="image/*, .pdf" />
-      </div>
-      <div class="btns-group">
-         <a href="#" class="btn btn-prev">Previous</a>
-         <a href="#" class="btn btn-next">Next</a>
+      <div>
+         <div class="col"> 
+            @*<a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>*@
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>
+            @*<img src="@Model.HomePlanFileUrl"/>*@
+         </div>
+         <div class="col">
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View Land Plan</a>
+            @*<a href="@Model.LandPlanFileUrl" class="btn" download>View Land Plan</a>*@
+         </div>
       </div>
    </div>
-   <!--fourth part-->
-   <div class="form-step">
-      <div class="input-group">
-         <h5>Payments</h5>
-         <br />
+   <!--fourth part -->
+   
+   @*<div>
+   <br/>
+   <h5>Approval Details</h5>
+   <hr />
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsPlanApproved"></label>
+         </div>
       </div>
-      <div class="input-group">
-         <label></label>
-         <ul>
-            <li>Rs 500/= is charged as the application fee</li>
-            <li>Accepts only online payments</li>
-            <li>Accepts Credit/Debit Cards</li>
-            <li>Accepted cards: Visa, Mastercard, American Express</li>
-            <li>Visa and Mastercard are accepted for payment</li>
-            <li>No additional charges will be applied</li>
-            <li>All online payments are securely processed through Stripe Payments</li>
-            <li>Your card details are not stored for added security</li>
-            <li>You will receive a confirmation once the payment is successfully processed</li>
-            <li>You will receive application status updates throughout the process to the provided email</li>
-         </ul>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsPlanApproved" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
       </div>
-      <input asp-for="Payment_Method" style="display: none;"/>
-      @*<span asp-validation-for="Payment_Method" class="text-danger"></span>*@
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsInspectionCompleted"></label>
+         </div>
+      </div>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsInspectionCompleted" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsFinalApproved"></label>
+         </div>
+      </div>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsFinalApproved" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>*@
+
+   <!--final part-->
+
+<br>
+
+   <div>
       <div class="btns-group">
-         <a href="#" class="btn btn-prev">Previous</a>
-         <button type="submit" class="btn" >Proceed to Pay</button>
-         @*<button type="submit" class="btn" asp-action="Payment">Proceed to Pay</button>*@
+         @*<a href="#" class="btn btn-prev">Previous</a>*@
+         @*<button type="submit" class="btn" >Update Application</button>*@
+
+         <button type="submit" class="btn btn-primary" style="width:350px" disabled>Update Application</button>
       </div>
    </div>
 </form>
-<script src="~/js/application.js" asp-append-version="true"></script>
+@*<script src="~/js/application.js" asp-append-version="true"></script>*@
