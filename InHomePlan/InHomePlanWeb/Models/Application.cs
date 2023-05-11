@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static InHomePlanWeb.Utility.Enums;
@@ -31,6 +32,8 @@ namespace InHomePlanWeb.Models
         public String Email { get; set; }
         
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateOfBirth { get; set; }
 
         [Required]
@@ -46,7 +49,7 @@ namespace InHomePlanWeb.Models
         public String BuildingArea { get; set; }
         public String PlanNo { get; set; }
 
-        //[Required(ErrorMessage = "Payment method is required")]
+        [DefaultValue("card")]
         public String? Payment_Method { get; set; }
         public DateTime? Payment_Date { get; set; }
 
