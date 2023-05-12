@@ -11,9 +11,13 @@
 		<MSBuild Projects="InHomePlanWeb.csproj" />
 	</Target>
   <ItemGroup>
+    <Compile Remove="Migrations\ExcludedMigrations\**" />
     <Compile Remove="Views\Payment\**" />
+    <Content Remove="Migrations\ExcludedMigrations\**" />
     <Content Remove="Views\Payment\**" />
+    <EmbeddedResource Remove="Migrations\ExcludedMigrations\**" />
     <EmbeddedResource Remove="Views\Payment\**" />
+    <None Remove="Migrations\ExcludedMigrations\**" />
     <None Remove="Views\Payment\**" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +75,11 @@
     <Compile Remove="Migrations\20230508133055_addStatustoApplicationToDb.Designer.cs" />
     <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.cs" />
     <Compile Remove="Migrations\20230510150926_RecreateApplicationTable.Designer.cs" />
+    <Compile Remove="Migrations\20230510151808_RecreateTablesToDb.cs" />
+    <Compile Remove="Migrations\20230510151808_RecreateTablesToDb.Designer.cs" />
+    <Compile Remove="Migrations\20230511013133_ChangeDOBDataTypeInApplicationTable.cs" />
+    <Compile Remove="Migrations\20230511013133_ChangeDOBDataTypeInApplicationTable.Designer.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,7 +94,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Migrations\ExcludedMigrations\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Uploads\Plans\Home\" />
     <Folder Include="wwwroot\Uploads\Plans\Land\" />
     <Folder Include="wwwroot\Uploads\Plans\" />
