@@ -1,14 +1,18 @@
 ﻿body {
+    background-color: white;
 }
 .gradient-custom {
-    background-color: white;
+    background-color: #1E3D58;
     /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
   
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))*/
 }
 .card {
-    background-color: white;
+    background-color: #F5F5E9;
     color: #145DA0;
+    height: 600px;
+    width: 500px;
+    display: flex;
 }
 .text-white-50{
     color:black;
@@ -28,4 +32,42 @@
 }
 .mb-0 {
     color:black;
+}
+/*.form-check-input {
+    font-size: 10px;
+}*/
+label[for="Input_RememberMe"] {
+    font-size: 8px;
+}
+.form-label {
+    font-size: 1.1rem; /* Change the font size to your desired value */
+}
+.form-check-label {
+    font-size: 20px !important;
+}
+.checkbox label {
+    font-size: 16px;
+}
+.outer-div{
+    background-color:antiquewhite;
+}
+.form-floating{
+    margin-top:10px;
+}
+.button {
+    background-color: #055C9D;
+    color: white;
+    width: 100%;
+    padding: 7px 18px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size:20px;
+    font-weight:bold;
+}
+p > a {
+    color: #444444;
+}
+.card-header {
+    background-color: #746C70;
 }

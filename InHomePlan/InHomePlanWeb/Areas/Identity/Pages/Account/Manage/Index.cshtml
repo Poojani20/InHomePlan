@@ -11,16 +11,35 @@
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
+            <div class="form-floating mt-4 mb-4">
                 <input asp-for="Username" class="form-control" disabled />
                 <label asp-for="Username" class="form-label"></label>
             </div>
-            <div class="form-floating">
+            <div class="form-floating mt-4 mb-4">
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+            <div class="form-group">
+                <label for="profile-photo">Profile Photo:</label>
+                <input type="file" class="form-control-file" id="profile-photo" name="ProfilePhoto">
+            </div>
+            <button id="update-profile-button" type="submit" style="background-color:#055C9D"  class="w-100 btn btn-lg btn-primary mt-4 mb-4">Save</button>
+
+            
+           
+
+           @* <div class="form-group">
+                <label>Current Profile Photo:</label>
+                @if (Model.ProfilePhotoPath != null)
+                {
+                    <img src="@Url.Content(Model.ProfilePhotoPath)" alt="Profile Photo" />
+                }
+                else
+                {
+                    <p>No profile photo uploaded.</p>
+                }
+            </div>*@
         </form>
     </div>
 </div>

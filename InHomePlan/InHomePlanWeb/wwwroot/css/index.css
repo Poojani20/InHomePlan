@@ -191,7 +191,7 @@ ul {
     background: #E2DED0;
     margin-top: 20px;
     margin-left: 0;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
     padding: 30px 0 30px 60px;
     align-items: center;
 }
@@ -223,7 +223,7 @@ small {
 }
 
 
-.btn {
+/*.btn {
     display: inline-block;
     background: #ff523b;
     padding: 8px 30px;
@@ -234,8 +234,8 @@ small {
     font-size: 50px;
     width: 300px;
 }
-
-    .btn:hover {
+*/
+    /*.btn:hover {
         background: #533440;
-    }
+    }*/
 
