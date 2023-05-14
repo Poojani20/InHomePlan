@@ -1,5 +1,6 @@
 ﻿body {
     padding: 0;
+    margin:0;
 }
 .footer-container {
     bottom: 0;
@@ -11,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    
 }
 
 .first-section {
@@ -24,7 +26,7 @@
 .left-section {
     flex: 1 1 300px;
     margin-left:20px;
-    margin-top:80px;
+    margin-top:10px;
 }
 
 .center-section {
@@ -35,7 +37,8 @@
 .right-section {
     flex: 1 1 300px;
     text-align: right;
-    padding-top:20px;
+    padding-top:10px;
+    margin-top:5px;
     margin-right:80px;
 }
 

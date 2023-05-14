@@ -2,17 +2,15 @@
     background-color: white;
     margin: 0;
     padding: 0;
+    background-image: linear-gradient(to right,#FFFF8A, #6ECB5A, #FFFF8A);
 }
 .gradient-custom {
-    background-color: #1E3D58;
-    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-  
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))*/
+    background-image: linear-gradient(to right,#FFFF8A, #6ECB5A, #FFFF8A);
 }
 .card {
     background-color: #F5F5E9;
     color: #145DA0;
-    height: 600px;
+    height: 500px;
     width: 500px;
     display: flex;
 }

@@ -1,8 +1,10 @@
 ﻿body {
-    background-color: white;
+    /*background-color: linear-gradient(to bottom right, #00FFFF, #FF00FF);*/
+    /*background-color: #1E3D58;*/
     margin: 0;
     padding: 0;
-    background-image: url(~/Images/house3.jpg);
+    /*background-image: linear-gradient(to right, #8AFF8A, #FFED86);*/
+    background-image: linear-gradient(to right, #7EC8E3, #FFED86);
 }
 /*.vh-100 {
     background-color: #145DA0;
@@ -22,18 +24,22 @@
 .card {
     margin-bottom: 600px;
     margin-top: 600px;
-    height: 800px;
+    height: 750px;
     width: 700px;
+    justify-content:center;
+    
 }
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
     font-size: 1rem;
     line-height: 2.15;
     padding-left: .75em;
     padding-right: .75em;
+   
 }
 
 .card-registration .select-arrow {
     top: 13px;
+   
 }
 .h-100 {
     background-color: #05445E;
@@ -43,6 +49,7 @@
     font-weight: bold;
     font-size: 30px;
     text-align: center;
+    
 }
 .btn {
     background-color: #145DA0;
@@ -64,9 +71,16 @@
     background-color: #C5C5C5;
 }
 .gradient-custom {
-    background-color: #1E3D58;
+    background-image: linear-gradient(to right, #7EC8E3, #FFED86);
+    margin: 0;
+    padding: 0;
+    outline-color: none;
+    border: none;
 }
 .card-header {
     background-color: #746C70;
+    padding-top:0px;
+    padding-bottom:0px;
+    
 }
     
