@@ -16,8 +16,8 @@ namespace InHomePlanWeb.Models
         
         [Required(ErrorMessage = "Last name is required")]
         public String LastName { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Address is required")]
         public String Address { get; set; }
         
         [Required]
@@ -36,10 +36,10 @@ namespace InHomePlanWeb.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Assessment number is required")]
         public String AssessmentNo { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Postal code is required")]
         public String PostalCode { get; set;}
 
         [Required]

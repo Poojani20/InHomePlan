@@ -6,6 +6,25 @@ const progressSteps = document.querySelectorAll(".progress-step");
 
 let formStepsNum = 0;
 
+const customErrorMessages = {
+    FirstName: 'Please enter your first name.',
+    LastName: 'Please enter your last name.',
+    email: 'Please enter a valid email address.',
+    // Add more field names and error messages as needed
+};
+
+function setCustomErrorMessages() {
+    const formInputs = document.querySelectorAll('input, select, textarea');
+    formInputs.forEach((input) => {
+        const fieldName = input.name;
+        if (fieldName in customErrorMessages) {
+            input.setCustomValidity(customErrorMessages[fieldName]);
+        }
+    });
+}
+
+ //setCustomErrorMessages();
+
 nextBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         e.preventDefault(); // Prevent the default form submission
@@ -14,41 +33,13 @@ nextBtns.forEach((btn) => {
             formStepsNum++;
             updateFormSteps();
             updateProgressbar();
+            console.log("form is valid!")
+        }
+        else {
+            console.log("form is invalid!")
         }
     });
 });
-
-//nextBtns.forEach((btn) => {
-//    btn.addEventListener("click", (e) => {
-//        e.preventDefault(); // Prevent the default form submission
-
-//        const currentFormStep = formSteps[formStepsNum];
-//        const formInputs = currentFormStep.querySelectorAll("input, select, textarea");
-
-//        let isValid = true;
-//        formInputs.forEach((input) => {
-//            if (!input.checkValidity()) {
-//                isValid = false;
-//                input.classList.add("is-invalid"); // Add "is-invalid" class to inputs with invalid values
-
-//                const errorContainer = input.closest(".form-group").querySelector(".text-danger");
-//                errorContainer.textContent = input.validationMessage; // Display validation message
-//            } else {
-//                input.classList.remove("is-invalid"); // Remove "is-invalid" class from valid inputs
-
-//                const errorContainer = input.closest(".form-group").querySelector(".text-danger");
-//                errorContainer.textContent = ""; // Clear any previous validation message
-//            }
-//        });
-
-//        if (isValid) {
-//            formStepsNum++;
-//            updateFormSteps();
-//            updateProgressbar();
-//        }
-//    });
-//});
-
 
 prevBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -89,46 +80,29 @@ function validateForm() {
     // Get the form inputs within the current form step
     const formInputs = currentFormStep.querySelectorAll("input, select, textarea");
 
+    console.log(formInputs);
+
     // Check if any of the inputs is invalid
     let isValid = true;
     formInputs.forEach((input) => {
         if (!input.checkValidity()) {
-            input.reportValidity();
+            input.classList.add("is-invalid"); // Add "is-invalid" class to inputs with invalid values
             isValid = false;
+
+            // Get the error message element associated with the input
+            const errorMessage = input.nextElementSibling;
+
+            // Set the error message text
+            errorMessage.innerText = input.validationMessage;
+        } else {
+            input.classList.remove("is-invalid"); // Remove "is-invalid" class from valid inputs
+
+            // Clear the error message
+            const errorMessage = input.nextElementSibling;
+            errorMessage.innerText = "";
         }
     });
 
     return isValid;
 }
 
-//video
-//var dataTable;
-
-//$(document).ready(function () {
-//    loadDataTable();
-//});
-
-//function loadDataTable() {
-//    dataTable = $('#tblData').DataTable({
-//        "ajax": { url: '/Application/getall' },
-//        "columns": [
-//            { data: 'id', "width": "25%" },
-//            { data: 'firstname', "width": "15%" },
-//            { data: 'lastname', "width": "15%" },
-//            { data: 'address', "width": "15%" },
-//            { data: 'phonenumber', "width": "10%" },
-//            { data: 'nic', "width": "10%" },
-//            { data: 'email', "width": "10%" },
-//            { data: 'dateofbirth', "width": "10%" },
-//            { data: 'status', "width": "10%" },
-
-//            {
-//                data: 'id',
-//                "render": function (data) {
-//                    return '<div class="w-75 btn-group">'
-//                },
-//                "width":"25%"
-//            }
-//        ]
-//    })
-//}
