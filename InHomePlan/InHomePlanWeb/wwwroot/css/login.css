@@ -1,5 +1,7 @@
 ﻿body {
     background-color: white;
+    margin: 0;
+    padding: 0;
 }
 .gradient-custom {
     background-color: #1E3D58;

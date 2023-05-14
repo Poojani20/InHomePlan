@@ -1,6 +1,8 @@
 ﻿body {
-    background-color:white;
-    background-image:url(~/Images/house3.jpg);
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    background-image: url(~/Images/house3.jpg);
 }
 /*.vh-100 {
     background-color: #145DA0;

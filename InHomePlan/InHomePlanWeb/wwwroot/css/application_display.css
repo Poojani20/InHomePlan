@@ -10,9 +10,14 @@
 
 body {
     margin: 0;
+    padding: 0;
     display: grid;
-    place-items: center;
+    /*place-items: center;*/
     margin-top: 100px;
+}
+.card {
+    margin-top: 80px;
+    margin-bottom: 100px;
 }
 /* Global Stylings */
 label {
@@ -39,7 +44,9 @@ input {
 .text-center {
     text-align: center;
 }
-
+table{
+    margin-bottom:200px;
+}
 
 /* Form */
 .form {
@@ -91,3 +98,43 @@ input {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
     }
 
+.dashboard-summary {
+    
+    border-radius: 5px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .dashboard-summary .summary-item {
+        margin-bottom: 5px;
+    }
+
+        .dashboard-summary .summary-item h4 {
+            margin: 0;
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .dashboard-summary .summary-item p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            color:white;
+        }
+    .dashboard-summary.pending {
+        background-color: #E10032;
+    }
+
+    .dashboard-summary.plan-approved {
+        background-color: #f5a623;
+    }
+
+    .dashboard-summary.inspection-completed {
+        background-color: #3498db;
+    }
+
+    .dashboard-summary.final-approval-granted {
+        background-color: #27ae60;
+    }

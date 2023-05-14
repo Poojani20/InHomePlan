@@ -3,9 +3,9 @@
 ViewData["Title"] = "Applications Summary";
 }
 <link rel="stylesheet" href="~/css/application_display.css" asp-append-version="true" />
-<div class="row">
+<div class="row mt-5 text-center">
    <div class="col-md-3">
-      <div class="dashboard-summary">
+      <div class="dashboard-summary pending">
          <!-- Display status counts -->
          <div class="summary-item">
             <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Pending")?.Count ?? 0)</h4>
@@ -14,7 +14,7 @@ ViewData["Title"] = "Applications Summary";
       </div>
    </div>
    <div class="col-md-3">
-      <div class="dashboard-summary">
+      <div class="dashboard-summary plan-approved">
          <!-- Display status counts -->
          <div class="summary-item">
             <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Plan Approved")?.Count ?? 0)</h4>
@@ -23,7 +23,7 @@ ViewData["Title"] = "Applications Summary";
       </div>
    </div>
    <div class="col-md-3">
-      <div class="dashboard-summary">
+      <div class="dashboard-summary inspection-completed">
          <!-- Display status counts -->
          <div class="summary-item">
             <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Inspection Completed")?.Count ?? 0)</h4>
@@ -32,7 +32,7 @@ ViewData["Title"] = "Applications Summary";
       </div>
    </div>
    <div class="col-md-3">
-      <div class="dashboard-summary">
+      <div class="dashboard-summary final-approval-granted">
          <!-- Display status counts -->
          <div class="summary-item">
             <h4>@(Model.StatusCounts.FirstOrDefault(s => s.StatusType == "Final Approval Granted")?.Count ?? 0)</h4>
@@ -41,9 +41,10 @@ ViewData["Title"] = "Applications Summary";
       </div>
    </div>
 </div>
-<div class="card shadow border-0 my-4">
+
+<div class="card shadow border-0 ">
 <div class="card-header bg-secondary bg-gradient m-lg-0 py-6">
-   <div class="row">
+   <div class="row text-center">
       <div class="col-12">
          <h2 class="text-white py-1">Applications</h2>
       </div>
@@ -87,4 +88,5 @@ ViewData["Title"] = "Applications Summary";
          </tbody>
       </table>
    </div>
+</div>
 </div>
