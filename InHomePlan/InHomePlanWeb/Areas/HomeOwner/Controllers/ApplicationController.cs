@@ -15,10 +15,10 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
     public class ApplicationController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment;// for file path
         private readonly IEmailSender _emailSender;
 
-        [BindProperty]
+        [BindProperty] // bind data between form elements and the model properties
         public Models.Application ApplicationModel { get; set; }
 
         public ApplicationController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment, IEmailSender emailSender)
