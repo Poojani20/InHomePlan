@@ -1,252 +1,202 @@
 ﻿@using static InHomePlanWeb.Utility.Enums
 @model Application
-
 @{
-    ViewData["Title"] = "Application Details";
+ViewData["Title"] = "Application Details";
 }
 <link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
-
 <form id="Application" class="form" method="post" enctype="multipart/form-data">
-    <h4 class="text-center">Application Details</h4>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <!-- Progress bar -->
-    @*<div class="progressbar">
-        <div class="progress" id="progress"></div>
+   <h4 class="text-center">Application Details</h4>
+   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="progress-step progress-step-active" data-title="Personal Details"></div>
-        <div class="progress-step" data-title="Plan Details"></div>
-        <div class="progress-step" data-title="Approval Details"></div>
-    </div>*@
-
-    <!-- Steps -->
-    <!--first part-->
-    <div>
-        <h5>Personal Details</h5>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="FirstName"></label>
-			        <input asp-for="FirstName"/>
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
+   <div>
+      <h5>Personal Details</h5>
+      <hr>
+      <div class="row">
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="FirstName"></label>
+               <input asp-for="FirstName"/>
+               <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="LastName"></label>
-			        <input asp-for="LastName"/>
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
+         </div>
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="LastName"></label>
+               <input asp-for="LastName"/>
+               <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="input-group">
-            <label asp-for="Address"></label>
-            <input asp-for="Address"/>
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="Phone"></label>
-			        <input asp-for="Phone"/>
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
+         </div>
+      </div>
+      <div class="input-group">
+         <label asp-for="Address"></label>
+         <input asp-for="Address"/>
+         <span asp-validation-for="Address" class="text-danger"></span>
+      </div>
+      <div class="row">
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="Phone"></label>
+               <input asp-for="Phone"/>
+               <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="NIC "></label>
-			        <input asp-for="NIC"/>
-                    <span asp-validation-for="NIC" class="text-danger"></span>
-                </div>
+         </div>
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="NIC "></label>
+               <input asp-for="NIC"/>
+               <span asp-validation-for="NIC" class="text-danger"></span>
             </div>
-        </div>
-
-       <div class="input-group">
-            <label asp-for="Email"></label>
-            <input asp-for="Email"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <div class="input-group">
-            <label asp-for="DateOfBirth"></label>
-            <input asp-for="DateOfBirth"/>
-            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-        </div>
-
-    </div>
-
-    <!--second part -->
-   
-    <div>
-        <br>
-        <h5>Plan Details</h5>
-        <hr>
-        <div class="row">
-            <div class="col">
-                <div class="input-group">           
-                    <label asp-for="AssessmentNo"></label>
-                    <input asp-for="AssessmentNo"/>
-                    <span asp-validation-for="AssessmentNo" class="text-danger"></span>
-                </div>
+         </div>
+      </div>
+      <div class="input-group">
+         <label asp-for="Email"></label>
+         <input asp-for="Email"/>
+         <span asp-validation-for="Email" class="text-danger"></span>
+      </div>
+      <div class="input-group">
+         <label asp-for="DateOfBirth"></label>
+         <input asp-for="DateOfBirth"/>
+         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+      </div>
+   </div>
+   <!--second part -->
+   <div>
+      <br>
+      <h5>Plan Details</h5>
+      <hr>
+      <div class="row">
+         <div class="col">
+            <div class="input-group">           
+               <label asp-for="AssessmentNo"></label>
+               <input asp-for="AssessmentNo"/>
+               <span asp-validation-for="AssessmentNo" class="text-danger"></span>
             </div>
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="PostalCode"></label>
-                    <input asp-for="PostalCode"/>
-                    <span asp-validation-for="PostalCode" class="text-danger"></span>
-                </div>
+         </div>
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="PostalCode"></label>
+               <input asp-for="PostalCode"/>
+               <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="input-group">
-            <label asp-for="StreetName"></label>
-            <input asp-for="StreetName"/>
-            <span asp-validation-for="StreetName" class="text-danger"></span>
-        </div>
-
-         <div class="row">
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="No_Of_Rooms"></label>
-                    <input asp-for="No_Of_Rooms"/>
-                    <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
-                </div>
+         </div>
+      </div>
+      <div class="input-group">
+         <label asp-for="StreetName"></label>
+         <input asp-for="StreetName"/>
+         <span asp-validation-for="StreetName" class="text-danger"></span>
+      </div>
+      <div class="row">
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="No_Of_Rooms"></label>
+               <input asp-for="No_Of_Rooms"/>
+               <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
             </div>
-            <div class="col">
-                <div class="input-group">
-                    <label asp-for="No_of_perches"></label>
-                    <input asp-for="No_of_perches"/>
-                    <span asp-validation-for="No_of_perches" class="text-danger"></span>
-                </div>
+         </div>
+         <div class="col">
+            <div class="input-group">
+               <label asp-for="No_of_perches"></label>
+               <input asp-for="No_of_perches"/>
+               <span asp-validation-for="No_of_perches" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="input-group">
-            <label asp-for="BuildingArea"></label>
-            <input asp-for="BuildingArea"/>
-            <span asp-validation-for="BuildingArea" class="text-danger"></span>
-        </div>
-
-    </div>
-
-       
-
-    <!--third part-->
-    <div >
-        <div class="input-group">
-            <label asp-for="PlanNo"></label>
-            <input asp-for="PlanNo"/>
-            <span asp-validation-for="PlanNo" class="text-danger"></span>
-        </div>
-       
-       <div>
-       <div class="col"> 
-               @*<a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>*@
-
-               <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>
-
-              @*<img src="@Model.HomePlanFileUrl"/>*@
-
-           </div>
-            <div class="col">
-                <a href="@Model.LandPlanFileUrl" class="btn" download>View Land Plan</a>
-           </div>
-           
-       </div>
-
-    </div>
-
-
-    <!--fourth part -->
-   
-    <div>
-        <br/>
-        <h5>Approval Details</h5>
-        <hr />
-        <div class="row">
-            <div class="col">
-                <div class="input-group">           
-                    <label asp-for="IsPlanApproved"></label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <select asp-for="IsPlanApproved" class="form-select">
-                        <option value="@BoolOptions.Yes">Yes</option>
-                        <option value="@BoolOptions.No">No</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="input-group">           
-                    <label asp-for="IsInspectionCompleted"></label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <select asp-for="IsInspectionCompleted" class="form-select">
-                        <option value="@BoolOptions.Yes">Yes</option>
-                        <option value="@BoolOptions.No">No</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
-        </div>
-
-        <div class="row">
-            <div class="col">
-                <div class="input-group">           
-                    <label asp-for="IsFinalApproved"></label>
-                </div>
-            </div>
-            <div class="col">
-                <div class="input-group">
-                    <select asp-for="IsFinalApproved" class="form-select">
-                        <option value="@BoolOptions.Yes">Yes</option>
-                        <option value="@BoolOptions.No">No</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
-        </div>
-
-
-
-
-
-    <!--final part-->
-    <div>
-      
-        <div class="btns-group">
-            @*<a href="#" class="btn btn-prev">Previous</a>*@
-            @*<button type="submit" class="btn" >Update Application</button>*@
-            <a asp-controller="Application" asp-action="ApplicationDisplay" class="btn">Back to List</a>
-            <button type="submit" class="btn btn-primary" style="width:150px">Update Application</button>
-        </div>
-    </div>
+         </div>
+      </div>
+      <div class="input-group">
+         <label asp-for="BuildingArea"></label>
+         <input asp-for="BuildingArea"/>
+         <span asp-validation-for="BuildingArea" class="text-danger"></span>
+      </div>
+   </div>
+   <!--third part-->
+   <div >
+      <div class="input-group">
+         <label asp-for="PlanNo"></label>
+         <input asp-for="PlanNo"/>
+         <span asp-validation-for="PlanNo" class="text-danger"></span>
+      </div>
+      <div class="row">
+         <div class="col">
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>
+            <i class="fas fa-file-download fa-3x"></i> Download Home Plan
+            </a>
+         </div>
+         <div class="col">
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.LandPlanFileUrl })" download>
+            <i class="fas fa-file-download fa-3x"></i> Download Land Plan
+            </a>
+         </div>
+      </div>
+   </div>
+   <!--fourth part -->
+   <div>
+   <br/>
+   <h5>Approval Details</h5>
+   <hr />
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsPlanApproved"></label>
+         </div>
+      </div>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsPlanApproved" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsInspectionCompleted"></label>
+         </div>
+      </div>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsInspectionCompleted" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>
+   <div class="row">
+      <div class="col">
+         <div class="input-group">           
+            <label asp-for="IsFinalApproved"></label>
+         </div>
+      </div>
+      <div class="col">
+         <div class="input-group">
+            <select asp-for="IsFinalApproved" class="form-select">
+               <option value="@BoolOptions.Yes">Yes</option>
+               <option value="@BoolOptions.No">No</option>
+            </select>
+         </div>
+      </div>
+   </div>
+   <div class="input-group">
+      <input type="text" placeholder="Comments" class="form-control" value="" style="height: 100px">
+   </div>
+   <!--final part-->
+   <div>
+      <div class="row">
+         <div class="col">
+            <a href="@Url.Action("ApplicationDisplay", "Application")" class="btn">Back to List</a>
+         </div>
+         <div class="col">
+            <a href="@Url.Action("ApplicationDetails", "Application", new { ApplicationId = Model.ApplicationID })" class="btn btn-red">Update Application</a>
+         </div>
+      </div>
+   </div>
 </form>
-
-@*<script src="~/js/application.js" asp-append-version="true"></script>*@
-
+<script src="https://kit.fontawesome.com/746043b767.js" crossorigin="anonymous"></script>
 <br>
-
-
-
-
-

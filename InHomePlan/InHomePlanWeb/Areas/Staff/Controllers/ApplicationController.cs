@@ -153,7 +153,7 @@ namespace InHomePlanWeb.Areas.Staff.Controllers
                 string fileName = Path.GetFileName(filePath);
 
                 // Return the file for download
-                return File(filePath, "application/octet-stream", fileName);
+                return PhysicalFile(filePath, "application/octet-stream", fileName);
             }
 
             // If the file path is invalid or the file doesn't exist, return an error or handle it accordingly

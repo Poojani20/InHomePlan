@@ -162,7 +162,12 @@ input {
     transition: 0.3s;
 }
 
-    .btn:hover {
-        box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
-    }
+.btn:hover {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
+}
 
+.btn-red {
+    color: #fff;
+    background-color: #ff0000;
+    /* Add any additional styling you want */
+}
