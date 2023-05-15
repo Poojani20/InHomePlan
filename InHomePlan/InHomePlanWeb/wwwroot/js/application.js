@@ -92,6 +92,8 @@ function validateForm() {
             // Get the error message element associated with the input
             const errorMessage = input.nextElementSibling;
 
+            console.log(errorMessage);
+
             // Set the error message text
             errorMessage.innerText = input.validationMessage;
         } else {
