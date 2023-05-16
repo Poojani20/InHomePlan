@@ -6,25 +6,6 @@ const progressSteps = document.querySelectorAll(".progress-step");
 
 let formStepsNum = 0;
 
-const customErrorMessages = {
-    FirstName: 'Please enter your first name.',
-    LastName: 'Please enter your last name.',
-    email: 'Please enter a valid email address.',
-    // Add more field names and error messages as needed
-};
-
-function setCustomErrorMessages() {
-    const formInputs = document.querySelectorAll('input, select, textarea');
-    formInputs.forEach((input) => {
-        const fieldName = input.name;
-        if (fieldName in customErrorMessages) {
-            input.setCustomValidity(customErrorMessages[fieldName]);
-        }
-    });
-}
-
- //setCustomErrorMessages();
-
 nextBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         e.preventDefault(); // Prevent the default form submission
@@ -96,12 +77,17 @@ function validateForm() {
 
             // Set the error message text
             errorMessage.innerText = input.validationMessage;
-        } else {
+        }
+        else {
+
             input.classList.remove("is-invalid"); // Remove "is-invalid" class from valid inputs
 
             // Clear the error message
             const errorMessage = input.nextElementSibling;
-            errorMessage.innerText = "";
+
+            if (errorMessage !== null) {
+                errorMessage.innerText = "";
+            }
         }
     });
 

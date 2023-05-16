@@ -26,47 +26,47 @@ ViewData["Title"] = "Application Details";
          <div class="col">
             <div class="input-group">
                <label asp-for="FirstName"></label>
-               <input asp-for="FirstName"/>
+               <input asp-for="FirstName" disabled/>
                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="LastName"></label>
-               <input asp-for="LastName"/>
+               <input asp-for="LastName" disabled/>
                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="Address"></label>
-         <input asp-for="Address"/>
+         <input asp-for="Address" disabled/>
          <span asp-validation-for="Address" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
                <label asp-for="Phone"></label>
-               <input asp-for="Phone"/>
+               <input asp-for="Phone" disabled/>
                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="NIC "></label>
-               <input asp-for="NIC"/>
+               <input asp-for="NIC" disabled/>
                <span asp-validation-for="NIC" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="Email"></label>
-         <input asp-for="Email"/>
+         <input asp-for="Email" disabled/>
          <span asp-validation-for="Email" class="text-danger"></span>
       </div>
       <div class="input-group">
          <label asp-for="DateOfBirth"></label>
-         <input asp-for="DateOfBirth"/>
+         <input asp-for="DateOfBirth" disabled/>
          <span asp-validation-for="DateOfBirth" class="text-danger"></span>
       </div>
    </div>
@@ -79,42 +79,42 @@ ViewData["Title"] = "Application Details";
          <div class="col">
             <div class="input-group">           
                <label asp-for="AssessmentNo"></label>
-               <input asp-for="AssessmentNo"/>
+               <input asp-for="AssessmentNo" disabled/>
                <span asp-validation-for="AssessmentNo" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="PostalCode"></label>
-               <input asp-for="PostalCode"/>
+               <input asp-for="PostalCode" disabled/>
                <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="StreetName"></label>
-         <input asp-for="StreetName"/>
+         <input asp-for="StreetName" disabled/>
          <span asp-validation-for="StreetName" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
                <label asp-for="No_Of_Rooms"></label>
-               <input asp-for="No_Of_Rooms"/>
+               <input asp-for="No_Of_Rooms" disabled/>
                <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="No_of_perches"></label>
-               <input asp-for="No_of_perches"/>
+               <input asp-for="No_of_perches" disabled/>
                <span asp-validation-for="No_of_perches" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="BuildingArea"></label>
-         <input asp-for="BuildingArea"/>
+         <input asp-for="BuildingArea" disabled/>
          <span asp-validation-for="BuildingArea" class="text-danger"></span>
       </div>
    </div>
@@ -122,19 +122,22 @@ ViewData["Title"] = "Application Details";
    <div >
       <div class="input-group">
          <label asp-for="PlanNo"></label>
-         <input asp-for="PlanNo"/>
+         <input asp-for="PlanNo" disabled/>
          <span asp-validation-for="PlanNo" class="text-danger"></span>
       </div>
       <div>
-         <div class="col"> 
-            @*<a href="@Model.HomePlanFileUrl" class="btn" download>View House Plan</a>*@
-            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View House Plan</a>
-            @*<img src="@Model.HomePlanFileUrl"/>*@
+         <div class="row">
+         <div class="col">
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>
+            <i class="fas fa-file-download fa-3x"></i> Download Home Plan
+            </a>
          </div>
          <div class="col">
-            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.HomePlanFileUrl })" download>View Land Plan</a>
-            @*<a href="@Model.LandPlanFileUrl" class="btn" download>View Land Plan</a>*@
+            <a href="@Url.Action("DownloadFile", "Application", new { filePath = Model.LandPlanFileUrl })" download>
+            <i class="fas fa-file-download fa-3x"></i> Download Land Plan
+            </a>
          </div>
+      </div>
       </div>
    </div>
    <!--fourth part -->
@@ -207,8 +210,17 @@ ViewData["Title"] = "Application Details";
          @*<a href="#" class="btn btn-prev">Previous</a>*@
          @*<button type="submit" class="btn" >Update Application</button>*@
 
-         <button type="submit" class="btn btn-primary" style="width:350px" disabled>Update Application</button>
-      </div>
+         @*<button type="submit" class="btn btn-primary" style="width:350px" disabled>Update Application</button>*@
+         
+        </div>
+
+        <p style="color: red; font-weight: bold;">
+    If you want to update the application, please contact support@inhomeplan.com.
+    <br>
+    You can also call our support team at 0112 345 823.
+</p>
+
    </div>
 </form>
 @*<script src="~/js/application.js" asp-append-version="true"></script>*@
+<script src="https://kit.fontawesome.com/746043b767.js" crossorigin="anonymous"></script>

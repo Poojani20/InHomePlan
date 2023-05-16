@@ -3,10 +3,9 @@
 @{
 ViewData["Title"] = "Application";
 }
-
-@*<form id="Application" class="form" method="post" enctype="multipart/form-data" data-ajax="true">*@
-<form id="Application" class="form" asp-area="HomeOwner" asp-action="Application" asp-controller="Application" method="post" >
-
+@*
+<form id="Application" class="form" method="post" enctype="multipart/form-data" data-ajax="true">*@
+<form id="Application" class="form" asp-area="HomeOwner" asp-action="Application" asp-controller="Application" method="post" enctype="multipart/form-data" >
    <h1 class="text-center">Application</h1>
    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
    <!-- Progress bar -->
@@ -23,50 +22,71 @@ ViewData["Title"] = "Application";
       <div class="row">
          <div class="col">
             <div class="input-group">
-              <label asp-for="FirstName"></label>
-              <input asp-for="FirstName" required data-val-required="Please enter your first name"/>
-              <span asp-validation-for="FirstName" class="text-danger"></span>
+               <label asp-for="FirstName">First Name</label>
+               @*<input asp-for="FirstName" required/>
+               <span asp-validation-for="FirstName" class="text-danger"></span>*@
+               <input type="text" name="FirstName" id="FirstName" required oninvalid="this.setCustomValidity('First name is required')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="FirstName" class="text-danger"></span>
             </div>
-
          </div>
          <div class="col">
             <div class="input-group">
-               <label asp-for="LastName"></label>
-               <input asp-for="LastName" required/>
-               <span asp-validation-for="LastName" class="text-danger"></span>
+               <label asp-for="LastName">Last Name</label>
+               @*<input asp-for="LastName" required/>
+               <span asp-validation-for="LastName" class="text-danger"></span>*@
+               <input type="text" name="LastName" id="LastName" required oninvalid="this.setCustomValidity('Last name is required')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="LastName" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
-         <label asp-for="Address"></label>
-         <input asp-for="Address" required/>
-         <span asp-validation-for="Address" class="text-danger"></span>
+         <label asp-for="Address">Home Address</label>
+         @*<input asp-for="Address"/>
+         <span asp-validation-for="Address" class="text-danger"></span>*@
+         <input type="text" name="Address" id="Address" required oninvalid="this.setCustomValidity('Address is required')" oninput="this.setCustomValidity('')" />
+         <span data-valmsg-for="Address" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
-               <label asp-for="Phone" required></label>
-               <input asp-for="Phone"/>
-               <span asp-validation-for="Phone" class="text-danger"></span>
+               <label asp-for="Phone">Mobile</label>
+               @*<input asp-for="Phone" required/>
+               <span asp-validation-for="Phone" class="text-danger"></span>*@
+               <input type="text" name="Phone" id="Phone" required pattern="[0-9]{10}" 
+                  oninvalid="this.setCustomValidity('Phone is required and should be a 10-digit number')"
+                  oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="Phone" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
-               <label asp-for="NIC "></label>
-               <input asp-for="NIC"/>
-               <span asp-validation-for="NIC" class="text-danger"></span>
+               <label asp-for="NIC">NIC Number</label>
+               @*<input asp-for="NIC" required/>
+               <span asp-validation-for="NIC" class="text-danger"></span>*@
+               <input type="text" name="NIC" id="NIC" required pattern="[0-9]{9,12}[A-Za-z]?"
+                  oninvalid="this.setCustomValidity('NIC is required and should be a valid Sri Lankan NIC number')"
+                  oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="NIC" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="Email"></label>
-         <input asp-for="Email"/>
-         <span asp-validation-for="Email" class="text-danger"></span>
+         @*<input asp-for="Email" required/>
+         <span asp-validation-for="Email" class="text-danger"></span>*@
+         <input type="email" name="Email" id="Email" required
+            oninvalid="this.setCustomValidity('Please enter a valid email address')"
+            oninput="this.setCustomValidity('')" />
+         <span data-valmsg-for="Email" class="text-danger"></span>
       </div>
       <div class="input-group">
-         <label asp-for="DateOfBirth"></label>
-         <input asp-for="DateOfBirth" asp-format="{yyyy-MM-dd}"/>
-         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+         <label asp-for="DateOfBirth">Date of Birth</label>
+         @*<input asp-for="DateOfBirth" asp-format="{yyyy-MM-dd}" required />*@
+         @* <span asp-validation-for="DateOfBirth" class="text-danger"></span>*@
+         @*<input type="date" name="DateOfBirth" id="DateOfBirth" required />
+         <span data-valmsg-for="DateOfBirth" class="text-danger"></span>*@
+         <input type="date" name="DateOfBirth" id="DateOfBirth" required/>
+         <span data-valmsg-for="DateOfBirth" class="text-danger"></span>
       </div>
       <div class="">
          <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
@@ -77,44 +97,57 @@ ViewData["Title"] = "Application";
       <div class="row">
          <div class="col">
             <div class="input-group">           
-               <label asp-for="AssessmentNo"></label>
-               <input asp-for="AssessmentNo" required/>
-               <span asp-validation-for="AssessmentNo" class="text-danger"></span>
+               <label asp-for="AssessmentNo">Assessment Number</label>
+               @* <input asp-for="AssessmentNo" required/>
+               <span asp-validation-for="AssessmentNo" class="text-danger"></span>*@
+               <input type="text" name="AssessmentNo" id="AssessmentNo" required oninvalid="this.setCustomValidity('Assessment Number is required')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="AssessmentNo" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
-               <label asp-for="PostalCode"></label>
-               <input asp-for="PostalCode" required/>
-               <span asp-validation-for="PostalCode" class="text-danger"></span>
+               <label asp-for="PostalCode">Postal Code</label>
+               @*<input asp-for="PostalCode" required/>
+               <span asp-validation-for="PostalCode" class="text-danger"></span>*@
+               <input type="text" name="PostalCode" id="PostalCode" required pattern="[0-9]+" 
+                  oninvalid="this.setCustomValidity('Please enter a valid postal code')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="PostalCode" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
-         <label asp-for="StreetName"></label>
-         <input asp-for="StreetName"/>
-         <span asp-validation-for="StreetName" class="text-danger"></span>
+         <label asp-for="StreetName">Street Name</label>
+         @*<input asp-for="StreetName" required/>
+         <span asp-validation-for="StreetName" class="text-danger"></span>*@
+         <input type="text" name="StreetName" id="StreetName" required oninvalid="this.setCustomValidity('Street Name is required')" oninput="this.setCustomValidity('')" />
+         <span data-valmsg-for="StreetName" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
-               <label asp-for="No_Of_Rooms"></label>
-               <input asp-for="No_Of_Rooms"/>
-               <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
+               <label asp-for="No_Of_Rooms">No of Rooms</label>
+               @* <input asp-for="No_Of_Rooms" required/>
+               <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>*@
+               <input type="number" name="No_Of_Rooms" id="No_Of_Rooms" required oninvalid="this.setCustomValidity('Number of rooms required')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="No_Of_Rooms" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
-               <label asp-for="No_of_perches"></label>
-               <input asp-for="No_of_perches"/>
-               <span asp-validation-for="No_of_perches" class="text-danger"></span>
+               <label asp-for="No_of_perches">Land Size (Perches)</label>
+               @*<input asp-for="No_of_perches" required/>
+               <span asp-validation-for="No_of_perches" class="text-danger"></span>*@
+               <input type="number" name="No_of_perches" id="No_of_perches" required oninvalid="this.setCustomValidity('Land size is required')" oninput="this.setCustomValidity('')" />
+               <span data-valmsg-for="No_of_perches" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
-         <label asp-for="BuildingArea"></label>
-         <input asp-for="BuildingArea"/>
-         <span asp-validation-for="BuildingArea" class="text-danger"></span>
+         <label asp-for="BuildingArea">Building Area</label>
+         @* <input asp-for="BuildingArea"/>
+         <span asp-validation-for="BuildingArea" class="text-danger"></span>*@
+         <input type="text" name="BuildingArea" id="BuildingArea" required oninvalid="this.setCustomValidity('Street Name is required')" oninput="this.setCustomValidity('')" />
+         <span data-valmsg-for="BuildingArea" class="text-danger"></span>
       </div>
       <div class="btns-group">
          <a href="#" class="btn btn-prev">Previous</a>
@@ -124,17 +157,21 @@ ViewData["Title"] = "Application";
    <!--third part-->
    <div class="form-step">
       <div class="input-group">
-         <label asp-for="PlanNo"></label>
-         <input asp-for="PlanNo"/>
-         <span asp-validation-for="PlanNo" class="text-danger"></span>
+         <label asp-for="PlanNo">Plan Number</label>
+         @* <input asp-for="PlanNo" required/>
+         <span asp-validation-for="PlanNo" class="text-danger"></span>*@
+         <input type="text" name="PlanNo" id="PlanNo" required oninvalid="this.setCustomValidity('Plan Number is required')" oninput="this.setCustomValidity('')" />
+         <span data-valmsg-for="PlanNo" class="text-danger"></span>
       </div>
       <div class="input-group">
          <label for="fileHomePlan">Upload House Plan</label>
-         <input type="file" name="fileHomePlan" id="file1" accept="image/*, .pdf" />
+         <input type="file" name="fileHomePlan" id="file1" accept="image/*, .pdf" required oninvalid="this.setCustomValidity('Please upload the home plan')" oninput="this.setCustomValidity('')"/>
+         <span data-valmsg-for="fileHomePlan" class="text-danger"></span>
       </div>
       <div class="input-group">
          <label for="fileLandPlan">Upload Land Plan</label>
-         <input type="file" name="fileLandPlan" id="file2" accept="image/*, .pdf" />
+         <input type="file" name="fileLandPlan" id="file2" accept="image/*, .pdf" required oninvalid="this.setCustomValidity('Please upload the land plan')" oninput="this.setCustomValidity('')"/>
+         <span data-valmsg-for="fileLandPlan" class="text-danger"></span>
       </div>
       <div class="btns-group">
          <a href="#" class="btn btn-prev">Previous</a>
@@ -150,7 +187,7 @@ ViewData["Title"] = "Application";
       <div class="input-group">
          <label></label>
          <ul>
-            <li>Rs 500/= is charged as the application fee</li>
+            <li>Rs 1500/= is charged as the application fee</li>
             <li>Accepts only online payments</li>
             <li>Accepts Credit/Debit Cards</li>
             <li>Accepted cards: Visa, Mastercard, American Express</li>
@@ -171,14 +208,35 @@ ViewData["Title"] = "Application";
       </div>
    </div>
 </form>
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>*@
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
-
-
 <script src="~/js/application.js" asp-append-version="true"></script>
-
+<script>
+   // Get the DateOfBirth input element
+   const dateOfBirthInput = document.getElementById("DateOfBirth");
+   
+   // Add event listener to validate the age when the date changes
+   dateOfBirthInput.addEventListener("change", validateAge);
+   
+   function validateAge() {
+     // Get the selected date from the input value
+     const selectedDate = new Date(dateOfBirthInput.value);
+   
+     // Calculate the user's age in milliseconds
+     const ageInMilliseconds = Date.now() - selectedDate.getTime();
+   
+     // Calculate the minimum age required (18 years) in milliseconds
+     const minAgeInMilliseconds = 18 * 365.25 * 24 * 60 * 60 * 1000;
+   
+     // Compare the age with the minimum age required
+     if (ageInMilliseconds < minAgeInMilliseconds) {
+       // Display the validation error message
+       dateOfBirthInput.setCustomValidity("You must be at least 18 years old.");
+     } else {
+       // Clear the validation error message
+       dateOfBirthInput.setCustomValidity("");
+     }
+   }
+</script>

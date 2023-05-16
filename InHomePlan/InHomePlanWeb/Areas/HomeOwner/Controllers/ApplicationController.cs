@@ -49,7 +49,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         // POST: Application/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Application(Models.Application obj, IFormFile? fileHomePlan, IFormFile? fileLandPlan)
+        public IActionResult Application(Models.Application obj, IFormFile fileHomePlan, IFormFile fileLandPlan)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             Currency = "lkr", // Set the currency code
-                            UnitAmount = 50000, // Set the amount in the smallest currency unit (e.g., cents)
+                            UnitAmount = 150000, // Set the amount in the smallest currency unit (e.g., cents)
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = "Product Name" // Set the name of the product or service
@@ -202,6 +202,22 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
             //}
 
             return View(applicationFromDb);
+        }
+
+        public IActionResult DownloadFile(string filePath)
+        {
+            // Ensure that the file path is valid and exists
+            if (!string.IsNullOrEmpty(filePath) && System.IO.File.Exists(filePath))
+            {
+                // Get the file name from the file path
+                string fileName = Path.GetFileName(filePath);
+
+                // Return the file for download
+                return PhysicalFile(filePath, "application/octet-stream", fileName);
+            }
+
+            // If the file path is invalid or the file doesn't exist, return an error or handle it accordingly
+            return NotFound();
         }
 
     }
