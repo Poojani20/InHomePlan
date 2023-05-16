@@ -4,7 +4,7 @@
 ViewData["Title"] = "Application Details";
 }
 <link rel="stylesheet" href="~/css/application.css" asp-append-version="true" />
-<form id="Application" class="form" method="post" enctype="multipart/form-data">
+<form id="Application" class="form" method="post" enctype="multipart/form-data" action>
    <h4 class="text-center">Application Details</h4>
    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -15,47 +15,47 @@ ViewData["Title"] = "Application Details";
          <div class="col">
             <div class="input-group">
                <label asp-for="FirstName"></label>
-               <input asp-for="FirstName" disabled/>
+               <input asp-for="FirstName" />
                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="LastName"></label>
-               <input asp-for="LastName" disabled/>
+               <input asp-for="LastName" />
                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="Address"></label>
-         <input asp-for="Address" disabled/>
+         <input asp-for="Address" />
          <span asp-validation-for="Address" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
                <label asp-for="Phone"></label>
-               <input asp-for="Phone" disabled/>
+               <input asp-for="Phone"/>
                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="NIC "></label>
-               <input asp-for="NIC" disabled/>
+               <input asp-for="NIC"/>
                <span asp-validation-for="NIC" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="Email"></label>
-         <input asp-for="Email" disabled/>
+         <input asp-for="Email"/>
          <span asp-validation-for="Email" class="text-danger"></span>
       </div>
       <div class="input-group">
          <label asp-for="DateOfBirth"></label>
-         <input asp-for="DateOfBirth" disabled/>
+         <input asp-for="DateOfBirth"/>
          <span asp-validation-for="DateOfBirth" class="text-danger"></span>
       </div>
    </div>
@@ -68,42 +68,42 @@ ViewData["Title"] = "Application Details";
          <div class="col">
             <div class="input-group">           
                <label asp-for="AssessmentNo"></label>
-               <input asp-for="AssessmentNo" disabled/>
+               <input asp-for="AssessmentNo"/>
                <span asp-validation-for="AssessmentNo" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="PostalCode"></label>
-               <input asp-for="PostalCode" disabled/>
+               <input asp-for="PostalCode"/>
                <span asp-validation-for="PostalCode" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="StreetName"></label>
-         <input asp-for="StreetName" disabled/>
+         <input asp-for="StreetName"/>
          <span asp-validation-for="StreetName" class="text-danger"></span>
       </div>
       <div class="row">
          <div class="col">
             <div class="input-group">
                <label asp-for="No_Of_Rooms"></label>
-               <input asp-for="No_Of_Rooms" disabled/>
+               <input asp-for="No_Of_Rooms"/>
                <span asp-validation-for="No_Of_Rooms" class="text-danger"></span>
             </div>
          </div>
          <div class="col">
             <div class="input-group">
                <label asp-for="No_of_perches"></label>
-               <input asp-for="No_of_perches" disabled/>
+               <input asp-for="No_of_perches"/>
                <span asp-validation-for="No_of_perches" class="text-danger"></span>
             </div>
          </div>
       </div>
       <div class="input-group">
          <label asp-for="BuildingArea"></label>
-         <input asp-for="BuildingArea" disabled/>
+         <input asp-for="BuildingArea"/>
          <span asp-validation-for="BuildingArea" class="text-danger"></span>
       </div>
    </div>
@@ -111,7 +111,7 @@ ViewData["Title"] = "Application Details";
    <div >
       <div class="input-group">
          <label asp-for="PlanNo"></label>
-         <input asp-for="PlanNo" disabled/>
+         <input asp-for="PlanNo"/>
          <span asp-validation-for="PlanNo" class="text-danger"></span>
       </div>
       <div class="row">
@@ -194,7 +194,7 @@ ViewData["Title"] = "Application Details";
          </div>
          <div class="col">
             @*<a href="@Url.Action("ApplicationDetailsAsync", "Application", new { obj = Model })" class="btn btn-red">Update Application</a>*@
-            <button type="submit" form="Application" class="btn btn-red btn-wide">Update Application</button>
+            <button type="submit" class="btn btn-red btn-wide">Update Application</button>
          </div>
       </div>
    </div>

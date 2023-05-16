@@ -79,7 +79,8 @@
     <Compile Remove="Migrations\20230510151808_RecreateTablesToDb.Designer.cs" />
     <Compile Remove="Migrations\20230511013133_ChangeDOBDataTypeInApplicationTable.cs" />
     <Compile Remove="Migrations\20230511013133_ChangeDOBDataTypeInApplicationTable.Designer.cs" />
-    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20230512100423_RecreateTablesToDb.cs" />
+    <Compile Remove="Migrations\20230512100423_RecreateTablesToDb.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,7 +95,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Migrations\ExcludedMigrations\" />
     <Folder Include="wwwroot\Uploads\Plans\Home\" />
     <Folder Include="wwwroot\Uploads\Plans\Land\" />
     <Folder Include="wwwroot\Uploads\Plans\" />
