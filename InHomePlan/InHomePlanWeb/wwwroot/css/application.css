@@ -171,3 +171,8 @@ input {
     background-color: #ff0000;
     /* Add any additional styling you want */
 }
+
+.btn-wide {
+    width: 500px; /* Adjust the width as needed */
+}
+
