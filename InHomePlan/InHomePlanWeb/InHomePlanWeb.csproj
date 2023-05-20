@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<WorkingDirectory>F:\Inhomeplan\InHomePlan\InHomePlan\InHomePlanWeb</WorkingDirectory>
+	<UserSecretsId>f4ffa433-15df-4028-8996-8ff6a4300e93</UserSecretsId>
   </PropertyGroup>
 
 	<Target Name="Build">

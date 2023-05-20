@@ -362,4 +362,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /InHomePlan/InHomePlanWeb/Models/Test.cs
-/InHomePlan/InHomePlanWeb/wwwroot/Uploads/Plans
