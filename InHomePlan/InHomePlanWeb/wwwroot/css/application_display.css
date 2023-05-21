@@ -37,9 +37,9 @@ input {
     width: 30%;
 }
 
-.ml-auto {
+/*.ml-auto {
     margin-left: auto;
-}
+}*/
 
 .text-center {
     text-align: center;
@@ -82,7 +82,7 @@ table{
     gap: 1.5rem;
 }
 
-.btn {
+/*.btn {
     padding: 0.75rem;
     display: block;
     text-decoration: none;
@@ -96,7 +96,7 @@ table{
 
     .btn:hover {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
-    }
+    }*/
 
 .dashboard-summary {
     

@@ -6,11 +6,11 @@
 }
 /**---Image slide -----*/
 .carousel {
-    margin-top: -10px;
-    margin-bottom: 60px;
+    /*margin-top: -10px;
+    margin-bottom: 60px;*/
     overflow: hidden;
     padding: 0;
-    width: 100%;
+   /* width: 100%;*/
     background-color:antiquewhite;
 }
 .carousel-item {

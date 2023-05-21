@@ -47,9 +47,12 @@
                         <a class="nav-link text-white" asp-area="Staff" asp-controller="Application" asp-action="ApplicationDisplay">Applications</a>
                      </li>
                      }
+                        @if (!User.IsInRole(SD.Role_Staff))
+                     {
                      <li class="nav-item">
                         <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="Contactus">Contact Us</a>
                      </li>
+                     }
                      <li class="nav-item">
                         <a class="nav-link text-white" asp-area="HomeOwner" asp-controller="Home" asp-action="About">About</a>
                      </li>

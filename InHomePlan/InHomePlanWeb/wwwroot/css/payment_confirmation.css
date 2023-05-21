@@ -74,7 +74,7 @@ input {
 
 
 /* Button */
-.btns-group {
+/*.btns-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -96,3 +96,4 @@ input {
         box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
     }
 
+*/
