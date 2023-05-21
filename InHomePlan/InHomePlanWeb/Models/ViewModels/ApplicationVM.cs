@@ -6,6 +6,8 @@ namespace InHomePlanWeb.Models.ViewModels
     {
         public List<Application> ApplicationList { get; set; }
         public List<ApplicationStatusCount> StatusCounts { get; set; }
-        //public ApplicationUser ApplicationUser { get; set; }
+       // public Application Application{ get; set; }
+       // public ApplicationUser ApplicationUser { get; set; }
+       // public Payment Payment { get; set; }
     }
 }

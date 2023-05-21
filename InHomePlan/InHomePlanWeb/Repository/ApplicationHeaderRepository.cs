@@ -35,7 +35,7 @@ namespace InHomePlanWeb.Repository
 
                 if(!string.IsNullOrEmpty(paymentStatus))
                 {
-                    applicationFromDb.PaymentStatus = paymentStatus;
+                    applicationFromDb.Payment.PaymentStatus = paymentStatus;
                 }
             }
 
@@ -46,12 +46,12 @@ namespace InHomePlanWeb.Repository
         {
             var ApplicationFromDb = _db.Application.FirstOrDefault(u => u.ApplicationID == id);
             if(!string.IsNullOrEmpty(sessionId)) {
-                ApplicationFromDb.SessionId = sessionId;
+                ApplicationFromDb.Payment.SessionId = sessionId;
             }
             if (!string.IsNullOrEmpty(paymentIntentId))
             {
-                ApplicationFromDb.PaymentIntentId = paymentIntentId;
-                ApplicationFromDb.PaymentDate = DateTime.Now;
+                ApplicationFromDb.Payment.PaymentIntentId = paymentIntentId;
+                ApplicationFromDb.Payment.PaymentDate = DateTime.Now;
             }
         }
     }

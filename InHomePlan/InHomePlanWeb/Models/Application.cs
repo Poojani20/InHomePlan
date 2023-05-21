@@ -74,26 +74,41 @@ namespace InHomePlanWeb.Models
         [ValidateNever]
         public string LandPlanFileUrl { get; set; }
 
-        public string? SessionId { get; set; }
+        //public string? SessionId { get; set; }
 
-        [Column(TypeName = "uniqueidentifier")]
-        public Guid PaymentId { get; set; }
-        public string? PaymentIntentId { get; set; }
-        public string? PaymentStatus { get; set; }
-        public DateTime PaymentDate { get; set; }
+        //[Column(TypeName = "uniqueidentifier")]
+        //public Guid PaymentId { get; set; }
+        //public string? PaymentIntentId { get; set; }
+        //public string? PaymentStatus { get; set; }
+        //public DateTime PaymentDate { get; set; }
 
         public string? ApplicationStatus { get; set; }
 
 
-        // Foreign key property
-        //public int UserID { get; set; }
+        // Foreign key properties
 
-        // Navigation property
-        //[ForeignKey("UserID")]
-        //public virtual User User { get; set; }
+        // get the application user
+        [ForeignKey("ApplicationUser")]
+        [ValidateNever]
+        public string ApplicationUserID { get; set; }
 
-        // Navigation property for Reviews
-        //public virtual ICollection<Review> Review { get; set; }
+        [ValidateNever]
+        public ApplicationUser ApplicationUser { get; set; }
+
+        // 1 to 1 relationship with payments
+        //1 application have only 1 payment
+        [ValidateNever]
+        public virtual Payment? Payment { get; set; }
+
+        // 1 to m relationship with ApplicationStatus
+        // ApplicationStatus table contains all history changes of the application status
+        [ValidateNever]
+        public ICollection<ApplicationStatus>? ApplicationStatusDetails { get; set; }
+
+        [NotMapped]
+        [ValidateNever]
+        public ApplicationStatus LastStatus { get; set; }
+
 
     }
 }

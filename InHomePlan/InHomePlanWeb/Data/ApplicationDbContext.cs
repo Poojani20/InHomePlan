@@ -14,7 +14,7 @@ namespace InHomePlanWeb.Data
         public DbSet<User> User { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<ApplicationHeader> ApplicationHeader { get; set; }
-        public DbSet<ApplicationDetails> ApplicationDetails { get; set; }
+        public DbSet<ApplicationStatus> ApplicationStatus { get; set; }
         public DbSet<SystemAdmin> SystemAdmin { get; set; }
         public DbSet<Surveyor> Surveyor { get; set; }
         public DbSet<Application> Application { get; set; }
@@ -29,6 +29,7 @@ namespace InHomePlanWeb.Data
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Profile> Profile { get; set; }
         public DbSet<Rejection_Detail> Rejection_Detail { get; set; }
+        public DbSet<Enquiry> Enquiry { get; set; }
 
     }
 }

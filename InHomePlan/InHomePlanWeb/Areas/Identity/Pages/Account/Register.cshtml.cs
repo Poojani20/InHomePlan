@@ -127,9 +127,9 @@ namespace InHomePlanWeb.Areas.Identity.Pages.Account
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Houseowner)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Staff)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Architect)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Surveyor)).GetAwaiter().GetResult();
+                //_roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                //_roleManager.CreateAsync(new IdentityRole(SD.Role_Architect)).GetAwaiter().GetResult();
+                //_roleManager.CreateAsync(new IdentityRole(SD.Role_Surveyor)).GetAwaiter().GetResult();
             }
 
             Input = new()

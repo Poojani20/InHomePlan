@@ -37,6 +37,10 @@ namespace InHomePlanWeb.Migrations
                     b.Property<string>("ApplicationStatus")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ApplicationUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("AssessmentNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -87,18 +91,6 @@ namespace InHomePlanWeb.Migrations
                     b.Property<int>("No_of_perches")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Payment_Date")
                         .HasColumnType("datetime2");
 
@@ -117,39 +109,15 @@ namespace InHomePlanWeb.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SessionId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StreetName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationID");
 
+                    b.HasIndex("ApplicationUserID");
+
                     b.ToTable("Application");
-                });
-
-            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ApplicationHeaderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationHeaderId");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("ApplicationDetails");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.ApplicationHeader", b =>
@@ -166,10 +134,6 @@ namespace InHomePlanWeb.Migrations
 
                     b.Property<string>("ApplicationStatus")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ApprovedDate")
                         .HasColumnType("datetime2");
@@ -246,9 +210,49 @@ namespace InHomePlanWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.ToTable("ApplicationHeader");
+                });
+
+            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationStatus", b =>
+                {
+                    b.Property<int>("ApplicationStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationStatusId"));
+
+                    b.Property<int>("ApplicationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FinalStatusComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InspectionStatusComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsFinalApproved")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsInspectionCompleted")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsPlanApproved")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PlanStatusComment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StatusChangedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StatusChangedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ApplicationStatusId");
+
+                    b.HasIndex("ApplicationID");
+
+                    b.ToTable("ApplicationStatus");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Approval", b =>
@@ -310,6 +314,39 @@ namespace InHomePlanWeb.Migrations
                     b.ToTable("Architect");
                 });
 
+            modelBuilder.Entity("InHomePlanWeb.Models.Enquiry", b =>
+                {
+                    b.Property<int>("EnquiryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EnquiryId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EnquiryId");
+
+                    b.ToTable("Enquiry");
+                });
+
             modelBuilder.Entity("InHomePlanWeb.Models.Inspection", b =>
                 {
                     b.Property<int>("InspectionID")
@@ -341,26 +378,37 @@ namespace InHomePlanWeb.Migrations
 
             modelBuilder.Entity("InHomePlanWeb.Models.Payment", b =>
                 {
-                    b.Property<int>("PaymentID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Amount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ApplicationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PaymentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PaymentIntentId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PaymentID");
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ApplicationID");
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationID")
+                        .IsUnique();
 
                     b.ToTable("Payment");
                 });
@@ -917,34 +965,26 @@ namespace InHomePlanWeb.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationDetails", b =>
-                {
-                    b.HasOne("InHomePlanWeb.Models.ApplicationHeader", "ApplicationHeader")
-                        .WithMany()
-                        .HasForeignKey("ApplicationHeaderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InHomePlanWeb.Models.Application", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Application");
-
-                    b.Navigation("ApplicationHeader");
-                });
-
-            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationHeader", b =>
+            modelBuilder.Entity("InHomePlanWeb.Models.Application", b =>
                 {
                     b.HasOne("InHomePlanWeb.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
+                        .WithMany("Applications")
+                        .HasForeignKey("ApplicationUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationStatus", b =>
+                {
+                    b.HasOne("InHomePlanWeb.Models.Application", "Application")
+                        .WithMany("ApplicationStatusDetails")
+                        .HasForeignKey("ApplicationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Application");
                 });
 
             modelBuilder.Entity("InHomePlanWeb.Models.Approval", b =>
@@ -983,8 +1023,8 @@ namespace InHomePlanWeb.Migrations
             modelBuilder.Entity("InHomePlanWeb.Models.Payment", b =>
                 {
                     b.HasOne("InHomePlanWeb.Models.Application", "Application")
-                        .WithMany()
-                        .HasForeignKey("ApplicationID")
+                        .WithOne("Payment")
+                        .HasForeignKey("InHomePlanWeb.Models.Payment", "ApplicationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1134,9 +1174,21 @@ namespace InHomePlanWeb.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("InHomePlanWeb.Models.Application", b =>
+                {
+                    b.Navigation("ApplicationStatusDetails");
+
+                    b.Navigation("Payment");
+                });
+
             modelBuilder.Entity("InHomePlanWeb.Models.RegionalStaff", b =>
                 {
                     b.Navigation("Review");
+                });
+
+            modelBuilder.Entity("InHomePlanWeb.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Applications");
                 });
 #pragma warning restore 612, 618
         }

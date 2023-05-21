@@ -1,12 +1,14 @@
 ﻿using InHomePlanWeb.Data;
 using InHomePlanWeb.Models;
-using InHomePlanWeb.Repository.IRepository;
 using InHomePlanWeb.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
+using Microsoft.AspNetCore.Identity;
 using Stripe.Checkout;
+using Microsoft.EntityFrameworkCore;
+using Session = Stripe.Checkout.Session;
+using static InHomePlanWeb.Utility.Enums;
 
 namespace InHomePlanWeb.Areas.HomeOwner.Controllers
 {
@@ -28,19 +30,6 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
             _emailSender = emailSender;
         }
 
-        //// GET: Application
-        //[HttpGet]
-        //public IActionResult PaymentConfirmation()
-        //{
-        //    List<Models.Application> objApplicationList = _db.Application.ToList();
-        //    return View(objApplicationList);
-        //}
-
-
-        //Update payments details
-
-        
-
         public IActionResult Application()
         {
             return View();
@@ -51,122 +40,89 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Application(Models.Application obj, IFormFile fileHomePlan, IFormFile fileLandPlan)
         {
+            // Generate a unique payment ID and set the application fee
+            Guid paymentId = Guid.NewGuid();
+            int applicationFee = 150000;
+
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-                if(fileHomePlan != null)
+                // Save uploaded files if they exist
+                if (fileHomePlan != null && fileLandPlan != null)
                 {
-                    string fileName1 = Guid.NewGuid().ToString() + Path.GetExtension(fileHomePlan.FileName);
-                    string filePath1 = Path.Combine(wwwRootPath, @"Uploads\Plans\Home");
+                    string wwwRootPath = _webHostEnvironment.WebRootPath; 
 
-                    string fileName2 = Guid.NewGuid().ToString() + Path.GetExtension(fileLandPlan.FileName);
-                    string filePath2 = Path.Combine(wwwRootPath, @"Uploads\Plans\Land");
+                    string homePlanFilePath = SaveUploadedFile(fileHomePlan, @"Uploads\Plans\Home", wwwRootPath);
+                    string landPlanFilePath = SaveUploadedFile(fileLandPlan, @"Uploads\Plans\Land", wwwRootPath);
 
-                    using (var fileStream1 = new FileStream(Path.Combine(filePath1, fileName1), FileMode.Create))
-                    {
-                        fileHomePlan.CopyTo(fileStream1);
-                    }
-
-                    using (var fileStream2 = new FileStream(Path.Combine(filePath2, fileName2), FileMode.Create))
-                    {
-                        fileLandPlan.CopyTo(fileStream2);
-                    }
-
-                    obj.HomePlanFileUrl = @"Uploads\Plans\Home\" + fileName1;
-                    obj.LandPlanFileUrl = @"Uploads\Plans\Land\" + fileName2;
+                    obj.HomePlanFileUrl = homePlanFilePath;
+                    obj.LandPlanFileUrl = landPlanFilePath;
 
                 }
 
-                // Stripe payment setup
+                // Create a Stripe session for payment
+                var session = CreateStripeSession(paymentId, applicationFee);
 
-                Guid paymentId = Guid.NewGuid();
+                // Create a payment object
+                var payment = CreatePayment(paymentId, session.Id);
 
-                var domain = "https://localhost:7169/";
-                var options = new SessionCreateOptions
-                {
-                    PaymentMethodTypes = new List<string>
-                {
-                    "card" // Allow card payments
-                },
-                    LineItems = new List<SessionLineItemOptions>
-                {
-                    new SessionLineItemOptions
-                    {
-                        PriceData = new SessionLineItemPriceDataOptions
-                        {
-                            Currency = "lkr", // Set the currency code
-                            UnitAmount = 150000, // Set the amount in the smallest currency unit (e.g., cents)
-                            ProductData = new SessionLineItemPriceDataProductDataOptions
-                            {
-                                Name = "Product Name" // Set the name of the product or service
-                            }
-                        },
-                        Quantity = 1 // Set the quantity of the product or service
-                    }
-                },
-                    Mode = "payment",
+                // Set the current user ID for the application
+                obj.ApplicationUserID = GetCurrentUserId();
 
-                    SuccessUrl = domain + $"homeowner/application/PaymentConfirmation?id={paymentId}", // Set the URL to redirect to after successful payment
-                    CancelUrl = domain + $"homeowner/application/PaymentConfirmation", // Set the URL to redirect to if the payment is canceled
-                };
+                // Associate the payment with the application
+                obj.Payment = payment;
 
-                var service = new SessionService();
-                Stripe.Checkout.Session session = service.Create(options); // currently using Stripe session
 
-                obj.PaymentId = paymentId;
-                obj.SessionId = session.Id;
-
+                // Add the application to the database
                 _db.Application.Add(obj);
                 _db.SaveChanges();
 
-                Response.Headers.Add("Location", session.Url);
-                return new StatusCodeResult(303);
-                
-                //return RedirectToAction("ApplicationDisplay");
+
+                // Redirect to the Stripe checkout page
+                return RedirectStripeCheckout(session.Url);
+
             }
 
             // If the model state is not valid, return the view with validation errors
             return RedirectToAction("Application");
         }
 
+
         public async Task<IActionResult> PaymentConfirmationAsync(Guid? id)
         {
             if (id != null)
             {
-                Models.Application? applicationFromDb = _db.Application.FirstOrDefault(u => u.PaymentId == id);
+                // Retrieve the payment from the database based on the provided ID
+                Models.Payment? PaymentFromDb = _db.Payment.FirstOrDefault(u => u.PaymentId == id);
 
                 var service = new SessionService();
-                Stripe.Checkout.Session session = service.Get(applicationFromDb.SessionId);
+                Stripe.Checkout.Session session = service.Get(PaymentFromDb.SessionId);
 
                 if (session.PaymentStatus.ToLower() == "paid")
                 {
-                    applicationFromDb.PaymentIntentId = session.PaymentIntentId;
-                    applicationFromDb.ApplicationStatus = SD.StatusPending;
-                    applicationFromDb.PaymentStatus = SD.PaymentStatusApproved;
-                    applicationFromDb.PaymentDate = DateTime.Now;
+                    // Update the payment details
+                    var payment = UpdatePayment(PaymentFromDb, session);
 
-                    //sending confirmation email
+                    // Update the application status
+                    var application = UpdateApplicationStatus(PaymentFromDb.ApplicationID);
 
-                    string recipientEmail = applicationFromDb.Email;
-                    string subject = "Home Plan Approval";
-                    EmailTemplateProvider templateProvider = new EmailTemplateProvider();
-                    string emailContent = templateProvider.GetApplicationSubmitEmailTemplate(applicationFromDb.FirstName, applicationFromDb.PlanNo, applicationFromDb.PaymentDate);
+                    // Create new ApplicationStatus object 
+                    var applicationStatus = CreateApplicationStatus(PaymentFromDb.ApplicationID);
 
-                    await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
+                    // Send confirmation email
+                    await SendConfirmationEmail(application, PaymentFromDb);
 
-                    //updating database
-                    _db.Application.Update(applicationFromDb);
+                    // Update the database
+                    _db.Payment.Update(PaymentFromDb);
+                    _db.Application.Update(application);
+                    _db.ApplicationStatus.Add(applicationStatus);
                     _db.SaveChanges();
 
                 }
             }
 
-            //List<Models.Application> objApplicationList = _db.Application.ToList();
-            //return View(objApplicationList);
+            // Retrieve applications for the current user
+            List<Application> objApplicationList = GetApplicationsForCurrentUser();
 
-            string? currentUserName = User.Identity.Name;
-
-            List<Models.Application> objApplicationList = _db.Application.Where(a => a.Email == currentUserName).ToList();
 
             return View(objApplicationList);
 
@@ -176,9 +132,7 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
         // GET: Get single application
         public IActionResult ApplicationDetails(int? applicationID)
         {
-            string wwwRootPath = _webHostEnvironment.WebRootPath;
-
-            if (applicationID == 0)
+            if (applicationID == null)
             {
                 return NotFound();
             }
@@ -190,18 +144,168 @@ namespace InHomePlanWeb.Areas.HomeOwner.Controllers
                 return NotFound();
             }
 
+            string wwwRootPath = _webHostEnvironment.WebRootPath;
             string filePath1 = Path.Combine(wwwRootPath, applicationFromDb.HomePlanFileUrl);
             string filePath2 = Path.Combine(wwwRootPath, applicationFromDb.LandPlanFileUrl);
 
             applicationFromDb.HomePlanFileUrl = filePath1;
             applicationFromDb.LandPlanFileUrl = filePath2;
 
-            //if (!applicationCurrent.Equals(applicationFromDb))
-            //{
-            //    // Models are not equal
-            //}
-
             return View(applicationFromDb);
+        }
+
+
+        // Method to save an uploaded file
+        private string SaveUploadedFile(IFormFile file, string folderPath, string wwwRootPath)
+        {
+            string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string filePath = Path.Combine(wwwRootPath, folderPath);
+
+            using (var fileStream = new FileStream(Path.Combine(filePath, fileName), FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+
+            return Path.Combine(folderPath, fileName);
+        }
+
+        // Method to create a Stripe session for payment
+        private Stripe.Checkout.Session CreateStripeSession(Guid paymentId, int applicationFee)
+        {
+            var domain = "https://localhost:7169/";
+
+            var options = new SessionCreateOptions
+            {
+                // Set Stripe session options
+
+                PaymentMethodTypes = new List<string>
+                {
+                    "card" // Allow card payments
+                },
+                LineItems = new List<SessionLineItemOptions>
+                {
+                    new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            Currency = "lkr", // Set the currency code
+                            UnitAmount = applicationFee, // Set the amount in the smallest currency unit (e.g., cents)
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = "Product Name" // Set the name of the product or service
+                            }
+                        },
+                        Quantity = 1 // Set the quantity of the product or service
+                    }
+                },
+                Mode = "payment",
+
+                SuccessUrl = domain + $"homeowner/application/PaymentConfirmation?id={paymentId}", // Set the URL to redirect to after successful payment
+                CancelUrl = domain + $"homeowner/application/PaymentConfirmation", // Set the URL to redirect to if the payment is canceled
+
+            };
+
+            var service = new SessionService();
+            var session = service.Create(options);
+
+            return session;
+        }
+
+        // Method to redirect to the Stripe checkout page
+        private IActionResult RedirectStripeCheckout(string url)
+        {
+            Response.Headers.Add("Location", url);
+            return new StatusCodeResult(303);
+        }
+
+
+        // Method to create a payment object
+        private Payment CreatePayment(Guid paymentId, string sessionId)
+        {
+            var payment = new Payment
+            {
+                PaymentId = paymentId,
+                SessionId = sessionId,
+                Amount = 150000/100
+            };
+
+            return payment;
+        }
+
+        // Method to update a payment object
+        private Payment UpdatePayment(Payment payment, Session session)
+        {
+            payment.PaymentIntentId = session.PaymentIntentId;
+            payment.PaymentStatus = SD.PaymentStatusApproved;
+            payment.PaymentDate = DateTime.Now;
+
+            return payment;
+        }
+
+        // Method to update the application status
+        private Application UpdateApplicationStatus(int applicationId)
+        {
+            Application? applicationFromDb = _db.Application.FirstOrDefault(u => u.ApplicationID == applicationId);
+
+            applicationFromDb.ApplicationStatus = SD.StatusPending;
+
+            return applicationFromDb;
+        }
+
+
+        // Method to create a ApplicationStatus object
+        private ApplicationStatus CreateApplicationStatus(int applicationId)
+        {
+            // Create a new ApplicationStatus record with default values
+            ApplicationStatus applicationStatus = new ApplicationStatus
+            {
+                ApplicationID = applicationId,
+                IsPlanApproved = BoolOptions.No,
+                IsInspectionCompleted = BoolOptions.No,
+                IsFinalApproved = BoolOptions.No,
+                PlanStatusComment = "No Comments",
+                InspectionStatusComment = "No Comments",
+                FinalStatusComment = "No Comments",
+                StatusChangedBy = GetCurrentUserId(), // Set the appropriate value
+                StatusChangedOn = DateTime.Now
+            };
+
+            return applicationStatus;
+        }
+
+
+
+        // Method to get the current user's ID
+        private string GetCurrentUserId()
+        {
+            string currentUserName = User.Identity.Name;
+
+            string currentUserId = _db.Users
+                .Where(u => u.UserName == currentUserName)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+
+            return currentUserId;
+        }
+
+        // Method to get all applications for current user
+        private List<Application> GetApplicationsForCurrentUser()
+        {
+            return _db.Application
+                .Include(a => a.Payment)
+                .Where(a => a.ApplicationUserID == GetCurrentUserId())
+                .ToList();
+        }
+
+        // Method to send confirmation email
+        private async Task SendConfirmationEmail(Application application, Payment payment)
+        {
+            string recipientEmail = application.Email;
+            string subject = "Home Plan Approval";
+            EmailTemplateProvider templateProvider = new EmailTemplateProvider();
+            string emailContent = templateProvider.GetApplicationSubmitEmailTemplate(application.FirstName, application.PlanNo, payment.PaymentDate);
+
+            await _emailSender.SendEmailAsync(recipientEmail, subject, emailContent);
         }
 
         public IActionResult DownloadFile(string filePath)

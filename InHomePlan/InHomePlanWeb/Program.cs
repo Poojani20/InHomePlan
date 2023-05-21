@@ -12,9 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//configure stripe
+// Configure stripe
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -25,6 +25,17 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+
+// Configure session timeout
+// Set Identity cookie to expire after a given time
+int sessionTimeoutMinutes = builder.Configuration.GetValue<int>("Session:TimeoutMinutes");
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "AspNetCore.identity.Application";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(sessionTimeoutMinutes);
+    options.SlidingExpiration = true;
 });
 
 builder.Services.AddRazorPages();
@@ -47,8 +58,7 @@ app.UseStaticFiles();
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 app.UseRouting();
-app.UseAuthentication();;
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
 

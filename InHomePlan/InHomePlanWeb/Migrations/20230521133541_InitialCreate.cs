@@ -12,11 +12,20 @@ namespace InHomePlanWeb.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Application",
+                name: "ApplicationHeader",
                 columns: table => new
                 {
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    SumbitDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PayementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntendId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -30,24 +39,11 @@ namespace InHomePlanWeb.Migrations
                     No_Of_Rooms = table.Column<int>(type: "int", nullable: false),
                     No_of_perches = table.Column<int>(type: "int", nullable: false),
                     BuildingArea = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlanNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Payment_Method = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Payment_Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsPlanApproved = table.Column<int>(type: "int", nullable: false),
-                    IsInspectionCompleted = table.Column<int>(type: "int", nullable: false),
-                    IsFinalApproved = table.Column<int>(type: "int", nullable: false),
-                    HomePlanFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LandPlanFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PlanNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Application", x => x.ApplicationID);
+                    table.PrimaryKey("PK_ApplicationHeader", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,6 +92,23 @@ namespace InHomePlanWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Enquiry",
+                columns: table => new
+                {
+                    EnquiryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enquiry", x => x.EnquiryId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SystemAdmin",
                 columns: table => new
                 {
@@ -131,133 +144,6 @@ namespace InHomePlanWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Approval",
-                columns: table => new
-                {
-                    ApprovalID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ApprovedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Approval", x => x.ApprovalID);
-                    table.ForeignKey(
-                        name: "FK_Approval_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Inspection",
-                columns: table => new
-                {
-                    InspectionID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InspectionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InspectionComment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    InspectionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Inspection", x => x.InspectionID);
-                    table.ForeignKey(
-                        name: "FK_Inspection_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Payment",
-                columns: table => new
-                {
-                    PaymentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payment", x => x.PaymentID);
-                    table.ForeignKey(
-                        name: "FK_Payment_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rejection_Detail",
-                columns: table => new
-                {
-                    RejectionID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RejectedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rejection_Detail", x => x.RejectionID);
-                    table.ForeignKey(
-                        name: "FK_Rejection_Detail_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Report",
-                columns: table => new
-                {
-                    ReportID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Report", x => x.ReportID);
-                    table.ForeignKey(
-                        name: "FK_Report_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Status",
-                columns: table => new
-                {
-                    StatusID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StatusDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApplicationID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Status", x => x.StatusID);
-                    table.ForeignKey(
-                        name: "FK_Status_Application_ApplicationID",
-                        column: x => x.ApplicationID,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -279,21 +165,11 @@ namespace InHomePlanWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicationHeader",
+                name: "Application",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    SumbitDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Total = table.Column<double>(type: "float", nullable: false),
-                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PayementDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentIntendId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -307,14 +183,23 @@ namespace InHomePlanWeb.Migrations
                     No_Of_Rooms = table.Column<int>(type: "int", nullable: false),
                     No_of_perches = table.Column<int>(type: "int", nullable: false),
                     BuildingArea = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PlanNo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PlanNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Payment_Method = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Payment_Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsPlanApproved = table.Column<int>(type: "int", nullable: false),
+                    IsInspectionCompleted = table.Column<int>(type: "int", nullable: false),
+                    IsFinalApproved = table.Column<int>(type: "int", nullable: false),
+                    HomePlanFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LandPlanFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApplicationUserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationHeader", x => x.Id);
+                    table.PrimaryKey("PK_Application", x => x.ApplicationID);
                     table.ForeignKey(
-                        name: "FK_ApplicationHeader_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Application_AspNetUsers_ApplicationUserID",
+                        column: x => x.ApplicationUserID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -523,26 +408,158 @@ namespace InHomePlanWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApplicationDetails",
+                name: "ApplicationStatus",
+                columns: table => new
+                {
+                    ApplicationStatusId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false),
+                    IsPlanApproved = table.Column<int>(type: "int", nullable: false),
+                    IsInspectionCompleted = table.Column<int>(type: "int", nullable: false),
+                    IsFinalApproved = table.Column<int>(type: "int", nullable: false),
+                    PlanStatusComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InspectionStatusComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FinalStatusComment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StatusChangedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StatusChangedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatus", x => x.ApplicationStatusId);
+                    table.ForeignKey(
+                        name: "FK_ApplicationStatus_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Approval",
+                columns: table => new
+                {
+                    ApprovalID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApprovedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Approval", x => x.ApprovalID);
+                    table.ForeignKey(
+                        name: "FK_Approval_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inspection",
+                columns: table => new
+                {
+                    InspectionID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InspectionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InspectionComment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InspectionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inspection", x => x.InspectionID);
+                    table.ForeignKey(
+                        name: "FK_Inspection_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payment",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationHeaderId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationId = table.Column<int>(type: "int", nullable: false)
+                    ApplicationID = table.Column<int>(type: "int", nullable: false),
+                    PaymentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationDetails", x => x.Id);
+                    table.PrimaryKey("PK_Payment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApplicationDetails_ApplicationHeader_ApplicationHeaderId",
-                        column: x => x.ApplicationHeaderId,
-                        principalTable: "ApplicationHeader",
-                        principalColumn: "Id",
+                        name: "FK_Payment_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rejection_Detail",
+                columns: table => new
+                {
+                    RejectionID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Reason = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RejectedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rejection_Detail", x => x.RejectionID);
                     table.ForeignKey(
-                        name: "FK_ApplicationDetails_Application_ApplicationId",
-                        column: x => x.ApplicationId,
+                        name: "FK_Rejection_Detail_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Report",
+                columns: table => new
+                {
+                    ReportID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReportName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Report", x => x.ReportID);
+                    table.ForeignKey(
+                        name: "FK_Report_Application_ApplicationID",
+                        column: x => x.ApplicationID,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    StatusID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StatusDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApplicationID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.StatusID);
+                    table.ForeignKey(
+                        name: "FK_Status_Application_ApplicationID",
+                        column: x => x.ApplicationID,
                         principalTable: "Application",
                         principalColumn: "ApplicationID",
                         onDelete: ReferentialAction.Cascade);
@@ -577,19 +594,14 @@ namespace InHomePlanWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationDetails_ApplicationHeaderId",
-                table: "ApplicationDetails",
-                column: "ApplicationHeaderId");
+                name: "IX_Application_ApplicationUserID",
+                table: "Application",
+                column: "ApplicationUserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationDetails_ApplicationId",
-                table: "ApplicationDetails",
-                column: "ApplicationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ApplicationHeader_ApplicationUserId",
-                table: "ApplicationHeader",
-                column: "ApplicationUserId");
+                name: "IX_ApplicationStatus_ApplicationID",
+                table: "ApplicationStatus",
+                column: "ApplicationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Approval_ApplicationID",
@@ -648,7 +660,8 @@ namespace InHomePlanWeb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Payment_ApplicationID",
                 table: "Payment",
-                column: "ApplicationID");
+                column: "ApplicationID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Profile_UserID",
@@ -700,7 +713,10 @@ namespace InHomePlanWeb.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApplicationDetails");
+                name: "ApplicationHeader");
+
+            migrationBuilder.DropTable(
+                name: "ApplicationStatus");
 
             migrationBuilder.DropTable(
                 name: "Approval");
@@ -722,6 +738,9 @@ namespace InHomePlanWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Enquiry");
 
             migrationBuilder.DropTable(
                 name: "Inspection");
@@ -754,9 +773,6 @@ namespace InHomePlanWeb.Migrations
                 name: "SystemAdmin");
 
             migrationBuilder.DropTable(
-                name: "ApplicationHeader");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -766,10 +782,10 @@ namespace InHomePlanWeb.Migrations
                 name: "Application");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "AspNetUsers");
         }
     }
 }

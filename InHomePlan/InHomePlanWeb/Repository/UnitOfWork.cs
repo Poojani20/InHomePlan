@@ -13,7 +13,7 @@ namespace InHomePlanWeb.Repository
             _db = db;
             ApplicationHeader = new ApplicationHeaderRepository(_db);
             //ApplicationHeader = new ApplicationHeaderRepository(_db);
-            //ApplicationDetails = new ApplicationDetailRepository(_db);
+            //ApplicationStatus = new ApplicationDetailRepository(_db);
         }
        
         public IApplicationRepository Application { get; private set; }

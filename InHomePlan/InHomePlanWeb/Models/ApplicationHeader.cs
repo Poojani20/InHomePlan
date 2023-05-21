@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.Build.Framework;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace InHomePlanWeb.Models
 {
     public class ApplicationHeader
     {
+        [Key]
         public int Id { get; set; }
-        public string ApplicationUserId { get; set; }
-        [ForeignKey("ApplicationUserId")]
+       
         [ValidateNever]
-        public ApplicationUser ApplicationUser { get; set; }
         public DateTime SumbitDate { get; set; }
         public DateTime ApprovedDate { get; set; }
         public double Total { get; set; }

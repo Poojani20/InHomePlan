@@ -1,82 +1,122 @@
-﻿@{
-    ViewData["Title"] = "Contactus Page";
+﻿@model Enquiry
+@{
+ViewData["Title"] = "Contactus Page";
 }
 <link rel="stylesheet" href="~/css/contactus.css" asp-append-version="true" />
-
 <div class="container2 ">
-    <div class="container">
-        <h1>Connect With Us</h1>
-        <h5><p>We would love to repsond to your queries and help you. <br>Feel free to get in touch with us.</p></h5>
-        <div class="contact-box">
-            <div class="contact-left">
-                <h2>Send your messsage</h2><br>
-                <form>
-                    <div class="input-row">
-                        <div class="input-group">
-                            <h5>Name</h5>
-                            <input type="text" placeholder="Poojani Ranasinghe">
-
-                        </div>
-                        <div class="input-group">
-                            <h5>Phone</h5>
-                            <input type="text" placeholder="+94 775191968">
-
-                        </div>
-                    </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <h5>E-mail</h5>
-                            <input type="text" placeholder="poojani2000@gmail.com">
-
-                        </div>
-                        <div class="input-group">
-                            <h5>Subject</h5>
-                            <input type="text" placeholder="Description">
-
-                        </div>
-
-                    </div>
-                    <h5>Message</h5>
-                    <textarea name="" id="message" rows="5" placeholder="Your Message"></textarea>
-
-                    <div class="text-center mt-2">
-                        @*<button class="btn ">Send</button>*@
-                        <button id="submit" type="submit" class="button">Send</button>
-                    </div>
-
-                </form>
-
-            </div>
-            <div class="contact-right">
-                <h3>Reach Us</h3>
-                <table>
-                    <tr>
-                        <td>Email</td>
-                        <td>inhomeplan@gov.lk</td>
-                    </tr>
-                    <tr>
-                        <td>Phone</td>
-                        <td>+94 755425394</td>
-                    </tr>
-                    <tr>
-                        <td>Address</td>
-                        <td>No.85/c,<br>Colombo9</td>
-                    </tr>
-                </table>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
+   <div class="container">
+      <h1>Connect With Us</h1>
+      <h5>
+         <p>We would love to repsond to your queries and help you. <br>Feel free to get in touch with us.</p>
+      </h5>
+      <div class="contact-box">
+         <div class="contact-left">
+            <h2>Send your messsage</h2>
+            <br>
+            <form id="ContactForm" class="form" asp-area="HomeOwner" asp-action="SubmitEnquiry" asp-controller="Home" method="post" enctype="multipart/form-data">
+               <div class="input-row">
+                  <div class="input-group">
+                     <h5>Name</h5>
+                     <input type="text" id="name" placeholder="Your name" asp-for="Name">
+                  </div>
+                  <div class="input-group">
+                     <h5>Phone</h5>
+                     <input type="text" id="phone" placeholder="Your mobile" asp-for="Phone">
+                  </div>
+               </div>
+               <div class="input-row">
+                  <div class="input-group">
+                     <h5>E-mail</h5>
+                     <input type="text" id="email" placeholder="Your email" asp-for="Email">
+                  </div>
+                  <div class="input-group">
+                     <h5>Subject</h5>
+                     <input type="text" id="subject" placeholder="Description" asp-for="Subject">
+                  </div>
+               </div>
+               <h5>Message</h5>
+               <textarea rows="5" class="form-control" placeholder="Your Message" asp-for="Message"></textarea>
+               <div class="text-center mt-2">
+                  @*<button class="btn ">Send</button>*@
+                  <button id="sendButton" type="submit" class="button">Send</button>
+                  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4"></script>
+                  @section scripts {
+                  <script>
+                     document.addEventListener('DOMContentLoaded', function() {
+                         const submitButton = document.getElementById('sendButton');
+                         submitButton.addEventListener('click', function(event) {
+                             event.preventDefault(); // Prevent the default form submission behavior
+                     
+                             Swal.fire({
+                                 title: 'Confirmation',
+                                 text: 'Are you sure you want to send this enquiry?',
+                                 icon: 'question',
+                                 showCancelButton: true,
+                                 confirmButtonText: 'Yes, send',
+                                 cancelButtonText: 'No, cancel'
+                             }).then((result) => {
+                                 if (result.isConfirmed) {
+                                     // Find the enquiry form and submit it
+                                     const enquiryForm = document.getElementById('ContactForm');
+                                     if (enquiryForm) {
+                                         enquiryForm.submit();
+                                     }
+                                 }
+                             });
+                         });
+                     });
+                  </script>
+                  }
+               </div>
+            </form>
+         </div>
+         <div class="contact-right">
+            <h3>Reach Us</h3>
+            <table>
+               <tr>
+                  <td>Email</td>
+                  <td>info@inhomeplan@com</td>
+               </tr>
+               <tr>
+                  <td>Phone</td>
+                  <td>+94 115 548 387</td>
+               </tr>
+               <tr>
+                  <td>Address</td>
+                  <td>No.85/C,<br>Colombo9</td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
 </div>
-
 <br>
 <br>
 <br>
 <br>
 <br>
+<script>
+   // Function to show SweetAlert message box
+   function showMessageBox(title, message, icon) {
+       Swal.fire({
+           //title: title,
+           text: message,
+           icon: icon,
+           showCancelButton: false,
+           confirmButtonColor: '#3085d6',
+           confirmButtonText: 'OK'
+       });
+   
+   }
+   
+   // Check for message in TempData and show the message box
+   @if (TempData["Message"] != null)
+   {
+       var message = TempData["Message"].ToString();
+       var messageType = TempData["MessageType"].ToString();
+   
+       <text>
+           showMessageBox('Message', "@message", "@messageType");
+       </text>
+   }
+</script>

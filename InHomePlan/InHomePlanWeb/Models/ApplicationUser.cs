@@ -19,6 +19,7 @@ namespace InHomePlanWeb.Models
 
         //public string? Phone { get; set; }
         //public string? Address { get; set; }
+        public ICollection<Application> Applications { get; set; }
 
     }
 }

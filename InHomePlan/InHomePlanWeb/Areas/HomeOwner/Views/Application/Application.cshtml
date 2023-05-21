@@ -203,9 +203,37 @@ ViewData["Title"] = "Application";
       @*<span asp-validation-for="Payment_Method" class="text-danger"></span>*@
       <div class="btns-group">
          <a href="#" class="btn btn-prev">Previous</a>
-         <button type="submit" class="btn" >Proceed to Pay</button>
+         <button type="submit" id="payButton" class="btn" >Proceed to Pay</button>
          @*<button type="submit" class="btn" asp-action="Payment">Proceed to Pay</button>*@
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4"></script>
+      @section scripts {
+      <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             const payButton = document.getElementById('payButton');
+             payButton.addEventListener('click', function(event) {
+                 event.preventDefault(); // Prevent the default form submission behavior
+         
+                 Swal.fire({
+                     title: 'Confirmation',
+                     text: 'Are you sure you want to proceed with the payment?',
+                     icon: 'question',
+                     showCancelButton: true,
+                     confirmButtonText: 'Yes, proceed',
+                     cancelButtonText: 'No, cancel'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         // Find the payment form and submit it
+                         const paymentForm = document.getElementById('Application');
+                         if (paymentForm) {
+                             paymentForm.submit();
+                         }
+                     }
+                 });
+             });
+         });
+      </script>
+      }
    </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

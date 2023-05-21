@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace InHomePlanWeb.Repository
 {
-    public class ApplicationDetailRepository : Repository<ApplicationDetails>, IApplicationDetailRepository 
+    public class ApplicationDetailRepository : Repository<ApplicationStatus>, IApplicationDetailRepository 
     {
         private ApplicationDbContext _db;
         public ApplicationDetailRepository(ApplicationDbContext db) : base(db)
@@ -18,9 +18,9 @@ namespace InHomePlanWeb.Repository
             _db.SaveChanges();
         }
 
-        public void Update(ApplicationDetails obj)
+        public void Update(ApplicationStatus obj)
         {
-            _db.ApplicationDetails.Update(obj);
+            _db.ApplicationStatus.Update(obj);
         }
     }
 }
